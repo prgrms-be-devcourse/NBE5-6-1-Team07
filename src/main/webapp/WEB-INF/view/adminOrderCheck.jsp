@@ -79,48 +79,24 @@
 
   <div class="table-box">
     <div class="table-title">관리자용 주문 리스트 페이지</div>
-
-    <div class="order-table">
-      <div class="row header">
-        <div class="col">주문번호</div>
-        <div class="col">배송번호</div>
-        <div class="col">주문내역</div>
-        <div class="col">배송일</div>
-        <div class="col">배송상태</div>
-      </div>
-
-      <div class="row">
-        <div class="col">123456</div>
-        <div class="col">DEL123</div>
-        <div class="col">주문1<br><span class="product-info">무슨무슨 커피빈</span></div>
-        <div class="col">2024-04-01</div>
-        <div class="col">배송완료</div>
-      </div>
-
-      <div class="row">
-        <div class="col">123457</div>
-        <div class="col">DEL124</div>
-        <div class="col">주문2<br><span class="product-info">무슨무슨 커피빈</span></div>
-        <div class="col">2024-04-05</div>
-        <div class="col">배송중</div>
-      </div>
-
-      <div class="row">
-        <div class="col">123458</div>
-        <div class="col">DEL125</div>
-        <div class="col">주문3<br><span class="product-info">무슨무슨 커피빈</span></div>
-        <div class="col">2024-04-09</div>
-        <div class="col">준비중</div>
-      </div>
-
-      <div class="row">
-        <div class="col">123459</div>
-        <div class="col">DEL126</div>
-        <div class="col">주문4<br><span class="product-info">무슨무슨 커피빈</span></div>
-        <div class="col">2024-04-11</div>
-        <div class="col">배송완료</div>
-      </div>
+    <div class="row header">
+      <div class="col">주문번호</div>
+      <div class="col">배송번호</div>
+      <div class="col">주문내역</div>
+      <div class="col">배송일</div>
+      <div class="col">배송상태</div>
     </div>
+    <ul class="order-table">
+      <c:forEach items="${orders}" var="order">
+        <li class="row">
+          <div class="col"><c:out value="${order.orderId}"/></div>
+          <div class="col"><c:out value="${order.orderId}"/></div>
+          <div class="col">주문1<br><span class="product-info">무슨무슨 커피빈</span></div>
+          <div class="col">2024-04-01</div>
+          <div class="col">배송완료</div>
+        </li>
+      </c:forEach>
+    </ul>
   </div>
 </div>
 </body>

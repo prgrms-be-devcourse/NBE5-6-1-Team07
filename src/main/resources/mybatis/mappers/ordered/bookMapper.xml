@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.grepp.team07.app.model.ordered.OrderedRepository">
+
+    <resultMap id="orderedMap" type="OrderedDto">
+        <id property="orderId" column="order_id"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="orderedMap">
+        select * from ordered
+    </select>
+
+</mapper>
