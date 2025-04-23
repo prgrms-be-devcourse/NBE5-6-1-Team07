@@ -12,9 +12,6 @@
   <style>
     body {
       background: #ddd;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
     .card {
@@ -38,7 +35,10 @@
 
   </style>
   <title>Hello, world!</title>
+  <%@include file="/WEB-INF/view/include/static.jsp" %>
 </head>
+<body>
+<%@include file="/WEB-INF/view/include/header.jsp" %>
 <div class="container-fluid">
   <div class="row justify-content-center m-4">
     <h1 class="text-center">Grids & Circle</h1>
@@ -83,6 +83,7 @@
     </div>
   </div>
 </div>
+</body>
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('id').value = 'hong123';
