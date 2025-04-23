@@ -1,0 +1,125 @@
+body {
+    margin: 0;
+    background: #ddd;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .brand {
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 58px;
+    color: #000;
+    margin-bottom: 40px;
+  }
+  
+  .card {
+    background: white;
+    max-width: 950px;
+    width: 90%;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 1rem;
+    padding: 30px;
+  }
+  
+  .title {
+    text-align: center;
+    font-weight: 600;
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+  
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 10px;
+  }
+  
+  .search-bar label {
+    font-weight: 600;
+    font-size: 18px;
+  }
+  
+  .search-bar input[type="text"] {
+    width: 300px;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    background: #D9D9D9;
+    padding-left: 10px;
+    font-size: 16px;
+  }
+  
+  .search-bar button {
+    height: 35px;
+    padding: 0 20px;
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between;
+    background-color: #F5F5F5;
+    padding: 16px;
+    border-radius: 10px;
+  }
+  
+  .order-header {
+    background-color: #ddd;
+    font-weight: 600;
+  }
+  
+  .row div {
+    flex: 1;
+    text-align: center;
+    font-size: 16px;
+  }
+  
+  .product-info {
+    font-size: 12px;
+    color: #555;
+  }
+  
+  @media (max-width: 767px) {
+    .search-bar {
+      flex-direction: column;
+    }
+  
+    .search-bar input[type="text"] {
+      width: 100%;
+    }
+  
+    .row {
+      flex-direction: column;
+      text-align: left;
+    }
+  
+    .row div {
+      padding: 5px 0;
+      text-align: left;
+    }
+  }
