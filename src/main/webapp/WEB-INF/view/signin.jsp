@@ -1,20 +1,23 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@include file="/WEB-INF/view/include/page.jsp" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   <style>
     body {
       background: #ddd;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
     .card {
+      margin-top: 3%;
       max-width: 900px;
       width: 90%;
       min-height: 500px;
@@ -32,6 +35,7 @@
     hr {
       margin-top: 1.25rem
     }
+
     .custom-link {
       color: gray;
       text-decoration: underline;
@@ -43,11 +47,11 @@
 
   </style>
   <title>Hello, world!</title>
+  <%@include file="/WEB-INF/view/include/static.jsp" %>
 </head>
+<body>
+<%@include file="/WEB-INF/view/include/header.jsp" %>
 <div class="container-fluid">
-  <div class="row justify-content-center m-4">
-    <h1 class="text-center">Grids & Circle</h1>
-  </div>
 
   <div class="row justify-content-center">
     <div class="card p-5 pr-7 pl-7">
@@ -72,7 +76,6 @@
         <div><a href="#" class="custom-link">비회원으로 계속하기</a></div>
       </div>
 
-
       <div class="d-flex justify-content-center gap-3 mt-5 pt-2 mb-2">
         <button type="button" class="btn btn-outline-secondary" style="width: 150px;">취소</button>
         <button type="button" class="btn btn-primary" style="width: 150px;">로그인</button>
@@ -81,4 +84,5 @@
     </div>
   </div>
 </div>
+</body>
 </html>
