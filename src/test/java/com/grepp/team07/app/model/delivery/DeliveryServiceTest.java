@@ -1,5 +1,7 @@
-package com.grepp.team07.app.model.ordered;
+package com.grepp.team07.app.model.delivery;
 
+import com.grepp.team07.app.model.delivery.dto.DeliveryDto;
+import com.grepp.team07.app.model.ordered.OrderedService;
 import com.grepp.team07.app.model.ordered.dto.OrderedDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -10,20 +12,21 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+@Slf4j
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations={
         "file:src/main/webapp/WEB-INF/spring/root-context.xml",
         "file:src/main/webapp/WEB-INF/spring/servlet-context.xml"
 })
-@Slf4j
-class OrderedServiceTest {
+class DeliveryServiceTest {
     @Autowired
-    private OrderedService orderedService;
+    private DeliveryService deliveryService;
 
     @Test
     public void selectAll(){
-        List<OrderedDto> orders = orderedService.findAll();
+        List<DeliveryDto> orders = deliveryService.findAll();
         orders.forEach(System.out::println);
     }
-
 }

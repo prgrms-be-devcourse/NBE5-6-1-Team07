@@ -33,7 +33,8 @@
       border-radius: 30px;
       padding: 50px;
       max-width: 1000px;
-      margin: 50px auto;
+      min-width: 400px;
+      margin: 40px auto;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     }
 
@@ -57,6 +58,20 @@
       background-color: #cfcfcf;
       font-weight: 700;
     }
+    .order-table .col-1 {
+      display: flex;
+      width: 100px;
+      flex-direction: column;
+      align-self: center;
+      justify-content: left;
+    }
+    .order-table .col-2 {
+      display: flex;
+      width: 200px;
+      flex-direction: column;
+      align-self: center;
+      justify-content: left;
+    }
 
     .order-table .col {
       display: flex;
@@ -79,21 +94,30 @@
 
   <div class="table-box">
     <div class="table-title">관리자용 주문 리스트 페이지</div>
-    <div class="row header">
-      <div class="col">주문번호</div>
-      <div class="col">배송번호</div>
-      <div class="col">주문내역</div>
-      <div class="col">배송일</div>
-      <div class="col">배송상태</div>
-    </div>
     <ul class="order-table">
+      <li class="row header">
+        <div class="col-1">주문번호</div>
+        <div class="col-2">이메일</div>
+        <div class="col">주문내역</div>
+        <div class="col">주문일</div>
+        <div class="col">도착예정일</div>
+        <div class="col">배송상태</div>
+      </li>
       <c:forEach items="${orders}" var="order">
         <li class="row">
-          <div class="col"><c:out value="${order.orderId}"/></div>
-          <div class="col"><c:out value="${order.orderId}"/></div>
-          <div class="col">주문1<br><span class="product-info">무슨무슨 커피빈</span></div>
-          <div class="col">2024-04-01</div>
-          <div class="col">배송완료</div>
+          <div class="col-1"><c:out value="${order.orderId}"/></div>
+          <div class="col-2"><c:out value="${order.email}"/></div>
+          <c:choose>
+            <c:when test="${order.orderedProducts.size() == 1}">
+              <div class="col"><c:out value="${order.orderedProducts[0].name}"/></div>
+            </c:when>
+            <c:otherwise>
+              <span class="col"><c:out value="${order.orderedProducts[0].name}"/> 외 <c:out value="${order.orderedProducts.size() - 1}"/> </span>
+            </c:otherwise>
+          </c:choose>
+          <div class="col"><c:out value="${order.orderedAt}"/></div>
+          <div class="col">도착예정일</div>
+          <div class="col"><c:out value="${order.status}"/></div>
         </li>
       </c:forEach>
     </ul>

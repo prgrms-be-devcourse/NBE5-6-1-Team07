@@ -1,5 +1,5 @@
 package com.grepp.team07.app.model.delivery.code;
 
-public enum DeliveryStatus {
+public enum DeliveryState {
     READY, SHIPPED, DELIVERED
 }

@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/WEB-INF/view/include/page.jsp" %>
-<jsp:forward page="/WEB-INF/view/adminOrderCheck.jsp" />
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -53,6 +52,7 @@
 <body>
 <%@include file="/WEB-INF/view/include/header.jsp" %>
 <div class="container text-center">
+    <a href="/ordered">aaaaaaa</a>
     <h1 class="my-4">Grids & Circle</h1>
     <div class="card mx-auto p-4">
         <h5><b>인기 상품</b></h5>

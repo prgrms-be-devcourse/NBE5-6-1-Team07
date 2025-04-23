@@ -1,6 +1,6 @@
 package com.grepp.team07.app.model.delivery.dto;
 
-import com.grepp.team07.app.model.delivery.code.DeliveryStatus;
+import com.grepp.team07.app.model.delivery.code.DeliveryState;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +11,6 @@ import java.time.LocalDateTime;
 public class DeliveryDto {
     private Integer deliveryId;
     private Integer orderId;
-    private DeliveryStatus deliveryStatus;
+    private DeliveryState status;
     private LocalDateTime deliveredAt;
 }
