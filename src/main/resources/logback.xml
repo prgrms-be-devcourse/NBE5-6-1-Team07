@@ -8,7 +8,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.grepp.spring" level="DEBUG" additivity="false">
+    <logger name="com.grepp.team07" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
     </logger>
 
