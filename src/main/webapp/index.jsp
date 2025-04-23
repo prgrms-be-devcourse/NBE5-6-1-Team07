@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@include file="/WEB-INF/view/include/page.jsp" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +12,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <style>
-      body {
-        background: #ddd;
-      }
 
       .card {
+        display: flex;
         margin: auto;
         max-width: 950px;
         min-width: 400px;
@@ -44,8 +44,10 @@
 
     </style>
     <title>Hello, world!</title>
+<%@include file="/WEB-INF/view/include/static.jsp" %>
 </head>
 <body class="container-fluid">
+<%@include file="/WEB-INF/view/include/header.jsp" %>
 <div class="row justify-content-center m-4">
     <h1 class="text-center">Grids & Circle</h1>
 </div>
