@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/WEB-INF/view/include/page.jsp" %>
+<jsp:forward page="/WEB-INF/view/adminOrderCheck.jsp" />
 
 <!DOCTYPE html>
 <html lang="ko">
