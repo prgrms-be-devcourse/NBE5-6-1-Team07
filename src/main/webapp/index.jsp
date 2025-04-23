@@ -1,6 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@include file="/WEB-INF/view/include/page.jsp" %>
+<jsp:forward page="/WEB-INF/view/adminOrderCheck.jsp" />
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -15,27 +18,16 @@
       }
 
       .card {
-        margin: auto;
+        display: flex;
+        margin: 0 auto;
         max-width: 950px;
+        min-width: 400px;
+        max-height: 600px;
+        min-height: 300px;
         width: 90%;
         box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         border-radius: 1rem;
         border: transparent
-      }
-
-      .summary {
-        background-color: #ddd;
-        border-top-right-radius: 1rem;
-        border-bottom-right-radius: 1rem;
-        padding: 4vh;
-        color: rgb(65, 65, 65)
-      }
-
-      @media (max-width: 767px) {
-        .summary {
-          border-top-right-radius: unset;
-          border-bottom-left-radius: 1rem
-        }
       }
 
       .row {
@@ -46,11 +38,6 @@
         font-size: 1.5rem
       }
 
-      .col-2,
-      .col {
-        padding: 0 1vh
-      }
-
       img {
         width: 3.5rem
       }
@@ -58,91 +45,33 @@
       hr {
         margin-top: 1.25rem
       }
-      .products {
-        width: 100%;
-      }
-      .products .price, .products .action {
-        line-height: 38px;
-      }
-      .products .action {
-        line-height: 38px;
-      }
 
     </style>
     <title>Hello, world!</title>
+<%@include file="/WEB-INF/view/include/static.jsp" %>
 </head>
-<body class="container-fluid">
-<div class="row justify-content-center m-4">
-    <h1 class="text-center">Grids & Circle</h1>
-</div>
-<div class="card">
-    <div class="row">
-        <div class="col-md-8 mt-4 d-flex flex-column align-items-start p-3 pt-0">
-            <h5 class="flex-grow-0"><b>상품 목록</b></h5>
-            <ul class="list-group products">
-                <li class="list-group-item d-flex mt-3">
-                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/HKOFQYa.jpeg" alt=""></div>
-                    <div class="col">
-                        <div class="row text-muted">커피콩</div>
-                        <div class="row">Columbia Nariñó</div>
-                    </div>
-                    <div class="col text-center price">5000원</div>
-                    <div class="col text-end action"><a class="btn btn-small btn-outline-dark" href="">추가</a></div>
-                </li>
-                <li class="list-group-item d-flex mt-2">
-                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/HKOFQYa.jpeg" alt=""></div>
-                    <div class="col">
-                        <div class="row text-muted">커피콩</div>
-                        <div class="row">Columbia Nariñó</div>
-                    </div>
-                    <div class="col text-center price">5000원</div>
-                    <div class="col text-end action"><a class="btn btn-small btn-outline-dark" href="">추가</a></div>
-                </li>
-                <li class="list-group-item d-flex mt-2">
-                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/HKOFQYa.jpeg" alt=""></div>
-                    <div class="col">
-                        <div class="row text-muted">커피콩</div>
-                        <div class="row">Columbia Nariñó</div>
-                    </div>
-                    <div class="col text-center price">5000원</div>
-                    <div class="col text-end action"><a class="btn btn-small btn-outline-dark" href="">추가</a></div>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-4 summary p-4">
-            <div>
-                <h5 class="m-0 p-0"><b>Summary</b></h5>
+<body>
+<%@include file="/WEB-INF/view/include/header.jsp" %>
+<div class="container text-center">
+    <h1 class="my-4">Grids & Circle</h1>
+    <div class="card mx-auto p-4">
+        <h5><b>인기 상품</b></h5>
+        <div class="row justify-content-center g-4 mt-3">
+            <div class="col-auto">
+                <img src="#" alt="커피 이미지">
+                <p>고급 커피 이름1</p>
+                <p>커피 가격1</p>
             </div>
-            <hr>
-            <div class="row">
-                <h6 class="p-0">Columbia Nariñó <span class="badge bg-dark text-">2개</span></h6>
+            <div class="col-auto">
+                <img src="#" alt="커피 이미지">
+                <p>고급 커피 이름2</p>
+                <p>커피 가격2</p>
             </div>
-            <div class="row">
-                <h6 class="p-0">Brazil Serra Do Caparaó <span class="badge bg-dark">2개</span></h6>
+            <div class="col-auto">
+                <img src="#" alt="커피 이미지">
+                <p>고급 커피 이름3</p>
+                <p>커피 가격3</p>
             </div>
-            <div class="row">
-                <h6 class="p-0">Columbia Nariñó <span class="badge bg-dark">2개</span></h6>
-            </div>
-            <form>
-                <div class="mb-3">
-                    <label for="email" class="form-label">이메일</label>
-                    <input type="email" class="form-control mb-1" id="email">
-                </div>
-                <div class="mb-3">
-                    <label for="address" class="form-label">주소</label>
-                    <input type="text" class="form-control mb-1" id="address">
-                </div>
-                <div class="mb-3">
-                    <label for="postcode" class="form-label">우편번호</label>
-                    <input type="text" class="form-control" id="postcode">
-                </div>
-                <div>당일 오후 2시 이후의 주문은 다음날 배송을 시작합니다.</div>
-            </form>
-            <div class="row pt-2 pb-2 border-top">
-                <h5 class="col">총금액</h5>
-                <h5 class="col text-end">15000원</h5>
-            </div>
-            <button class="btn btn-dark col-12">결제하기</button>
         </div>
     </div>
 </div>
