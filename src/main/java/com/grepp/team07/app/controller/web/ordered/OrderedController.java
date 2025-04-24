@@ -27,11 +27,6 @@ public class OrderedController {
 
     private final OrderedService orderedService;
 
-    @PostConstruct
-    public void init() {
-        log.info("✅ OrderedController 초기화됨");
-    }
-
     @GetMapping("orders")
     public String list(@Valid
                        PageParam param,
