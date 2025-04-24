@@ -1,6 +1,12 @@
-package com.grepp.team07.app.model.product;
+package com.grepp.team07.app.model.product.dto;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class ProductDto {
+
     private int productId;
     private String name;
     private String image;
