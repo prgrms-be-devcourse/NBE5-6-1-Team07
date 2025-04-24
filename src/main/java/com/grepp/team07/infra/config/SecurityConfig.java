@@ -69,9 +69,10 @@ public class SecurityConfig {
             .authorizeHttpRequests(
                 (requests) -> requests
                     .requestMatchers(GET, "/", "/assets/**", "/download/**").permitAll()
-                        .requestMatchers(GET, "/member/signup").permitAll()
+                    .requestMatchers(GET, "/member/signup").permitAll()
                     .requestMatchers(GET, "/member/signin").permitAll()
                     .requestMatchers(POST, "/member/signin", "/member/signup").permitAll()
+                    .requestMatchers(GET, "/api/member/exists/*").permitAll()
                     .anyRequest().authenticated()
             )
             .formLogin((form) -> form

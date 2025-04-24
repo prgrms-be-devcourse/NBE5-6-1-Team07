@@ -53,11 +53,12 @@
             ${errorMessage}
         </div>
       </c:if>
-      <form:form modelAttribute="signupForm" action="/member/signup" method="post">
+      <form:form modelAttribute="signupForm" action="/member/signup" method="post" id="signupForm">
         <div class="mx-auto mb-1" style="max-width: 500px; width: 100%;">
           <label for="userId" class="form-label">아이디</label>
           <form:input class="form-control bg-light" id="userId" path="userId" placeholder="아이디를 입력하세요"/>
           <form:errors path="userId" cssClass="helper-text text-danger"/>
+          <span class="helper-text" id="idCheckMsg" style="display: none;"></span>
         </div>
 
         <div class="mx-auto mt-1 mb-1" style="max-width: 500px; width: 100%;">
@@ -93,5 +94,34 @@
   </div>
 </div>
 </main>
+<script>
+  const validElement = document.querySelector('#idCheckMsg');
+  document.querySelector('#userId').addEventListener('focusout', async ev => {
+    const id = ev.target.value;
+    if(!id) return;
+    const response = await fetch('/api/member/exists/' + id);
+    const data = await response.json();
+    validElement.style.display = 'block';
+    validElement.textContent = data.data ? '사용이 불가능한 아이디 입니다.' : '사용 가능한 아이디 입니다.';
+  });
+
+  document.querySelector('#signupForm').addEventListener('submit', async ev => {
+    // form tag 의 기본 이벤트 차단
+    ev.preventDefault();
+
+    const id = document.querySelector('#userId').value;
+    if(!id) return;
+    const response = await fetch('/api/member/exists/' + id);
+    const data = await response.json();
+
+    if(data.data){
+      document.querySelector('#userId').focus();
+      validElement.textContent = '사용이 불가능한 아이디 입니다.';
+      return;
+    }
+
+    ev.target.submit();
+  });
+</script>
 </body>
 </html>
