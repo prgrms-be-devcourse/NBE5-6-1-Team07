@@ -3,26 +3,26 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.grepp.team07.app.model.product.ProductRepository">
+<mapper namespace="com.grepp.team07.app.model.admin.AdminRepository">
 
-  <resultMap id="productMap" type="ProductDto">
+  <resultMap id="adminProductMap" type="ProductDto">
     <id property="productId" column="product_id"/>
     <collection property="images" column="product_id" ofType="ProductImgDto" select="selectImg"/>
   </resultMap>
 
-  <select id="selectAll" resultMap="productMap">
+  <select id="selectAll" resultMap="adminProductMap">
     select * from product where deleted_at is null;
   </select>
 
   <select id="selectImg" parameterType="int" resultType="ProductImgDto">
-    select * from product_img where product_id = #{product_id} AND activated = 1;
+  select * from product_img where product_id = #{product_id} AND activated = 1;
   </select>
 
-  <select id="selectById" parameterType="int" resultMap="productMap">
+  <select id="selectById" parameterType="int" resultMap="adminProductMap">
     select * from product where product_id = #{product_id};
   </select>
 
-  <select id="searchByKeyword" parameterType="string" resultMap="productMap">
+  <select id="searchByKeyword" parameterType="string" resultMap="adminProductMap">
     select * from product where name like concat('%', #{keyword}, '%')
   </select>
 </mapper>

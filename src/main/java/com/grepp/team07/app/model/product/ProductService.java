@@ -20,69 +20,6 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final FileUtil fileUtil;
 
-    public List<ProductDto> findAll() {
-        return productRepository.selectAll();
-    }
-
-    public List<ProductDto> searchByKeyword(String keyword) {
-        return productRepository.searchByKeyword(keyword);
-    }
-
-    @Transactional
-    public void insertProduct(List<MultipartFile> thumbnail, ProductDto productDto) {
-        try {
-            List<FileDto> fileDtos = fileUtil.upload(thumbnail, "product");
-            productRepository.insert(productDto);
-
-            if(fileDtos.isEmpty()) return;
-
-            Integer productId = productDto.getProductId();
-            ProductImgDto productImgDto = new ProductImgDto(productId, fileDtos.get(0));
-            productRepository.insertImage(productImgDto);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public ProductDto findById(Integer id) {
-        return productRepository.selectById(id);
-    }
-
-    @Transactional
-    public void updateProduct(List<MultipartFile> thumbnail, ProductDto productDto) {
-        try {
-            List<FileDto> fileDtos = fileUtil.upload(thumbnail, "product");
-            productRepository.update(productDto);
-
-            Integer productId = productDto.getProductId();
-            productRepository.deleteImage(productId);
-
-            if(fileDtos.isEmpty()) return;
-
-            ProductImgDto productImgDto = new ProductImgDto(productId, fileDtos.get(0));
-            productRepository.insertImage(productImgDto);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Transactional
-    public void incrementCount(Integer productId) {
-        productRepository.increment(productId);
-    }
-
-    @Transactional
-    public void decrementCount(Integer productId) {
-        productRepository.decrement(productId);
-    }
-
-    @Transactional
-    public void delete(Integer productId) {
-        productRepository.deleteImage(productId);
-        productRepository.delete(productId);
-    }
-
-
     public List<ProductDto> searchProducts(String keyword) {
         return productRepository.findByKeyword(keyword);
     }

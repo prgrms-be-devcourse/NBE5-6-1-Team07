@@ -1,4 +1,4 @@
-package com.grepp.team07.app.controller.web.product.form;
+package com.grepp.team07.app.controller.web.admin.form;
 
 import com.grepp.team07.app.model.product.dto.ProductDto;
 import jakarta.validation.constraints.NotBlank;

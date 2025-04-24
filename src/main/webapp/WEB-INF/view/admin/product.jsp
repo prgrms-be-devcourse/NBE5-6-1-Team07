@@ -151,9 +151,7 @@
                                         <i class="bi bi-trash3"></i>
                                     </button>
                                 </form>
-
                             </div>
-
                         </li>
                     </c:forEach>
                 </ul>

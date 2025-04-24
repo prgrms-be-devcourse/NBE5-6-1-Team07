@@ -9,6 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(locations = {
     "file:src/main/webapp/WEB-INF/spring/root-context.xml",
     "file:src/main/webapp/WEB-INF/spring/servlet-context.xml"
 })
