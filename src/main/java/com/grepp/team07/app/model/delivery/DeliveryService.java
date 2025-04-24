@@ -25,6 +25,9 @@ public class DeliveryService {
     @Transactional
     public void sendProduct(Integer orderId) {
         DeliveryDto delivery = deliveryRepository.findByOrderId(orderId);
+        if(delivery.getStatus() != DeliveryState.READY){
+            return;
+        }
 
         delivery.setDeliveredAt(LocalDateTime.now());
         delivery.setStatus(DeliveryState.SHIPPED);

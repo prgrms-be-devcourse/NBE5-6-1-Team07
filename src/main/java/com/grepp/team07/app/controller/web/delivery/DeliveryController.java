@@ -6,9 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -17,12 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class DeliveryController {
     private final DeliveryService deliveryService;
 
-    @PostMapping("send")
-    public ResponseEntity<String> sendProduct(
-            @RequestParam
+    @GetMapping("send/{orderId}")
+    public String sendProduct(
+            @PathVariable("orderId")
             Integer orderId
     ){
+        log.info("orderId : ", orderId);
         deliveryService.sendProduct(orderId);
-        return ResponseEntity.ok("상품이 발송되었습니다.");
+        return "redirect:/admin/orders";
     }
 }

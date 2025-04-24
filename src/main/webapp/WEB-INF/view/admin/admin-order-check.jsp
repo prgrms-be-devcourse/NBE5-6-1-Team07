@@ -122,6 +122,7 @@
           <div class="col"><c:out value="${order.orderedDate}"/></div>
           <div class="col"><c:out value="${order.deliveredDate}"/></div>
           <div class="col"><c:out value="${order.status}"/></div>
+          <a href="<c:url value='/delivery/send/${order.orderId}' />">발송</a>
         </li>
       </c:forEach>
     </ul>
