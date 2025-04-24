@@ -27,7 +27,7 @@ import static org.springframework.http.HttpMethod.POST;
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
-    @Value("${remember-me.key")
+    @Value("${remember-me.key}")
     private String rememberMeKey;
 
     @Bean
@@ -38,13 +38,15 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationSuccessHandler successHandler(){
-
         return new AuthenticationSuccessHandler() {
             @Override
-            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+            public void onAuthenticationSuccess(HttpServletRequest request,
+                HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+
                 boolean isAdmin = authentication.getAuthorities()
-                        .stream()
-                        .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
+                    .stream()
+                    .anyMatch(authority ->
+                        authority.getAuthority().equals("ROLE_ADMIN"));
 
                 if(isAdmin){
                     response.sendRedirect("/admin");
@@ -54,38 +56,38 @@ public class SecurityConfig {
                 response.sendRedirect("/");
             }
         };
+
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         // * : 1depth 아래 모든 경로
-        // ** : 모든 depth의 모든 경로
-        // Security Config에는 인증과 관련된 설정만 지정 (PermitAll or Authenticated
+        // ** : 모든 depth 의 모든 경로
+        // Security Config 에는 인증과 관련된 설정만 지정 (PermitAll or Authenticated)
         http
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(GET, "/", "/assets/**", "/download/**").permitAll()
-                        .requestMatchers(GET, "/book/list").permitAll()
-                        .requestMatchers(GET, "/api/member/exists/*").permitAll()
+            .authorizeHttpRequests(
+                (requests) -> requests
+                    .requestMatchers(GET, "/", "/assets/**", "/download/**").permitAll()
                         .requestMatchers(GET, "/member/signup").permitAll()
-                        .requestMatchers(GET, "/member/signin").permitAll()
-                        .requestMatchers(POST, "/member/signin", "/member/signup").permitAll()
-                        .requestMatchers("/rent/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
-                        .anyRequest().authenticated()
-                )
-                .formLogin((form) -> form
-                        .loginPage("/member/signin")
-                        .usernameParameter("userId")
-                        .loginProcessingUrl("/member/signin")
-                        .defaultSuccessUrl("/")
-                        .successHandler(successHandler())
-                        .permitAll()
-                )
-                .rememberMe(rememberMe -> rememberMe.key(rememberMeKey))
-                .logout(LogoutConfigurer::permitAll);
+                    .requestMatchers(GET, "/member/signin").permitAll()
+                    .requestMatchers(POST, "/member/signin", "/member/signup").permitAll()
+                    .anyRequest().authenticated()
+            )
+            .formLogin((form) -> form
+                .loginPage("/member/signin")
+                .usernameParameter("userId")
+                .loginProcessingUrl("/member/signin")
+                .defaultSuccessUrl("/")
+                .successHandler(successHandler())
+                .permitAll()
+            )
+            .rememberMe(rememberMe -> rememberMe.key(rememberMeKey))
+            .logout(LogoutConfigurer::permitAll);
 
         return http.build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder(){

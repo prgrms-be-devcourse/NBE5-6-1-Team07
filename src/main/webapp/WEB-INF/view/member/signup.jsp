@@ -36,51 +36,62 @@
       margin-top: 1.25rem
     }
   </style>
-  <title>회원 정보 수정</title>
+  <title>회원 가입</title>
   <%@include file="/WEB-INF/view/include/static.jsp" %>
 </head>
 <body>
 <%@include file="/WEB-INF/view/include/header.jsp" %>
+<main>
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="card p-5 pr-7 pl-7">
       <div class="text-center mb-1">
         <h2><b>회원 정보 수정</b></h2>
       </div>
-
-      <form action="saveUser.jsp" method="post">
+      <c:if test="${not empty errorMessage}">
+        <div class="alert alert-danger" role="alert">
+            ${errorMessage}
+        </div>
+      </c:if>
+      <form:form modelAttribute="signupForm" action="/member/signup" method="post">
         <div class="mx-auto mb-1" style="max-width: 500px; width: 100%;">
-          <label for="id" class="form-label">아이디</label>
-          <input type="text" class="form-control bg-light" id="id" name="id" value="${id}" placeholder="아이디를 입력하세요">
+          <label for="userId" class="form-label">아이디</label>
+          <form:input class="form-control bg-light" id="userId" path="userId" placeholder="아이디를 입력하세요"/>
+          <form:errors path="userId" cssClass="helper-text text-danger"/>
         </div>
 
         <div class="mx-auto mt-1 mb-1" style="max-width: 500px; width: 100%;">
           <label for="email" class="form-label">이메일</label>
-          <input type="text" class="form-control bg-light" id="email" name="email" value="${email}" placeholder="이메일을 입력하세요">
+          <form:input class="form-control bg-light" id="email" path="email" placeholder="이메일을 입력하세요"/>
+          <form:errors path="email" cssClass="helper-text text-danger"/>
         </div>
 
         <div class="mx-auto mt-1 mb-1" style="max-width: 500px; width: 100%;">
           <label for="password" class="form-label">비밀번호</label>
-          <input type="password" class="form-control bg-light" id="password" name="password" value="${password}" placeholder="비밀번호를 입력하세요">
+          <form:password class="form-control bg-light" id="password" path="password" placeholder="비밀번호를 입력하세요"/>
+          <form:errors path="password" cssClass="helper-text text-danger"/>
         </div>
 
         <div class="mx-auto mt-1 mb-1" style="max-width: 500px; width: 100%;">
           <label for="address" class="form-label">주소</label>
-          <input type="text" class="form-control bg-light" id="address" name="address" value="${address}" placeholder="주소를 입력하세요">
+          <form:input class="form-control bg-light" id="address" path="address" placeholder="주소를 입력하세요"/>
+          <form:errors path="address" cssClass="helper-text text-danger"/>
         </div>
 
         <div class="mx-auto mt-1 mb-1" style="max-width: 500px; width: 100%;">
           <label for="postCode" class="form-label">우편번호</label>
-          <input type="text" class="form-control bg-light" id="postCode" name="postCode" value="${postCode}" placeholder="우편번호를 입력하세요">
+          <form:input class="form-control bg-light" id="postCode" path="postCode" placeholder="우편번호를 입력하세요"/>
+          <form:errors path="postCode" cssClass="helper-text text-danger"/>
         </div>
 
         <div class="d-flex justify-content-center gap-3 mt-2 pt-2">
           <button type="reset" class="btn btn-outline-secondary" style="width: 150px;">취소</button>
-          <button type="submit" class="btn btn-primary" style="width: 150px;">저장</button>
+          <button type="submit" class="btn btn-primary" style="width: 150px;">회원가입</button>
         </div>
-      </form>
+      </form:form>
     </div>
   </div>
 </div>
+</main>
 </body>
 </html>
