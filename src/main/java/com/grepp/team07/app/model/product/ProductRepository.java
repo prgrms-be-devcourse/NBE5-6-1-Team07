@@ -43,4 +43,7 @@ public interface ProductRepository {
 
     @Update("UPDATE product_img SET activated = 0 WHERE product_id = #{productId}")
     void deleteImage(@Param("productId") Integer productId);
+    List<ProductDto> findByKeyword(String keyword);
+
+    List<ProductDto> bestProduct();
 }
