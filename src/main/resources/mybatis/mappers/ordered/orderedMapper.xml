@@ -7,6 +7,12 @@
 
     <resultMap id="orderedMap" type="OrderedDto">
         <id property="orderId" column="order_id"/>
+        <result property="cartId" column="cart_id"/>
+        <result property="email" column="email"/>
+        <result property="address" column="address"/>
+        <result property="orderedAt" column="ordered_at"/>
+        <result property="status" column="status" javaType="com.grepp.team07.app.model.delivery.code.DeliveryState"/>
+        <result property="deliveredAt" column="delivered_at"/>
         <collection property="orderedProducts" ofType="OrderedProductDto"
                     column="order_id" select="selectOrderProductByOrderId"/>
     </resultMap>
@@ -16,6 +22,19 @@
         from ordered o
         left join
         delivery d on o.order_id = d.order_id
+    </select>
+
+    <select id="findPaged" resultMap="orderedMap" parameterType="map">
+        select o.order_id, o.cart_id, o.email, o.address, o.ordered_at,
+        d.status, d.delivered_at
+        from ordered o
+        left join delivery d ON o.order_id = d.order_id
+        order by o.ordered_at DESC
+        limit #{limit} offset #{offset}
+    </select>
+
+    <select id="countAllOrders" resultType="int">
+        SELECT COUNT(*) FROM ordered
     </select>
 
     <select id="selectOrderProductByOrderId" parameterType="int"

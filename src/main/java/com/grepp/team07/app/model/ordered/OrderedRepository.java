@@ -2,7 +2,7 @@ package com.grepp.team07.app.model.ordered;
 
 import com.grepp.team07.app.model.ordered.dto.OrderedDto;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -10,4 +10,8 @@ import java.util.List;
 public interface OrderedRepository {
 
     List<OrderedDto> selectAll();
+
+    int countAllOrders();
+
+    List<OrderedDto> findPaged(@Param("limit") int limit, @Param("offset") int offset);
 }
