@@ -1,7 +1,7 @@
 package com.grepp.team07.app.controller.web.product;
 
 import com.grepp.team07.app.model.product.ProductService;
-import com.grepp.team07.app.model.product.dto.Product;
+import com.grepp.team07.app.model.product.dto.ProductDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ public class ProductController {
 
     @GetMapping("")
     public String searchProduct(@RequestParam("item") String item, Model model) {
-        List<Product> products = productService.searchProducts(item);
+        List<ProductDto> products = productService.searchProducts(item);
         model.addAttribute("products", products);
         return "product";
     }
