@@ -33,6 +33,9 @@ public class ProductController {
                 productService.incrementCount(id);
             } else if (action.equals("decrement")) {
                 productService.decrementCount(id);
+            } else if (action.equals("delete")) {
+                productService.delete(id);
+                return "redirect:/admin/product";
             }
         }
 

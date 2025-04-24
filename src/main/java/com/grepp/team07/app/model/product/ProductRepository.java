@@ -2,6 +2,7 @@ package com.grepp.team07.app.model.product;
 
 import com.grepp.team07.app.model.product.dto.ProductDto;
 import java.util.List;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -27,4 +28,8 @@ public interface ProductRepository {
 
     @Update("UPDATE product SET count = count - 1 WHERE product_id = #{productId} AND count > 0")
     void decrement(@Param("productId") Integer productId);
+
+    @Update("UPDATE product SET deleted_at = NOW() WHERE product_id = #{productId}")
+    void delete(@Param("productId") Integer productId);
+
 }

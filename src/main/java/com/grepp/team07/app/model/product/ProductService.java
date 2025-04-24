@@ -50,4 +50,9 @@ public class ProductService {
     public void decrementCount(Integer productId) {
         productRepository.decrement(productId);
     }
+
+    @Transactional
+    public void delete(Integer productId) {
+        productRepository.delete(productId);
+    }
 }

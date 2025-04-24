@@ -1,5 +1,6 @@
 package com.grepp.team07.app.model.product.dto;
 
+import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ public class ProductDto {
     private String brand;
     private Integer count = 10;
     private Integer sales = 0;
+    private LocalDateTime deletedAt;
 
 
     public ProductDto(String name, String image, String price, String info, String brand) {

@@ -115,7 +115,8 @@
                                    style="border-color: #ccc;">
                                     -
                                 </a>
-                                <a class="btn btn-sm btn-outline-dark px-3" style="min-width: 60px; white-space: nowrap;" href="/admin/product?id=${product.productId}">수정</a>
+                                <a class="btn btn-sm btn-outline-dark px-2" style="min-width: 50px; white-space: nowrap;" href="/admin/product?id=${product.productId}">수정</a>
+                                <a class="btn btn-sm btn-outline-dark px-2" style="min-width: 50px; white-space: nowrap; border-color: red; color: red;" href="/admin/product?id=${product.productId}&action=delete">삭제</a>
                             </div>
 
                         </li>
