@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Data
@@ -19,4 +20,14 @@ public class OrderedDto {
     private String address;
     private List<OrderedProductDto> orderedProducts;
     private LocalDateTime orderedAt;
+
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    public String getOrderedDate() {
+        return orderedAt != null ? orderedAt.format(DATE_FORMATTER) : null;
+    }
+
+    public String getDeliveredDate() {
+        return deliveredAt != null ? deliveredAt.format(DATE_FORMATTER) : null;
+    }
 }

@@ -31,19 +31,13 @@
     .table-box {
       background: white;
       border-radius: 30px;
-      padding: 30px 60px 30px 30px;
+      padding: 50px 60px 20px 30px;
       max-width: 1000px;
       min-width: 400px;
-      margin: 40px auto;
+      margin: 20px auto;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     }
 
-    .table-title {
-      font-size: 36px;
-      font-weight: bold;
-      text-align: center;
-      margin-bottom: 20px;
-    }
 
     .order-table .row {
       background-color: #e0e0e0;
@@ -101,10 +95,9 @@
 <%@ include file="/WEB-INF/view/include/header.jsp" %>
 
 <div class="container">
-  <div class="brand">Grids & Circle</div>
+  <div class="brand">관리자용 주문 목록</div>
 
   <div class="table-box">
-    <div class="table-title">관리자용 주문 리스트 페이지</div>
     <ul class="order-table">
       <li class="row header">
         <div class="col-1">주문번호</div>
@@ -126,8 +119,8 @@
               <span class="col"><c:out value="${order.orderedProducts[0].name}"/> 외 <c:out value="${order.orderedProducts.size() - 1}"/> </span>
             </c:otherwise>
           </c:choose>
-          <div class="col"><c:out value="${order.orderedAt}"/></div>
-          <div class="col"><c:out value="${order.deliveredAt.plusDays(1)}"/></div>
+          <div class="col"><c:out value="${order.orderedDate}"/></div>
+          <div class="col"><c:out value="${order.deliveredDate}"/></div>
           <div class="col"><c:out value="${order.status}"/></div>
         </li>
       </c:forEach>
