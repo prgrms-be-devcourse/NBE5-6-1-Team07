@@ -52,7 +52,6 @@
 <body>
 <%@include file="/WEB-INF/view/include/header.jsp" %>
 <div class="container text-center">
-    <a href="/admin/orders">aaaaaaa</a>
     <h1 class="my-4">Grids & Circle</h1>
     <div class="card mx-auto p-4">
         <h5><b>인기 상품</b></h5>

@@ -31,7 +31,7 @@
     .table-box {
       background: white;
       border-radius: 30px;
-      padding: 50px;
+      padding: 30px 60px 30px 30px;
       max-width: 1000px;
       min-width: 400px;
       margin: 40px auto;
