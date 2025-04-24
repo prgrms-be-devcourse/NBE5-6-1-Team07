@@ -106,6 +106,7 @@
         <div class="col">주문일</div>
         <div class="col">도착예정일</div>
         <div class="col">배송상태</div>
+        <div class="col"></div>
       </li>
       <c:forEach items="${page.content()}" var="order">
         <li class="row">
@@ -122,7 +123,14 @@
           <div class="col"><c:out value="${order.orderedDate}"/></div>
           <div class="col"><c:out value="${order.deliveredDate}"/></div>
           <div class="col"><c:out value="${order.status}"/></div>
-          <a href="<c:url value='/delivery/send/${order.orderId}' />">발송</a>
+          <c:choose>
+            <c:when test="${order.status == 'READY'}">
+              <div class="col"><a href="<c:url value='/delivery/send/${order.orderId}' />"><i class="bi bi-send"></i></a></div>
+            </c:when>
+            <c:otherwise>
+              <div class="col"></div>
+            </c:otherwise>
+          </c:choose>
         </li>
       </c:forEach>
     </ul>
