@@ -67,6 +67,14 @@
       justify-content: left;
     }
 
+    .order-table .col-7 {
+      display: flex;
+      width: 60px;
+      flex-direction: column;
+      align-self: flex-start;
+      justify-content: left;
+    }
+
     .order-table .col {
       display: flex;
       flex-direction: column;
@@ -106,7 +114,7 @@
         <div class="col">주문일</div>
         <div class="col">도착예정일</div>
         <div class="col">배송상태</div>
-        <div class="col"></div>
+        <div class="col-7"></div>
       </li>
       <c:forEach items="${page.content()}" var="order">
         <li class="row">
@@ -125,10 +133,10 @@
           <div class="col"><c:out value="${order.status}"/></div>
           <c:choose>
             <c:when test="${order.status == 'READY'}">
-              <div class="col"><a href="<c:url value='/delivery/send/${order.orderId}' />"><i class="bi bi-send"></i></a></div>
+              <div class="col-7"><a href="<c:url value='/delivery/send/${order.orderId}' />"><i class="bi bi-send"></i></a></div>
             </c:when>
             <c:otherwise>
-              <div class="col"></div>
+              <div class="col-7"></div>
             </c:otherwise>
           </c:choose>
         </li>
