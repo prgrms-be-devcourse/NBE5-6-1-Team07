@@ -15,5 +15,7 @@ public interface DeliveryRepository {
 
     DeliveryDto findByOrderId(@Param("orderId") Integer orderId);
 
-    void updateDelivery(@Param("deliveryId")Integer deliveryId, @Param("deliveredAt")LocalDateTime deliveredAt, @Param("status")DeliveryState status);
+    void updateDeliveredAt(@Param("deliveryId")Integer deliveryId, @Param("deliveredAt")LocalDateTime deliveredAt);
+
+    void updateStatus(@Param("deliveryId")Integer deliveryId, @Param("status")DeliveryState status);
 }

@@ -17,8 +17,13 @@
         select * from delivery where order_id = #{orderId}
     </select>
 
-    <update id="updateDelivery" parameterType="DeliveryDto">
-        update delivery set delivered_at = #{deliveredAt}, status = #{status}
+    <update id="updateStatus" parameterType="DeliveryDto">
+        update delivery set status = #{status}
+        where delivery_id = #{deliveryId}
+    </update>
+
+    <update id="updateDeliveredAt" parameterType="DeliveryDto">
+        update delivery set delivered_at = #{deliveredAt}
         where delivery_id = #{deliveryId}
     </update>
 </mapper>

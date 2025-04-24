@@ -19,7 +19,16 @@ public class DeliveryService {
     private final DeliveryRepository deliveryRepository;
 
     public List<DeliveryDto> findAll() {
-        return deliveryRepository.selectAll();
+        List<DeliveryDto> deliverys = deliveryRepository.selectAll();
+
+        deliverys.stream().forEach(e -> {
+            if(LocalDateTime.now().isAfter(e.getDeliveredAt().plusDays(1)) && e.getStatus() == DeliveryState.SHIPPED){
+                e.setStatus(DeliveryState.DELIVERED);
+                deliveryRepository.updateStatus(e.getDeliveryId(), e.getStatus());
+            }
+        });
+
+        return deliverys;
     }
 
     @Transactional
@@ -32,6 +41,7 @@ public class DeliveryService {
         delivery.setDeliveredAt(LocalDateTime.now());
         delivery.setStatus(DeliveryState.SHIPPED);
 
-        deliveryRepository.updateDelivery(delivery.getDeliveryId(), delivery.getDeliveredAt(), delivery.getStatus());
+        deliveryRepository.updateDeliveredAt(delivery.getDeliveryId(), delivery.getDeliveredAt());
+        deliveryRepository.updateStatus(delivery.getDeliveryId(), delivery.getStatus());
     }
 }
