@@ -9,4 +9,6 @@ import java.util.List;
 public interface ProductRepository {
 
     List<ProductDto> findByKeyword(String keyword);
+
+    List<ProductDto> bestProduct();
 }
