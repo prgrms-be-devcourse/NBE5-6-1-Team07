@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductDto {
 
-    private int id;
+    private Integer id;
     private String name;
     private String image;
     private String price;

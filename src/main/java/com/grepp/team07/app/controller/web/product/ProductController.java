@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @Slf4j
@@ -22,25 +23,46 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("product")
-    public String list(Model model) {
+    public String list(
+        @RequestParam(required = false)
+        Integer id,
+        Model model
+    ) {
         List<ProductDto> products = productService.findAll();
         model.addAttribute("products", products);
-        model.addAttribute("productInsertForm", new ProductDto());
+
+        if (id != null) {
+            ProductDto product = productService.findById(id);
+            System.out.println("Product: " + product);
+            System.out.println("Product ID: " + product.getId());
+            model.addAttribute("productInsertForm", product);
+        } else {
+            model.addAttribute("productInsertForm", new ProductInsertForm());
+        }
+
         return "admin/product";
     }
 
     @PostMapping("product")
-    public String insert(
-        @Valid
-        ProductInsertForm form,
+    public String insertOrUpdate(
+        @Valid ProductInsertForm form,
         BindingResult bindingResult,
         Model model
     ) {
+        System.out.println("Product ID: " + form.getId());
+
         if (bindingResult.hasErrors()) {
             return "admin/product";
         }
-        productService.insertProduct(form.toDto());
-        return "redirect:/";
+
+        if (form.getId() != null && form.getId() > 0) {
+            productService.updateProduct(form.fromForm());
+        } else {
+            productService.insertProduct(form.toDto());
+        }
+
+
+        return "redirect:/admin/product";
     }
 
 }

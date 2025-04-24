@@ -28,4 +28,16 @@ public class ProductService {
         }
     }
 
+    public ProductDto findById(Integer id) {
+        return productRepository.selectById(id);
+    }
+
+    @Transactional
+    public void updateProduct(ProductDto productDto) {
+        try {
+            productRepository.update(productDto);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

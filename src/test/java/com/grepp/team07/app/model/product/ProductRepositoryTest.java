@@ -2,6 +2,7 @@ package com.grepp.team07.app.model.product;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.grepp.team07.app.model.product.dto.ProductDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,6 +24,24 @@ class ProductRepositoryTest {
     @Test
     public void selectAll() {
         log.info("all products : {}", productRepository.selectAll());
+    }
+
+    @Test
+    public void selectById() {
+        log.info("product by id : {}", productRepository.selectById(1));
+    }
+
+    @Test
+    public void update() {
+        ProductDto productDto = new ProductDto();
+        productDto.setId(7);
+        productDto.setName("test");
+        productDto.setImage("test");
+        productDto.setPrice("test");
+        productDto.setInfo("test");
+        productDto.setBrand("test");
+        productRepository.update(productDto);
+        log.info("update by id : {}", productRepository.update(productDto));
     }
   
 }

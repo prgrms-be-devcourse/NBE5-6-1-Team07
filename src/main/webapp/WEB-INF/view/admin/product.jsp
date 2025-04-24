@@ -83,6 +83,7 @@
         <div class="col-md-8 mt-4 d-flex flex-column align-items-start p-3 pt-0">
             <ul class="list-group products">
                 <c:forEach items="${products}" var="product">
+                    <c:out value="${product}" />
                     <li class="list-group-item d-flex mt-2">
                         <div class="col-2">
                             <img class="img-fluid" src="<c:out value='${product.image}'/>" alt="">
@@ -95,7 +96,7 @@
                             <c:out value="${product.price}" />원
                         </div>
                         <div class="col text-end action">
-<%--                            <a class="btn btn-small btn-outline-dark" href="/admin/product/edit?id=${product.id}">수정</a>--%>
+                            <a class="btn btn-small btn-outline-dark" href="/admin/product?id=${product.id}">수정</a>
                         </div>
                     </li>
                 </c:forEach>
@@ -103,6 +104,7 @@
         </div>
         <div class="col-md-4 summary p-4">
             <form:form modelAttribute="productInsertForm" action="/admin/product" method="post">
+                <form:input path="id" type="hidden" id="id" />
                 <div class="mb-3">
                     <label for="name" class="form-label">상품명</label>
                     <form:input path="name" id="name" class="form-control"/>

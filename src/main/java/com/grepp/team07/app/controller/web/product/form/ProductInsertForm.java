@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class ProductInsertForm {
 
+    private Integer id;
     @NotBlank
     private String name;
     @NotBlank
@@ -25,6 +26,17 @@ public class ProductInsertForm {
         productDto.setPrice(price);
         productDto.setInfo(info);
         productDto.setBrand(brand);
+        return productDto;
+    }
+
+    public ProductDto fromForm() {
+        ProductDto productDto = new ProductDto();
+        productDto.setId(this.getId());
+        productDto.setName(this.getName());
+        productDto.setImage(this.getImage());
+        productDto.setPrice(this.getPrice());
+        productDto.setInfo(this.getInfo());
+        productDto.setBrand(this.getBrand());
         return productDto;
     }
 }
