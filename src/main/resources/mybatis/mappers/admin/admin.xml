@@ -15,7 +15,7 @@
   </select>
 
   <select id="selectImg" parameterType="int" resultType="ProductImgDto">
-    select * from product_img where product_id = #{product_id};
+    select * from product_img where product_id = #{product_id} AND activated = 1;
   </select>
 
 

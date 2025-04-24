@@ -45,9 +45,18 @@ public class ProductService {
     }
 
     @Transactional
-    public void updateProduct(ProductDto productDto) {
+    public void updateProduct(List<MultipartFile> thumbnail, ProductDto productDto) {
         try {
+            List<FileDto> fileDtos = fileUtil.upload(thumbnail, "product");
             productRepository.update(productDto);
+
+            Integer productId = productDto.getProductId();
+            productRepository.deleteImage(productId);
+
+            if(fileDtos.isEmpty()) return;
+
+            ProductImgDto productImgDto = new ProductImgDto(productId, fileDtos.get(0));
+            productRepository.insertImage(productImgDto);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -65,6 +74,7 @@ public class ProductService {
 
     @Transactional
     public void delete(Integer productId) {
+        productRepository.deleteImage(productId);
         productRepository.delete(productId);
     }
 }

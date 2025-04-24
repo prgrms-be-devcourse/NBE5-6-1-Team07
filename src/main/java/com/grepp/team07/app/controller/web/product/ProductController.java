@@ -64,7 +64,7 @@ public class ProductController {
         }
 
         if (form.getProductId() != null && form.getProductId() > 0) {
-            productService.updateProduct(form.fromForm());
+            productService.updateProduct(form.getThumbnail(), form.fromForm());
         } else {
             productService.insertProduct(form.getThumbnail(), form.toDto());
         }

@@ -39,4 +39,7 @@ public interface ProductRepository {
     @Update("UPDATE product SET deleted_at = NOW() WHERE product_id = #{productId}")
     void delete(@Param("productId") Integer productId);
 
+    @Update("UPDATE product_img SET activated = 0 WHERE product_id = #{productId}")
+    void deleteImage(@Param("productId") Integer productId);
+
 }
