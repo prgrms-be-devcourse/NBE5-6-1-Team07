@@ -15,12 +15,18 @@
         }
 
         .card {
-            margin: auto;
-            max-width: 950px;
-            width: 90%;
-            box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            border-radius: 1rem;
-            border: transparent
+           margin: auto;
+           max-width: 950px;
+           width: 90%;
+           box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+           border-radius: 1rem;
+           border: transparent
+         }
+
+        .product-list-scroll {
+          max-height: 500px;
+          overflow-y: auto;
+          width: 100%;
         }
 
         .summary {
@@ -69,7 +75,7 @@
         }
 
     </style>
-    <title>Hello, world!</title>
+    <title>Grids & Circle</title>
     <%@include file="/WEB-INF/view/include/static.jsp" %>
 </head>
 <body>
@@ -81,26 +87,39 @@
 <div class="card">
     <div class="row">
         <div class="col-md-8 mt-4 d-flex flex-column align-items-start p-3 pt-0">
-            <ul class="list-group products">
-                <c:forEach items="${products}" var="product">
-                    <c:out value="${product}" />
-                    <li class="list-group-item d-flex mt-2">
-                        <div class="col-2">
-                            <img class="img-fluid" src="<c:out value='${product.image}'/>" alt="">
-                        </div>
-                        <div class="col">
-                            <div class="row text-muted"><c:out value="${product.brand}" /></div>
-                            <div class="row"><c:out value="${product.name}" /></div>
-                        </div>
-                        <div class="col text-center price">
-                            <c:out value="${product.price}" />원
-                        </div>
-                        <div class="col text-end action">
-                            <a class="btn btn-small btn-outline-dark" href="/admin/product?id=${product.id}">수정</a>
-                        </div>
-                    </li>
-                </c:forEach>
-            </ul>
+            <div class="product-list-scroll">
+                <ul class="list-group products">
+                    <c:forEach items="${products}" var="product">
+                        <li class="list-group-item d-flex mt-2">
+                            <div class="col-2">
+                                <img class="img-fluid" src="<c:out value='${product.image}'/>" alt="">
+                            </div>
+                            <div class="col">
+                                <div class="row text-muted"><c:out value="${product.brand}" /></div>
+                                <div class="row"><c:out value="${product.name}" /></div>
+                            </div>
+                            <div class="col text-center price">
+                                <c:out value="${product.price}" />원
+                            </div>
+                            <div class="col d-flex justify-content-center align-items-center gap-2">
+                                <a class="btn btn-sm btn-outline-dark"
+                                   href="/admin/product?id=${product.id}&action=increment"
+                                   style="border-color: #ccc;">
+                                    +
+                                </a>
+                                <span style="min-width: 40px; display: inline-block; text-align: center;"><c:out value="${product.count}" /></span>
+                                <a class="btn btn-sm btn-outline-dark"
+                                   href="/admin/product?id=${product.id}&action=decrement"
+                                   style="border-color: #ccc;">
+                                    -
+                                </a>
+                                <a class="btn btn-sm btn-outline-dark px-3" style="min-width: 60px; white-space: nowrap;" href="/admin/product?id=${product.id}">수정</a>
+                            </div>
+
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
         </div>
         <div class="col-md-4 summary p-4">
             <form:form modelAttribute="productInsertForm" action="/admin/product" method="post">
