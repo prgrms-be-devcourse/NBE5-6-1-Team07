@@ -1,5 +1,6 @@
 package com.grepp.team07.app.model.product;
 
+import com.grepp.team07.app.model.product.dto.ProductDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

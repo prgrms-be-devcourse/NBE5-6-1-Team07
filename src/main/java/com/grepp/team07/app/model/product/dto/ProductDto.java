@@ -1,5 +1,8 @@
-package com.grepp.team07.app.model.product;
+package com.grepp.team07.app.model.product.dto;
 
+import lombok.Data;
+
+@Data
 public class ProductDto {
     private int productId;
     private String name;
