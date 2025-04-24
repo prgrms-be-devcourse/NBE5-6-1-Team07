@@ -11,4 +11,6 @@ public interface ProductRepository {
     List<ProductDto> findByKeyword(String keyword);
 
     List<ProductDto> bestProduct();
+
+    List<ProductDto> selectAll();
 }

@@ -21,4 +21,8 @@ public class ProductService {
     public List<ProductDto> bestProduct() {
         return productRepository.bestProduct();
     }
+
+    public List<ProductDto> selectAll() {
+        return productRepository.selectAll();
+    }
 }

@@ -21,8 +21,10 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("")
-    public String searchProduct(@RequestParam("item") String item, Model model) {
-        List<ProductDto> products = productService.searchProducts(item);
+    public String productList(@RequestParam(value = "item", required = false) String item, Model model) {
+        List<ProductDto> products = (item == null || item.isBlank())
+            ? productService.selectAll()
+            : productService.searchProducts(item);
         model.addAttribute("products", products);
         return "product";
     }

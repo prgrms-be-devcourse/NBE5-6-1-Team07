@@ -99,33 +99,21 @@
         </form>
       </div>
       <ul class="list-group products">
-        <li class="list-group-item d-flex mt-3">
-          <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/HKOFQYa.jpeg" alt=""></div>
-          <div class="col">
-            <div class="row text-muted">커피콩</div>
-            <div class="row">Columbia Nariñó</div>
-          </div>
-          <div class="col text-center price">5000원</div>
-          <div class="col text-end action"><a class="btn btn-small btn-outline-dark" href="">추가</a></div>
-        </li>
-        <li class="list-group-item d-flex mt-2">
-          <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/HKOFQYa.jpeg" alt=""></div>
-          <div class="col">
-            <div class="row text-muted">커피콩</div>
-            <div class="row">Columbia Nariñó</div>
-          </div>
-          <div class="col text-center price">5000원</div>
-          <div class="col text-end action"><a class="btn btn-small btn-outline-dark" href="">추가</a></div>
-        </li>
-        <li class="list-group-item d-flex mt-2">
-          <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/HKOFQYa.jpeg" alt=""></div>
-          <div class="col">
-            <div class="row text-muted">커피콩</div>
-            <div class="row">Columbia Nariñó</div>
-          </div>
-          <div class="col text-center price">5000원</div>
-          <div class="col text-end action"><a class="btn btn-small btn-outline-dark" href="">추가</a></div>
-        </li>
+        <c:forEach var="product" items="${products}">
+          <li class="list-group-item d-flex mt-3">
+            <div class="col-2">
+              <img class="img-fluid" src="${product.image}" alt="">
+            </div>
+            <div class="col">
+              <div class="row text-muted">${product.brand}</div>
+              <div class="row">${product.name}</div>
+            </div>
+            <div class="col text-center price">${product.price}원</div>
+            <div class="col text-end action">
+              <a class="btn btn-small btn-outline-dark" href="javascript:addToCart(${product.productId})">추가</a>
+            </div>
+          </li>
+        </c:forEach>
       </ul>
     </div>
     <div class="col-md-4 summary p-4">

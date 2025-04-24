@@ -9,6 +9,10 @@
         <id property="productId" column="product_id"/>
     </resultMap>
 
+    <select id="selectAll" resultMap="productMap">
+        select * from product
+    </select>
+
     <select id="findByKeyword" resultMap="productMap">
         select * from product
         where name like concat('%', #{keyword}, '%')
