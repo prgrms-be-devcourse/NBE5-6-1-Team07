@@ -15,7 +15,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("ordered")
+@RequestMapping("admin")
 public class OrderedController {
 
     private final OrderedService orderedService;
@@ -25,7 +25,7 @@ public class OrderedController {
         log.info("✅ OrderedController 초기화됨");
     }
 
-    @GetMapping
+    @GetMapping("orders")
     public String list(Model model){
         List<OrderedDto> orders = orderedService.findAll();
         model.addAttribute("orders", orders);

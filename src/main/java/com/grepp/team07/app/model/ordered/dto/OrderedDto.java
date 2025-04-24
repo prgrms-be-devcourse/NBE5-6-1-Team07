@@ -15,6 +15,7 @@ public class OrderedDto {
     private String email;
     private String name;
     private DeliveryState status;
+    private LocalDateTime deliveredAt;
     private String address;
     private List<OrderedProductDto> orderedProducts;
     private LocalDateTime orderedAt;

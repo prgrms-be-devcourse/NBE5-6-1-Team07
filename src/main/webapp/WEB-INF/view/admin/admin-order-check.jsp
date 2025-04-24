@@ -42,7 +42,7 @@
       font-size: 36px;
       font-weight: bold;
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
 
     .order-table .row {
@@ -116,7 +116,7 @@
             </c:otherwise>
           </c:choose>
           <div class="col"><c:out value="${order.orderedAt}"/></div>
-          <div class="col">도착예정일</div>
+          <div class="col"><c:out value="${order.deliveredAt.plusDays(1)}"/></div>
           <div class="col"><c:out value="${order.status}"/></div>
         </li>
       </c:forEach>
