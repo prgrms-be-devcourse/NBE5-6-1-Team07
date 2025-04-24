@@ -5,7 +5,7 @@
 
 <mapper namespace="com.grepp.team07.app.model.product.ProductRepository">
 
-  <resultMap id="productMap" type="com.grepp.team07.app.model.product.dto.ProductDto">
+  <resultMap id="productMap" type="ProductDto">
 
   <id property="id" column="id"/>
   </resultMap>
@@ -13,4 +13,5 @@
   <select id="selectAll" resultMap="productMap">
     select * from product;
   </select>
+
 </mapper>

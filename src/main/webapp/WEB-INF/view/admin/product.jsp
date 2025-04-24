@@ -70,71 +70,69 @@
 
     </style>
     <title>Hello, world!</title>
+    <%@include file="/WEB-INF/view/include/static.jsp" %>
 </head>
-<body class="container-fluid">
+<body>
+<%@include file="/WEB-INF/view/include/header.jsp" %>
 <div class="row justify-content-center m-4">
-    <h1 class="text-center">Grids & Circle</h1>
+    <h1 class="text-center">관리자용 상품 페이지</h1>
 </div>
+<div class="container-fluid">
 <div class="card">
     <div class="row">
         <div class="col-md-8 mt-4 d-flex flex-column align-items-start p-3 pt-0">
-            <h5 class="flex-grow-0"><b>관리자용 상품 페이지</b></h5>
             <ul class="list-group products">
-                <li class="list-group-item d-flex mt-3">
-                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/HKOFQYa.jpeg" alt=""></div>
-                    <div class="col">
-                        <div class="row text-muted">커피콩</div>
-                        <div class="row">Columbia Nariñó</div>
-                    </div>
-                    <div class="col text-center price">5000원</div>
-                    <div class="col text-end action"><a class="btn btn-small btn-outline-dark" href="">수정</a></div>
-                </li>
-                <li class="list-group-item d-flex mt-2">
-                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/HKOFQYa.jpeg" alt=""></div>
-                    <div class="col">
-                        <div class="row text-muted">커피콩</div>
-                        <div class="row">Columbia Nariñó</div>
-                    </div>
-                    <div class="col text-center price">5000원</div>
-                    <div class="col text-end action"><a class="btn btn-small btn-outline-dark" href="">수정</a></div>
-                </li>
-                <li class="list-group-item d-flex mt-2">
-                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/HKOFQYa.jpeg" alt=""></div>
-                    <div class="col">
-                        <div class="row text-muted">커피콩</div>
-                        <div class="row">Columbia Nariñó</div>
-                    </div>
-                    <div class="col text-center price">5000원</div>
-                    <div class="col text-end action"><a class="btn btn-small btn-outline-dark" href="">수정</a></div>
-                </li>
+                <c:forEach items="${products}" var="product">
+                    <li class="list-group-item d-flex mt-2">
+                        <div class="col-2">
+                            <img class="img-fluid" src="<c:out value='${product.image}'/>" alt="">
+                        </div>
+                        <div class="col">
+                            <div class="row text-muted"><c:out value="${product.brand}" /></div>
+                            <div class="row"><c:out value="${product.name}" /></div>
+                        </div>
+                        <div class="col text-center price">
+                            <c:out value="${product.price}" />원
+                        </div>
+                        <div class="col text-end action">
+<%--                            <a class="btn btn-small btn-outline-dark" href="/admin/product/edit?id=${product.id}">수정</a>--%>
+                        </div>
+                    </li>
+                </c:forEach>
             </ul>
         </div>
         <div class="col-md-4 summary p-4">
-            <form action="/admin/product" method="post">
+            <form:form modelAttribute="productInsertForm" action="/admin/product" method="post">
                 <div class="mb-3">
                     <label for="name" class="form-label">상품명</label>
-                    <input type="text" class="form-control mb-1" id="name">
+                    <form:input path="name" id="name" class="form-control"/>
+                    <form:errors path="name" cssClass="text-danger"/>
                 </div>
                 <div class="mb-3">
                     <label for="brand" class="form-label">종류</label>
-                    <input type="text" class="form-control mb-1" id="brand">
+                    <form:input path="brand" id="brand" class="form-control"/>
+                    <form:errors path="brand" cssClass="text-danger"/>
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">가격</label>
-                    <input type="text" class="form-control" id="price">
+                    <form:input path="price" id="price" class="form-control"/>
+                    <form:errors path="price" cssClass="text-danger"/>
                 </div>
                 <div class="mb-3">
                     <label for="info" class="form-label">설명</label>
-                    <input type="text" class="form-control" id="info">
+                    <form:input path="info" id="info" class="form-control"/>
+                    <form:errors path="info" cssClass="text-danger"/>
                 </div>
                 <div class="mb-3">
-                    <label for="image" class="form-label">사진</label>
-                    <input type="text" class="form-control" id="image">
+                    <label for="image" class="form-label">이미지</label>
+                    <form:input path="image" id="image" class="form-control"/>
+                    <form:errors path="image" cssClass="text-danger"/>
                 </div>
                 <button class="btn btn-dark col-12">등록/수정</button>
-            </form>
+            </form:form>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
