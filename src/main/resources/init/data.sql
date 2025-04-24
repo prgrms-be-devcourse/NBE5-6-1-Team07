@@ -9,10 +9,10 @@ INSERT INTO CUSTOMER (user_id, email, password, address, post_code) VALUES
                                                                         ('user03', 'user03@example.com', 'pass03', '대구 달서구 B길 789', '11223');
 
 -- PRODUCT
-INSERT INTO PRODUCT (name, image, price, info, brand, count, sales) VALUES
-                                                                        ('에스프레소 블렌드', 'espresso.jpg', '15000', '진한 풍미의 커피', 'CoffeeBrand', 100, 20),
-                                                                        ('드립백 세트', 'drip.jpg', '18000', '간편한 드립백', 'DripMaster', 80, 15),
-                                                                        ('콜드브루 원액', 'coldbrew.jpg', '20000', '진한 콜드브루', 'CoolBrew', 60, 10);
+INSERT INTO PRODUCT (name, price, info, brand, count, sales) VALUES
+                                                                        ('에스프레소 블렌드', '15000', '진한 풍미의 커피', 'CoffeeBrand', 100, 20),
+                                                                        ('드립백 세트', '18000', '간편한 드립백', 'DripMaster', 80, 15),
+                                                                        ('콜드브루 원액', '20000', '진한 콜드브루', 'CoolBrew', 60, 10);
 
 -- CART
 INSERT INTO CART (customer_id, is_activated) VALUES

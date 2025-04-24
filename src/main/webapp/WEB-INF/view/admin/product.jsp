@@ -93,9 +93,14 @@
                 <ul class="list-group products">
                     <c:forEach items="${products}" var="product">
                         <li class="list-group-item d-flex mt-2">
-                            <div class="col-2">
-                                <img class="img-fluid" src="<c:out value='${product.image}'/>" alt="">
-                            </div>
+                            <c:if test="${empty product.images}">
+                                <img src="#" alt="thumbnail" class="circle">
+                            </c:if>
+                            <c:if test="${not empty product.images}">
+                                <c:forEach items="${product.images}" var="image">
+                                    <img src="${image.url}" alt="thumbnail" class="circle">
+                                </c:forEach>
+                            </c:if>
                             <div class="col">
                                 <div class="row text-muted"><c:out value="${product.brand}" /></div>
                                 <div class="row"><c:out value="${product.name}" /></div>
@@ -125,7 +130,7 @@
             </div>
         </div>
         <div class="col-md-4 summary p-4">
-            <form:form modelAttribute="productInsertForm" action="/admin/product" method="post">
+            <form:form modelAttribute="productInsertForm" action="/admin/product" method="post" enctype="multipart/form-data">
                 <form:input path="productId" type="hidden" id="productId" />
                 <div class="mb-3">
                     <label for="name" class="form-label">상품명</label>
@@ -148,9 +153,10 @@
                     <form:errors path="info" cssClass="text-danger"/>
                 </div>
                 <div class="mb-3">
-                    <label for="image" class="form-label">이미지</label>
-                    <form:input path="image" id="image" class="form-control"/>
-                    <form:errors path="image" cssClass="text-danger"/>
+                    <label for="thumbnail" class="form-label fw-bold">이미지</label>
+                    <div class="input-group">
+                        <input type="file" class="form-control" id="thumbnail" name="thumbnail" aria-label="Upload">
+                    </div>
                 </div>
                 <button class="btn btn-dark col-12">등록/수정</button>
             </form:form>

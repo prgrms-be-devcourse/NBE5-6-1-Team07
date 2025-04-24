@@ -59,8 +59,6 @@ public class ProductController {
         BindingResult bindingResult,
         Model model
     ) {
-        System.out.println("Product ID: " + form.getProductId());
-
         if (bindingResult.hasErrors()) {
             return "admin/product";
         }
@@ -68,9 +66,8 @@ public class ProductController {
         if (form.getProductId() != null && form.getProductId() > 0) {
             productService.updateProduct(form.fromForm());
         } else {
-            productService.insertProduct(form.toDto());
+            productService.insertProduct(form.getThumbnail(), form.toDto());
         }
-
 
         return "redirect:/admin/product";
     }

@@ -14,5 +14,6 @@
 
     <context:property-placeholder location="classpath:application.properties"/>
     <mvc:annotation-driven/>
+    <mvc:resources mapping="/download/**" location="file:${upload.path}" />
 
 </beans>

@@ -36,7 +36,6 @@ class ProductRepositoryTest {
         ProductDto productDto = new ProductDto();
         productDto.setProductId(7);
         productDto.setName("test");
-        productDto.setImage("test");
         productDto.setPrice("test");
         productDto.setInfo("test");
         productDto.setBrand("test");

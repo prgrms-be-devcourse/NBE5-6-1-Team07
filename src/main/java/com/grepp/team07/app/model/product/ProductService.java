@@ -1,12 +1,16 @@
 package com.grepp.team07.app.model.product;
 
 import com.grepp.team07.app.model.product.dto.ProductDto;
+import com.grepp.team07.app.model.product.dto.ProductImgDto;
+import com.grepp.team07.infra.util.file.FileDto;
+import com.grepp.team07.infra.util.file.FileUtil;
 import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
@@ -14,15 +18,27 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final FileUtil fileUtil;
 
     public List<ProductDto> findAll() {
         return productRepository.selectAll();
     }
 
     @Transactional
-    public void insertProduct(ProductDto productDto) {
+    public void insertProduct(List<MultipartFile> thumbnail, ProductDto productDto) {
         try {
             productRepository.insert(productDto);
+            Integer productId = productDto.getProductId();
+
+            if (productId == null) {
+                throw new RuntimeException("Product ID is null after insertion.");
+            }
+
+            if (!thumbnail.isEmpty()) {
+                List<FileDto> fileDtos = fileUtil.upload(thumbnail, "product");
+                ProductImgDto productImgDto = new ProductImgDto(productId, fileDtos.get(0));
+                productRepository.insertImage(productImgDto);
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

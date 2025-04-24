@@ -15,13 +15,22 @@ CREATE TABLE IF NOT EXISTS `ADMIN` (
 CREATE TABLE IF NOT EXISTS `PRODUCT` (
      `product_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '상품번호',
      `name`       VARCHAR(255) NOT NULL COMMENT '상품이름',
-     `image`      VARCHAR(255) NOT NULL COMMENT '상품이미지',
      `price`      VARCHAR(255) NOT NULL COMMENT '상품가격',
      `info`       VARCHAR(255) NOT NULL COMMENT '상품정보',
      `brand`      VARCHAR(255) NOT NULL COMMENT '상품브랜드',
      `count`      INT DEFAULT 10 COMMENT '상품재고',
      `sales`      INT DEFAULT 0 COMMENT '상품판매량',
      `deleted_at`  TIMESTAMP NULL DEFAULT NULL COMMENT '삭제일시'
+);
+
+CREATE TABLE IF NOT EXISTS `PRODUCT_IMG` (
+     `image_id`             INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '파일번호',
+     `product_id`           INT NOT NULL COMMENT '상품번호',
+     `original_file_name`   VARCHAR(255)  NOT NULL COMMENT '원본파일명',
+     `rename_file_name`     VARCHAR(255)  NOT NULL COMMENT '저장파일명',
+     `save_path`            VARCHAR(255) NOT NULL COMMENT '저장경로',
+     `created_at`           TIMESTAMP NULL DEFAULT now() COMMENT '파일등록일자',
+     `activated`            BOOLEAN NOT NULL DEFAULT true
 );
 
 CREATE TABLE IF NOT EXISTS `CART` (
