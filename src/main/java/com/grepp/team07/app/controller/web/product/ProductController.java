@@ -24,6 +24,6 @@ public class ProductController {
     public String searchProduct(@RequestParam("item") String item, Model model) {
         List<Product> products = productService.searchProducts(item);
         model.addAttribute("products", products);
-        return "/product";
+        return "product";
     }
 }
