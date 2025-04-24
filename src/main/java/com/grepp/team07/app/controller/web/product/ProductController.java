@@ -24,10 +24,18 @@ public class ProductController {
 
     @GetMapping("product")
     public String list(
-        @RequestParam(required = false)
-        Integer id,
+        @RequestParam(required = false) Integer id,
+        @RequestParam(required = false) String action,
         Model model
     ) {
+        if (id != null && action != null) {
+            if (action.equals("increment")) {
+                productService.incrementCount(id);
+            } else if (action.equals("decrement")) {
+                productService.decrementCount(id);
+            }
+        }
+
         List<ProductDto> products = productService.findAll();
         model.addAttribute("products", products);
 
@@ -40,6 +48,7 @@ public class ProductController {
 
         return "admin/product";
     }
+
 
     @PostMapping("product")
     public String insertOrUpdate(

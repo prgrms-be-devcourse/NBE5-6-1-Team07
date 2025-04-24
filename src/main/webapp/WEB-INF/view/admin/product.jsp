@@ -18,13 +18,15 @@
            margin: auto;
            max-width: 950px;
            width: 90%;
+           max-height: 500px;
+          overflow: hidden;
            box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
            border-radius: 1rem;
            border: transparent
          }
 
         .product-list-scroll {
-          max-height: 500px;
+          max-height: 90%;
           overflow-y: auto;
           width: 100%;
         }

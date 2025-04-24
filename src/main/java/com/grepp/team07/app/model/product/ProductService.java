@@ -40,4 +40,14 @@ public class ProductService {
             throw new RuntimeException(e);
         }
     }
+
+    @Transactional
+    public void incrementCount(Integer productId) {
+        productRepository.increment(productId);
+    }
+
+    @Transactional
+    public void decrementCount(Integer productId) {
+        productRepository.decrement(productId);
+    }
 }
