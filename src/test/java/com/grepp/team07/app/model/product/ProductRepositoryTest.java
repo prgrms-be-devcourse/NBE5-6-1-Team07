@@ -34,7 +34,7 @@ class ProductRepositoryTest {
     @Test
     public void update() {
         ProductDto productDto = new ProductDto();
-        productDto.setId(7);
+        productDto.setProductId(7);
         productDto.setName("test");
         productDto.setImage("test");
         productDto.setPrice("test");

@@ -103,17 +103,17 @@
                             </div>
                             <div class="col d-flex justify-content-center align-items-center gap-2">
                                 <a class="btn btn-sm btn-outline-dark"
-                                   href="/admin/product?id=${product.id}&action=increment"
+                                   href="/admin/product?id=${product.productId}&action=increment"
                                    style="border-color: #ccc;">
                                     +
                                 </a>
                                 <span style="min-width: 40px; display: inline-block; text-align: center;"><c:out value="${product.count}" /></span>
                                 <a class="btn btn-sm btn-outline-dark"
-                                   href="/admin/product?id=${product.id}&action=decrement"
+                                   href="/admin/product?id=${product.productId}&action=decrement"
                                    style="border-color: #ccc;">
                                     -
                                 </a>
-                                <a class="btn btn-sm btn-outline-dark px-3" style="min-width: 60px; white-space: nowrap;" href="/admin/product?id=${product.id}">수정</a>
+                                <a class="btn btn-sm btn-outline-dark px-3" style="min-width: 60px; white-space: nowrap;" href="/admin/product?id=${product.productId}">수정</a>
                             </div>
 
                         </li>
@@ -123,7 +123,7 @@
         </div>
         <div class="col-md-4 summary p-4">
             <form:form modelAttribute="productInsertForm" action="/admin/product" method="post">
-                <form:input path="id" type="hidden" id="id" />
+                <form:input path="productId" type="hidden" id="productId" />
                 <div class="mb-3">
                     <label for="name" class="form-label">상품명</label>
                     <form:input path="name" id="name" class="form-control"/>

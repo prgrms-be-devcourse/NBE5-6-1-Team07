@@ -18,6 +18,6 @@ public interface ProductRepository {
         + "values (#{name}, #{image}, #{price}, #{info}, #{brand})")
     void insert(ProductDto productDto);
 
-    @Update("update product set name=#{name}, image=#{image}, price=#{price}, info=#{info} where product_id=#{id}")
+    @Update("update product set name=#{name}, image=#{image}, price=#{price}, info=#{info}, brand=#{brand} where product_id=#{productId}")
     boolean update(ProductDto productDto);
 }

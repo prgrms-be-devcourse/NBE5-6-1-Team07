@@ -33,8 +33,6 @@ public class ProductController {
 
         if (id != null) {
             ProductDto product = productService.findById(id);
-            System.out.println("Product: " + product);
-            System.out.println("Product ID: " + product.getId());
             model.addAttribute("productInsertForm", product);
         } else {
             model.addAttribute("productInsertForm", new ProductInsertForm());
@@ -49,13 +47,13 @@ public class ProductController {
         BindingResult bindingResult,
         Model model
     ) {
-        System.out.println("Product ID: " + form.getId());
+        System.out.println("Product ID: " + form.getProductId());
 
         if (bindingResult.hasErrors()) {
             return "admin/product";
         }
 
-        if (form.getId() != null && form.getId() > 0) {
+        if (form.getProductId() != null && form.getProductId() > 0) {
             productService.updateProduct(form.fromForm());
         } else {
             productService.insertProduct(form.toDto());

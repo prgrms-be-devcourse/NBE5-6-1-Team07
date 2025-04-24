@@ -11,28 +11,11 @@
   </resultMap>
 
   <select id="selectAll" resultMap="productMap">
-    select
-    product_id AS id,
-    name,
-    image,
-    price,
-    info,
-    brand,
-    count,
-    sales from product;
+    select * from product;
   </select>
 
 
   <select id="selectById" parameterType="int" resultMap="productMap">
-    select
-    product_id AS id,
-    name,
-    image,
-    price,
-    info,
-    brand,
-    count,
-    sales from product
-    where product_id = #{id};
+    select * from product where product_id = #{product_id};
   </select>
 </mapper>
