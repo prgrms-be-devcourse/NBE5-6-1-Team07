@@ -76,6 +76,13 @@
       white-space: nowrap;
     }
 
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
   </style>
   <title>Hello, world!</title>
   <%@include file="/WEB-INF/view/include/static.jsp" %>
@@ -99,7 +106,7 @@
         </form>
       </div>
       <ul class="list-group products">
-        <c:forEach var="product" items="${products}">
+        <c:forEach var="product" items="${page.content()}">
           <li class="list-group-item d-flex mt-3">
             <div class="col-2">
               <img class="img-fluid" src="${product.image}" alt="">
@@ -115,6 +122,32 @@
           </li>
         </c:forEach>
       </ul>
+
+      <div class="pagination-container w-100 mt-4 mb-4 d-flex justify-content-center">
+        <nav>
+          <ul class="pagination">
+            <li class="page-item <c:if test='${page.currentNumber() == 1}'>disabled</c:if>'">
+              <a class="page-link" href="${page.url()}?page=${page.prevPage()}">
+                <i class="bi bi-chevron-double-left"></i>
+              </a>
+            </li>
+
+            <c:forEach var="i" begin="${page.startNumber()}" end="${page.endNumber()}">
+              <li class="page-item <c:if test='${page.currentNumber() == i}'>active</c:if>'">
+                <a class="page-link" href="${page.url()}?page=${i}">${i}</a>
+              </li>
+            </c:forEach>
+
+            <li class="page-item <c:if test='${page.currentNumber() == page.endNumber()}'>disabled</c:if>'">
+              <a class="page-link" href="${page.url()}?page=${page.nextPage()}">
+                <i class="bi bi-chevron-double-right"></i>
+              </a>
+            </li>
+
+          </ul>
+        </nav>
+      </div>
+
     </div>
     <div class="col-md-4 summary p-4">
       <div>

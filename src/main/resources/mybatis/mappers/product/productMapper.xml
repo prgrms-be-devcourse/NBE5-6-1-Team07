@@ -7,6 +7,13 @@
 
     <resultMap id="productMap" type="ProductDto">
         <id property="productId" column="product_id"/>
+        <result property="name" column="name"/>
+        <result property="image" column="image"/>
+        <result property="price" column="price"/>
+        <result property="info" column="info"/>
+        <result property="brand" column="brand"/>
+        <result property="count" column="count"/>
+        <result property="sales" column="sales"/>
     </resultMap>
 
     <select id="selectAll" resultMap="productMap">
@@ -23,6 +30,16 @@
         from product
         order by sales desc
         limit 3;
+    </select>
+
+    <select id="findPaged" resultMap="productMap" parameterType="map">
+        select * from product
+        order by product_id desc
+        limit #{limit} offset #{offset}
+    </select>
+
+    <select id="countAll" resultType="int">
+        select count(*) from product
     </select>
 
 </mapper>
