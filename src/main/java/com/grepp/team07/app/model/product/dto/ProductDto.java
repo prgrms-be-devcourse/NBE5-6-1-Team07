@@ -17,8 +17,9 @@ public class ProductDto {
     private Integer sales = 0;
 
 
-    public ProductDto(String name, String price, String info, String brand) {
+    public ProductDto(String name, String image, String price, String info, String brand) {
         this.name = name;
+        this.image = image;
         this.price = price;
         this.info = info;
         this.brand = brand;
