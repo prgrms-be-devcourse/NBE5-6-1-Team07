@@ -17,4 +17,8 @@ public class ProductService {
     public List<ProductDto> searchProducts(String keyword) {
         return productRepository.findByKeyword(keyword);
     }
+
+    public List<ProductDto> bestProduct() {
+        return productRepository.bestProduct();
+    }
 }
