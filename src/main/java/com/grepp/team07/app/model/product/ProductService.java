@@ -27,18 +27,14 @@ public class ProductService {
     @Transactional
     public void insertProduct(List<MultipartFile> thumbnail, ProductDto productDto) {
         try {
+            List<FileDto> fileDtos = fileUtil.upload(thumbnail, "product");
             productRepository.insert(productDto);
+
+            if(fileDtos.isEmpty()) return;
+
             Integer productId = productDto.getProductId();
-
-            if (productId == null) {
-                throw new RuntimeException("Product ID is null after insertion.");
-            }
-
-            if (!thumbnail.isEmpty()) {
-                List<FileDto> fileDtos = fileUtil.upload(thumbnail, "product");
-                ProductImgDto productImgDto = new ProductImgDto(productId, fileDtos.get(0));
-                productRepository.insertImage(productImgDto);
-            }
+            ProductImgDto productImgDto = new ProductImgDto(productId, fileDtos.get(0));
+            productRepository.insertImage(productImgDto);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
