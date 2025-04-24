@@ -18,6 +18,8 @@ public interface ProductRepository {
 
     ProductDto selectById(Integer id);
 
+    List<ProductDto> searchByKeyword(String keyword);
+
     @Insert("insert into product(name, price, info, brand)"
         + "values (#{name}, #{price}, #{info}, #{brand})")
     @Options(useGeneratedKeys = true, keyProperty = "productId")
@@ -41,5 +43,4 @@ public interface ProductRepository {
 
     @Update("UPDATE product_img SET activated = 0 WHERE product_id = #{productId}")
     void deleteImage(@Param("productId") Integer productId);
-
 }

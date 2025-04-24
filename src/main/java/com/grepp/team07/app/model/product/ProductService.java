@@ -24,6 +24,10 @@ public class ProductService {
         return productRepository.selectAll();
     }
 
+    public List<ProductDto> searchByKeyword(String keyword) {
+        return productRepository.searchByKeyword(keyword);
+    }
+
     @Transactional
     public void insertProduct(List<MultipartFile> thumbnail, ProductDto productDto) {
         try {
@@ -77,4 +81,5 @@ public class ProductService {
         productRepository.deleteImage(productId);
         productRepository.delete(productId);
     }
+
 }

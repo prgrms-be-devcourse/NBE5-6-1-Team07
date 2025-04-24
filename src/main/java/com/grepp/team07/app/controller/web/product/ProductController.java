@@ -26,6 +26,7 @@ public class ProductController {
     public String list(
         @RequestParam(required = false) Integer id,
         @RequestParam(required = false) String action,
+        @RequestParam(required = false) String keyword,
         Model model
     ) {
         if (id != null && action != null) {
@@ -39,7 +40,14 @@ public class ProductController {
             }
         }
 
-        List<ProductDto> products = productService.findAll();
+        List<ProductDto> products;
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            products = productService.searchByKeyword(keyword);
+            model.addAttribute("keyword", keyword);
+        } else {
+            products = productService.findAll();
+        }
+
         model.addAttribute("products", products);
 
         if (id != null) {

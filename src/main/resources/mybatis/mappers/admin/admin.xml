@@ -18,8 +18,11 @@
     select * from product_img where product_id = #{product_id} AND activated = 1;
   </select>
 
-
   <select id="selectById" parameterType="int" resultMap="productMap">
     select * from product where product_id = #{product_id};
+  </select>
+
+  <select id="searchByKeyword" parameterType="string" resultMap="productMap">
+    select * from product where name like concat('%', #{keyword}, '%')
   </select>
 </mapper>

@@ -15,18 +15,20 @@
         }
 
         .card {
-           margin: auto;
-           max-width: 950px;
-           width: 90%;
-           max-height: 500px;
+          margin: auto;
+          max-width: 950px;
+          width: 90%;
+          height: 65vh;
+          display: flex;
+          flex-direction: column;
+          box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          border-radius: 1rem;
+          border: transparent;
           overflow: hidden;
-           box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-           border-radius: 1rem;
-           border: transparent
-         }
+        }
 
         .product-list-scroll {
-          max-height: 90%;
+          flex: 1;
           overflow-y: auto;
           width: 100%;
         }
@@ -87,8 +89,16 @@
 </div>
 <div class="container-fluid">
 <div class="card">
-    <div class="row">
-        <div class="col-md-8 mt-4 d-flex flex-column align-items-start p-3 pt-0">
+    <div class="row" style="height: 100%;">
+        <div class="col-md-8 mt-2 d-flex flex-column align-items-start p-3 pt-0" style="height: 100%;">
+        <div class="justify-content-end d-flex w-30">
+                <form method="get" action="/admin/product" class="d-flex w-30 justify-content-end">
+                    <input class="form-control me-1" type="search" name="keyword" placeholder="상품명 검색" value="${keyword}">
+                    <button class="btn" type="submit" style="border: none; background: none; outline: none;">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
+            </div>
             <div class="product-list-scroll">
                 <ul class="list-group products">
                     <c:forEach items="${products}" var="product">
@@ -120,8 +130,28 @@
                                    style="border-color: #ccc;">
                                     -
                                 </a>
-                                <a class="btn btn-sm btn-outline-dark px-2" style="min-width: 50px; white-space: nowrap;" href="/admin/product?id=${product.productId}">수정</a>
-                                <a class="btn btn-sm btn-outline-dark px-2" style="min-width: 50px; white-space: nowrap; border-color: red; color: red;" href="/admin/product?id=${product.productId}&action=delete">삭제</a>
+                                <form method="get" action="/admin/product" style="display: inline;">
+                                    <input type="hidden" name="id" value="${product.productId}" />
+                                    <c:if test="${not empty param.keyword}">
+                                        <input type="hidden" name="keyword" value="${param.keyword}" />
+                                    </c:if>
+                                    <button type="submit" class="btn btn-sm btn-outline-dark px-2"
+                                            style="min-width: 40px; white-space: nowrap;">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                </form>
+                                <form method="get" action="/admin/product" style="display: inline;">
+                                    <input type="hidden" name="id" value="${product.productId}" />
+                                    <input type="hidden" name="action" value="delete" />
+                                    <c:if test="${not empty param.keyword}">
+                                        <input type="hidden" name="keyword" value="${param.keyword}" />
+                                    </c:if>
+                                    <button type="submit" class="btn btn-sm btn-outline-dark px-2"
+                                            style="min-width: 40px; white-space: nowrap; border-color: red; color: red;">
+                                        <i class="bi bi-trash3"></i>
+                                    </button>
+                                </form>
+
                             </div>
 
                         </li>
