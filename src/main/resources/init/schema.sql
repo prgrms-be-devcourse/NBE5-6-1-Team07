@@ -1,17 +1,11 @@
-CREATE TABLE IF NOT EXISTS `CUSTOMER`
-(
+CREATE TABLE IF NOT EXISTS CUSTOMER (
     `id`        INT          NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '회원번호',
     `user_id`   VARCHAR(70)  NOT NULL UNIQUE COMMENT '회원아이디',
     `email`     VARCHAR(255) NOT NULL COMMENT '이메일',
     `password`  VARCHAR(255) NOT NULL COMMENT '비밀번호',
     `address`   VARCHAR(255) NOT NULL COMMENT '주소',
-    `post_code` VARCHAR(255) NOT NULL COMMENT '우편번호'
-);
-
-CREATE TABLE IF NOT EXISTS `ADMIN`
-(
-    `id`       VARCHAR(70) PRIMARY KEY COMMENT '관리자아이디',
-    `password` VARCHAR(255) NOT NULL COMMENT '비밀번호'
+    `post_code` VARCHAR(255) NOT NULL COMMENT '우편번호',
+    `role` ENUM('USER', 'ADMIN') NOT NULL COMMENT '역할'
 );
 
 CREATE TABLE IF NOT EXISTS `PRODUCT`
@@ -34,7 +28,8 @@ CREATE TABLE IF NOT EXISTS `PRODUCT_IMG`
     `rename_file_name`   VARCHAR(255) NOT NULL COMMENT '저장파일명',
     `save_path`          VARCHAR(255) NOT NULL COMMENT '저장경로',
     `created_at`         TIMESTAMP    NULL     DEFAULT now() COMMENT '파일등록일자',
-    `activated`          BOOLEAN      NOT NULL DEFAULT true
+    `activated`          BOOLEAN      NOT NULL DEFAULT true COMMENT '활성여부',
+    FOREIGN KEY (`product_id`) REFERENCES `PRODUCT` (`product_id`)
 );
 
 CREATE TABLE IF NOT EXISTS `CART`
@@ -82,7 +77,9 @@ CREATE TABLE IF NOT EXISTS `DELIVERY`
 (
     `delivery_id`  INT                                    NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '배송번호',
     `order_id`     INT                                    NOT NULL COMMENT '주문번호',
+    `customer_id`  INT                                    NOT NULL COMMENT '회원번호',
     `status`       ENUM ('READY', 'SHIPPED', 'DELIVERED') NOT NULL COMMENT '주문상태',
     `delivered_at` TIMESTAMP                              NULL DEFAULT now() COMMENT '배송일시',
-    FOREIGN KEY (`order_id`) REFERENCES ORDERED (`order_id`)
+    FOREIGN KEY (`order_id`) REFERENCES ORDERED (`order_id`),
+    FOREIGN KEY (`customer_id`) REFERENCES CUSTOMER(`id`)
 );
