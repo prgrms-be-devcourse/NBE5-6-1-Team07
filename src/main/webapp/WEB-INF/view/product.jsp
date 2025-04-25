@@ -109,7 +109,7 @@
         <c:forEach var="product" items="${page.content()}">
           <li class="list-group-item d-flex mt-3">
             <div class="col-2">
-              <img class="img-fluid" src="${product.image}" alt="">
+<%--              <img class="img-fluid" src="${product.image}" alt="">--%>
             </div>
             <div class="col">
               <div class="row text-muted">${product.brand}</div>
