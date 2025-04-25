@@ -3,11 +3,9 @@
 
 <html lang="ko">
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   <style>
@@ -109,7 +107,14 @@
         <c:forEach var="product" items="${page.content()}">
           <li class="list-group-item d-flex mt-3">
             <div class="col-2">
-<%--              <img class="img-fluid" src="${product.image}" alt="">--%>
+              <c:if test="${empty product.images}">
+                <img src="#" alt="thumbnail" class="circle">
+              </c:if>
+              <c:if test="${not empty product.images}">
+                <c:forEach items="${product.images}" var="image">
+                  <img src="${image.url}" alt="thumbnail" class="circle">
+                </c:forEach>
+              </c:if>
             </div>
             <div class="col">
               <div class="row text-muted">${product.brand}</div>
