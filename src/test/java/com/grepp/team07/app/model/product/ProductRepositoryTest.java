@@ -25,4 +25,10 @@ class ProductRepositoryTest {
         List<ProductDto> products = productRepository.findByKeyword("콜드브루");
         log.info("검색된 상품 목록: {}", products);
     }
+
+    @Test
+    public void selectAll() {
+        List<ProductDto> products = productRepository.selectAll();
+        log.info("전체 상품 목록: {}", products);
+    }
 }
