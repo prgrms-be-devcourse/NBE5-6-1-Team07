@@ -14,9 +14,13 @@
         where user_id = #{userId}
     </select>
 
-    <update id="update" parameterType="CustomerDto">
+    <update id="update">
         update customer
-        set user_id = #{dto.getuserId()}, email = #{dto.getEmail()}, password = #{dto.getPassword()}, address = #{dto.getAddress()}, post_code = #{dto.getPostCode()}
+        set
+        email = #{dto.email},
+        password = #{dto.password},
+        address = #{dto.address},
+        post_code = #{dto.postCode}
         where user_id = #{userId}
     </update>
     <update id="updateDeliveredAt" parameterType="DeliveryDto">

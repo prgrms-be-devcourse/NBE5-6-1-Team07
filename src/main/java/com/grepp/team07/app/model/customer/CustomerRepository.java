@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Param;
 public interface CustomerRepository {
     CustomerDto findById(@Param("userId") String userId);
 
-    boolean existsCustomer(String userId);
 
     void update(@Param("userId")String userId, @Param("dto")CustomerDto dto);
 }

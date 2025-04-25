@@ -20,9 +20,6 @@ public class CustomerService {
 
     @Transactional
     public void edit(CustomerDto dto) {
-        if (customerRepository.existsCustomer(dto.getUserId()))
-            throw new CommonException();
-
         customerRepository.update(dto.getUserId(), dto);
 
     }
