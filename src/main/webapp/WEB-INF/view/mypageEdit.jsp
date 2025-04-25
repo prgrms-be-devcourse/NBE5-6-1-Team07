@@ -86,11 +86,11 @@
 </body>
 <script>
   window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('id').value = 'hong123';
-    document.getElementById('email').value = 'hong@example.com';
-    document.getElementById('password').value = '12345';
-    document.getElementById('address').value = '서울특별시 강남구 태해란로123길';
-    document.getElementById('postCode').value = '02010';
+    document.getElementById('id').value = '<c:out value="${info.userId}"/>';
+    document.getElementById('email').value = '<c:out value="${info.email}"/>';
+    document.getElementById('password').value = '<c:out value="${info.password}"/>';
+    document.getElementById('address').value = '<c:out value="${info.address}"/>';
+    document.getElementById('postCode').value = '<c:out value="${info.postCode}"/>';
   });
 </script>
 </html>
