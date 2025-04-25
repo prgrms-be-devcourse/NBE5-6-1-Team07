@@ -29,7 +29,7 @@ public class AuthService implements UserDetailsService {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(member.getRole().name()));
 
-        log.info("member.getUserIId(): {}", member.getUserId());
+        log.info("member.getUserId(): {}", member.getUserId());
         log.info("member.getPassword(): {}", member.getPassword());
         log.info("authorities: {}", authorities);
 

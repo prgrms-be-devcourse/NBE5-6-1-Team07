@@ -1,4 +1,4 @@
-package com.grepp.team07.infra.error.exceptions;
+package com.grepp.team07.infra.exceptions;
 
 import com.grepp.team07.infra.response.ResponseCode;
 import lombok.extern.slf4j.Slf4j;
@@ -7,6 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 public class CommonException extends RuntimeException {
 
     private final ResponseCode code;
+
+    public CommonException() {
+        this.code = ResponseCode.INTERNAL_SERVER_ERROR;
+    }
 
     public CommonException(ResponseCode code) {
         this.code = code;

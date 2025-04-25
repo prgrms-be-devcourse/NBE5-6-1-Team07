@@ -46,7 +46,7 @@
   <div class="row justify-content-center">
     <div class="card p-5 pr-7 pl-7">
       <div class="text-center mb-1">
-        <h2><b>회원 정보 수정</b></h2>
+        <h2><b>회원가입</b></h2>
       </div>
       <c:if test="${not empty errorMessage}">
         <div class="alert alert-danger" role="alert">
