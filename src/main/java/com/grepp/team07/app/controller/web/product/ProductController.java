@@ -1,6 +1,5 @@
 package com.grepp.team07.app.controller.web.product;
 
-import com.grepp.team07.app.model.ordered.dto.OrderedDto;
 import com.grepp.team07.app.model.product.ProductService;
 import com.grepp.team07.app.model.product.dto.ProductDto;
 import com.grepp.team07.infra.exceptions.CommonException;
