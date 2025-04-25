@@ -14,6 +14,17 @@
         select * from product
     </select>
 
+    <select id="findPaged" resultMap="productMap">
+        SELECT *
+        FROM product
+        ORDER BY product_id DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*) FROM product
+    </select>
+
     <select id="selectImg" parameterType="int" resultType="ProductImgDto">
         select * from product_img where product_id = #{product_id} AND activated = 1;
     </select>
