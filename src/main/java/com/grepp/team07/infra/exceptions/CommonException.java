@@ -1,4 +1,4 @@
-package com.grepp.team07.infra.error.exceptions;
+package com.grepp.team07.infra.exceptions;
 
 import com.grepp.team07.infra.response.ResponseCode;
 import lombok.extern.slf4j.Slf4j;

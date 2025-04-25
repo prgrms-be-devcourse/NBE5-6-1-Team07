@@ -5,7 +5,6 @@ import com.grepp.team07.app.model.ordered.dto.OrderedDto;
 import com.grepp.team07.infra.exceptions.CommonException;
 import com.grepp.team07.infra.payload.PageParam;
 import com.grepp.team07.infra.response.PageResponse;
-import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,9 +35,9 @@ public class OrderedController {
         Pageable pageable = PageRequest.of(param.getPage() - 1, param.getSize());
         Page<OrderedDto> page = orderedService.findPaged(pageable);
 
-        if(param.getPage() != 1 && page.getContent().isEmpty()){
-            throw new CommonException();
-        }
+//        if(param.getPage() != 1 && page.getContent().isEmpty()){
+//            throw new CommonException();
+//        }
 
         PageResponse<OrderedDto> response = new PageResponse<>("/admin/orders", page, 3);
         model.addAttribute("page", response);

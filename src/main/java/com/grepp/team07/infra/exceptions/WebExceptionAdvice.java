@@ -1,6 +1,5 @@
-package com.grepp.team07.infra.error;
+package com.grepp.team07.infra.exceptions;
 
-import com.grepp.team07.infra.error.exceptions.CommonException;
 import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
