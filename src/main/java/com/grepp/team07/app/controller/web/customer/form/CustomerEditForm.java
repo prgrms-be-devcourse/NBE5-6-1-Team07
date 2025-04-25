@@ -1,7 +1,8 @@
 package com.grepp.team07.app.controller.web.customer.form;
 
-import com.grepp.team07.app.model.member.dto.CustomerDto;
+import com.grepp.team07.app.model.customer.dto.CustomerDto;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -14,7 +15,7 @@ public class CustomerEditForm {
     private String password;
     @NotBlank
     private String address;
-    @NotBlank
+    @NotNull
     private Integer postCode;
 
     public CustomerDto toDto() {

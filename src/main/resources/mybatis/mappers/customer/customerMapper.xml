@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.grepp.team07.app.model.member.CustomerRepository">
+<mapper namespace="com.grepp.team07.app.model.customer.CustomerRepository">
 
     <resultMap id="customerMap" type="CustomerDto">
         <id property="userId" column="user_id"/>
@@ -14,5 +14,13 @@
         where user_id = #{userId}
     </select>
 
-
+    <update id="update" parameterType="CustomerDto">
+        update customer
+        set user_id = #{dto.getuserId()}, email = #{dto.getEmail()}, password = #{dto.getPassword()}, address = #{dto.getAddress()}, post_code = #{dto.getPostCode()}
+        where user_id = #{userId}
+    </update>
+    <update id="updateDeliveredAt" parameterType="DeliveryDto">
+        update delivery set delivered_at = #{deliveredAt}
+        where delivery_id = #{deliveryId}
+    </update>
 </mapper>

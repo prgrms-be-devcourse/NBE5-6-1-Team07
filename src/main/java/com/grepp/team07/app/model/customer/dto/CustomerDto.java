@@ -1,4 +1,4 @@
-package com.grepp.team07.app.model.member.dto;
+package com.grepp.team07.app.model.customer.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

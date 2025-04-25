@@ -49,10 +49,10 @@
       <div class="text-center mb-1">
         <h2><b>회원 정보 수정</b></h2>
       </div>
-      <form>
+      <form:form method="post" action="/mypage/edit" enctype="multipart/form-data" modelAttribute="customerEditForm">
         <div class="mx-auto mb-1" style="max-width: 500px; width: 100%;">
-          <label for="id" class="form-label">아이디</label>
-          <input type="text" class="form-control bg-light" id="id" placeholder="이메일을 입력하세요">
+          <label class="form-label">아이디</label>
+          <div class="form-control bg-light"><c:out value="${info.userId}"/></div>
         </div>
 
         <div class="mx-auto mt-1 mb-1" style="max-width: 500px; width: 100%;">
@@ -76,17 +76,16 @@
         </div>
 
         <div class="d-flex justify-content-center gap-3 mt-2 pt-2">
-          <button type="button" class="btn btn-outline-secondary" style="width: 150px;">취소</button>
+          <a href="/mypage"><button type="button" class="btn btn-outline-secondary" style="width: 150px;">취소</button></a>
           <button type="submit" class="btn btn-primary" style="width: 150px;">저장</button>
         </div>
-      </form>
+      </form:form>
     </div>
   </div>
 </div>
 </body>
 <script>
   window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('id').value = '<c:out value="${info.userId}"/>';
     document.getElementById('email').value = '<c:out value="${info.email}"/>';
     document.getElementById('password').value = '<c:out value="${info.password}"/>';
     document.getElementById('address').value = '<c:out value="${info.address}"/>';

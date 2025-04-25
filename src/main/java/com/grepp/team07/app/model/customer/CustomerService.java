@@ -1,6 +1,6 @@
-package com.grepp.team07.app.model.member;
+package com.grepp.team07.app.model.customer;
 
-import com.grepp.team07.app.model.member.dto.CustomerDto;
+import com.grepp.team07.app.model.customer.dto.CustomerDto;
 import com.grepp.team07.infra.exceptions.CommonException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ public class CustomerService {
         if (customerRepository.existsCustomer(dto.getUserId()))
             throw new CommonException();
 
-        customerRepository.update(dto);
+        customerRepository.update(dto.getUserId(), dto);
 
     }
 }

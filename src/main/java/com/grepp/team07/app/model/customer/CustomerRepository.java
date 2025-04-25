@@ -1,6 +1,6 @@
-package com.grepp.team07.app.model.member;
+package com.grepp.team07.app.model.customer;
 
-import com.grepp.team07.app.model.member.dto.CustomerDto;
+import com.grepp.team07.app.model.customer.dto.CustomerDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,5 +10,5 @@ public interface CustomerRepository {
 
     boolean existsCustomer(String userId);
 
-    void update(CustomerDto dto);
+    void update(@Param("userId")String userId, @Param("dto")CustomerDto dto);
 }
