@@ -80,7 +80,7 @@
         <div class="row g-1">
             <c:forEach var="product" items="${products}">
                 <div class="col">
-                    <img class="image" src="${product.image}" alt="커피 이미지">
+<%--                    <img class="image" src="${product.image}" alt="커피 이미지">--%>
                     <p><c:out value="${product.name}"/></p>
                     <p><c:out value="${product.price}"/></p>
                     <p><c:out value="${product.brand}"/></p>

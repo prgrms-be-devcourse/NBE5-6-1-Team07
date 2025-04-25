@@ -8,6 +8,10 @@ public class CommonException extends RuntimeException {
 
     private final ResponseCode code;
 
+    public CommonException() {
+        this.code = ResponseCode.INTERNAL_SERVER_ERROR;
+    }
+
     public CommonException(ResponseCode code) {
         this.code = code;
     }
