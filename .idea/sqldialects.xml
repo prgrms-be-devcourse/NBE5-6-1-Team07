@@ -2,6 +2,6 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/main/resources/init/table.sql" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/mybatis/mappers/member/MemberMapper.xml" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/mybatis/mappers/member/memberMapper.xml" dialect="GenericSQL" />
   </component>
 </project>

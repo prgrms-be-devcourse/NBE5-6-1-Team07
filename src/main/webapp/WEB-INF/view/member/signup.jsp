@@ -86,7 +86,7 @@
         </div>
 
         <div class="d-flex justify-content-center gap-3 mt-2 pt-2">
-          <button type="reset" class="btn btn-outline-secondary" style="width: 150px;">취소</button>
+          <button type="button" class="btn btn-outline-secondary" style="width: 150px;" onclick="history.back()">취소</button>
           <button type="submit" class="btn btn-primary" style="width: 150px;">회원가입</button>
         </div>
       </form:form>
