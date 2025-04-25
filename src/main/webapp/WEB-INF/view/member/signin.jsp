@@ -46,7 +46,7 @@
     }
 
   </style>
-  <title>Hello, world!</title>
+  <title>로그인</title>
   <%@include file="/WEB-INF/view/include/static.jsp" %>
 </head>
 <body>
@@ -70,7 +70,7 @@
       </div>
 
       <div class="text-center mt-4">
-        <div><a href="#" class="text-decoration-none">Grids & Circle 이 처음이라면?</a></div>
+        <div><a href="<c:url value='/member/signup' />" class="text-decoration-none">Grids & Circle 이 처음이라면?</a></div>
       </div>
       <div class="text-center mt-2">
         <div><a href="#" class="custom-link">비회원으로 계속하기</a></div>
