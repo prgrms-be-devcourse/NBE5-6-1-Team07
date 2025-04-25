@@ -52,27 +52,27 @@
       <form:form method="post" action="/mypage/edit" enctype="multipart/form-data" modelAttribute="customerEditForm">
         <div class="mx-auto mb-1" style="max-width: 500px; width: 100%;">
           <label class="form-label">아이디</label>
-          <div class="form-control bg-light"><c:out value="${info.userId}"/></div>
+          <form:input class="form-control bg-light" path="userId"></form:input>
         </div>
 
         <div class="mx-auto mt-1 mb-1" style="max-width: 500px; width: 100%;">
           <label for="email" class="form-label">이메일</label>
-          <input type="text" class="form-control bg-light" id="email" placeholder="이메일을 입력하세요">
+          <form:input path="email" cssClass="form-control bg-light" placeholder="이메일을 입력하세요"/>
         </div>
 
         <div class="mx-auto mt-1 mb-1" style="max-width: 500px; width: 100%;">
           <label for="password" class="form-label">비밀번호</label>
-          <input type="text" class="form-control bg-light" id="password" placeholder="비밀번호를 입력하세요">
+          <form:input path="password" cssClass="form-control bg-light" placeholder="비밀번호를 입력하세요"/>
         </div>
 
         <div class="mx-auto mt-1 mb-1" style="max-width: 500px; width: 100%;">
           <label for="address" class="form-label">주소</label>
-          <input type="text" class="form-control bg-light" id="address" placeholder="주소를 입력하세요">
+          <form:input path="address" cssClass="form-control bg-light" placeholder="주소를 입력하세요"/>
         </div>
 
         <div class="mx-auto mt-1 mb-1" style="max-width: 500px; width: 100%;">
           <label for="postCode" class="form-label">우편번호</label>
-          <input type="text" class="form-control bg-light" id="postCode" placeholder="우편번호를 입력하세요">
+          <form:input path="postCode" cssClass="form-control bg-light" placeholder="우편번호를 입력하세요"/>
         </div>
 
         <div class="d-flex justify-content-center gap-3 mt-2 pt-2">
@@ -84,12 +84,4 @@
   </div>
 </div>
 </body>
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('email').value = '<c:out value="${info.email}"/>';
-    document.getElementById('password').value = '<c:out value="${info.password}"/>';
-    document.getElementById('address').value = '<c:out value="${info.address}"/>';
-    document.getElementById('postCode').value = '<c:out value="${info.postCode}"/>';
-  });
-</script>
 </html>
