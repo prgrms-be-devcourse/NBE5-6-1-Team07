@@ -1,31 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.grepp.team07.app.model.product.ProductRepository">
 
     <resultMap id="productMap" type="ProductDto">
         <id property="productId" column="product_id"/>
-<<<<<<< HEAD
-        <result property="name" column="name"/>
-        <result property="image" column="image"/>
-        <result property="price" column="price"/>
-        <result property="info" column="info"/>
-        <result property="brand" column="brand"/>
-        <result property="count" column="count"/>
-        <result property="sales" column="sales"/>
+        <collection property="images" column="product_id" ofType="ProductImgDto" select="selectImg"/>
     </resultMap>
 
     <select id="selectAll" resultMap="productMap">
         select * from product
-=======
-        <collection property="images" column="product_id" ofType="ProductImgDto" select="selectImg"/>
-    </resultMap>
+    </select>
 
     <select id="selectImg" parameterType="int" resultType="ProductImgDto">
         select * from product_img where product_id = #{product_id} AND activated = 1;
->>>>>>> main
     </select>
 
     <select id="findByKeyword" resultMap="productMap">
@@ -41,17 +31,5 @@
         limit 3;
     </select>
 
-<<<<<<< HEAD
-    <select id="findPaged" resultMap="productMap" parameterType="map">
-        select * from product
-        order by product_id desc
-        limit #{limit} offset #{offset}
-    </select>
-
-    <select id="countAll" resultType="int">
-        select count(*) from product
-    </select>
-=======
->>>>>>> main
 
 </mapper>
