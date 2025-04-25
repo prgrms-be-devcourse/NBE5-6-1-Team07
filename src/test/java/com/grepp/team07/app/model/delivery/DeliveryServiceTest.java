@@ -29,4 +29,10 @@ class DeliveryServiceTest {
         List<DeliveryDto> orders = deliveryService.findAll();
         orders.forEach(System.out::println);
     }
+
+    @Test
+    public void sendProduct(){
+        deliveryService.sendProduct(3);
+    }
+
 }
