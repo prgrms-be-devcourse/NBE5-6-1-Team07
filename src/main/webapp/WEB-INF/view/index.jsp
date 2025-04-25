@@ -80,7 +80,14 @@
         <div class="row g-1">
             <c:forEach var="product" items="${products}">
                 <div class="col">
-                    <img class="image" src="${product.image}" alt="커피 이미지">
+                    <c:if test="${empty product.images}">
+                        <img src="#" alt="thumbnail" class="circle">
+                    </c:if>
+                    <c:if test="${not empty product.images}">
+                        <c:forEach items="${product.images}" var="image">
+                            <img src="${image.url}" alt="thumbnail" class="circle">
+                        </c:forEach>
+                    </c:if>
                     <p><c:out value="${product.name}"/></p>
                     <p><c:out value="${product.price}"/></p>
                     <p><c:out value="${product.brand}"/></p>

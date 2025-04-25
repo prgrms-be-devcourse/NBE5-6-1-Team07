@@ -7,7 +7,12 @@
 
     <resultMap id="productMap" type="ProductDto">
         <id property="productId" column="product_id"/>
+        <collection property="images" column="product_id" ofType="ProductImgDto" select="selectImg"/>
     </resultMap>
+
+    <select id="selectImg" parameterType="int" resultType="ProductImgDto">
+        select * from product_img where product_id = #{product_id} AND activated = 1;
+    </select>
 
     <select id="findByKeyword" resultMap="productMap">
         select * from product
@@ -17,8 +22,10 @@
     <select id="bestProduct" resultMap="productMap">
         select *
         from product
+        where deleted_at is null
         order by sales desc
         limit 3;
     </select>
+
 
 </mapper>
