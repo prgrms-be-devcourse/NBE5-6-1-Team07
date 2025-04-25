@@ -7,14 +7,6 @@ VALUES ('user01', 'user01@example.com', 'pass123', '서울 강남구 테헤란�
 INSERT INTO CUSTOMER (user_id, email, password, address, post_code)
 VALUES ('user02', 'user02@example.com', 'pass456', '부산 해운대구 우동 456', '48095');
 
-INSERT INTO PRODUCT (name, image, price, info, brand, count, sales)
-VALUES ('에스프레소 블렌드', 'espresso.jpg', '15000', '진한 향의 에스프레소 원두', 'BlueCoffee', 100, 25);
-
-INSERT INTO PRODUCT (name, image, price, info, brand, count, sales)
-VALUES ('콜드브루 원액', 'coldbrew.jpg', '12000', '부드럽고 깔끔한 콜드브루', 'CafeNova', 80, 12);
-
-INSERT INTO PRODUCT (name, image, price, info, brand, count, sales)
-VALUES ('드립백 세트', 'dripbag.jpg', '10000', '간편한 드립백 10개입', 'BeanStory', 50, 8);
 
 INSERT INTO CART (user_id, is_activated)
 VALUES ('user01', 'Y');
@@ -51,3 +43,9 @@ VALUES (1, 'SHIPPED');
 
 INSERT INTO DELIVERY (order_id, status)
 VALUES (2, 'READY');
+-- PRODUCT
+INSERT INTO PRODUCT (name, price, info, brand, count, sales) VALUES
+                                                                        ('에스프레소 블렌드', '15000', '진한 풍미의 커피', 'CoffeeBrand', 100, 20),
+                                                                        ('드립백 세트', '18000', '간편한 드립백', 'DripMaster', 80, 15),
+                                                                        ('콜드브루 원액', '20000', '진한 콜드브루', 'CoolBrew', 60, 10);
+
