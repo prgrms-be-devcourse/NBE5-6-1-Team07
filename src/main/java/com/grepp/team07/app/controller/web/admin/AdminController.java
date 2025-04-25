@@ -4,6 +4,8 @@ import com.grepp.team07.app.controller.web.admin.form.ProductInsertForm;
 import com.grepp.team07.app.model.admin.AdminService;
 import com.grepp.team07.app.model.product.dto.ProductDto;
 import jakarta.validation.Valid;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,53 +24,41 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminController {
     private final AdminService adminService;
 
-    @GetMapping("product")
+    @GetMapping("admin-product")
     public String list(
         @RequestParam(required = false) Integer id,
-        @RequestParam(required = false) String action,
         @RequestParam(required = false) String keyword,
         Model model
     ) {
-        if (id != null && action != null) {
-            if (action.equals("increment")) {
-                adminService.incrementCount(id);
-            } else if (action.equals("decrement")) {
-                adminService.decrementCount(id);
-            } else if (action.equals("delete")) {
-                adminService.delete(id);
-                return "redirect:/admin/product";
-            }
-        }
-
-        List<ProductDto> products;
+        List<ProductDto> adminProducts;
         if (keyword != null && !keyword.trim().isEmpty()) {
-            products = adminService.searchByKeyword(keyword);
+            adminProducts = adminService.searchByKeyword(keyword);
             model.addAttribute("keyword", keyword);
         } else {
-            products = adminService.findAll();
+            adminProducts = adminService.findAll();
         }
 
-        model.addAttribute("products", products);
+        model.addAttribute("adminProducts", adminProducts);
 
         if (id != null) {
-            ProductDto product = adminService.findById(id);
-            model.addAttribute("productInsertForm", product);
+            ProductDto adminProduct = adminService.findById(id);
+            model.addAttribute("productInsertForm", adminProduct);
         } else {
             model.addAttribute("productInsertForm", new ProductInsertForm());
         }
 
-        return "admin/product";
+        return "admin/admin-product";
     }
 
 
-    @PostMapping("product")
+    @PostMapping("admin-product")
     public String insertOrUpdate(
         @Valid ProductInsertForm form,
         BindingResult bindingResult,
         Model model
     ) {
         if (bindingResult.hasErrors()) {
-            return "admin/product";
+            return "admin/admin-product";
         }
 
         if (form.getProductId() != null && form.getProductId() > 0) {
@@ -77,7 +67,32 @@ public class AdminController {
             adminService.insertProduct(form.getThumbnail(), form.toDto());
         }
 
-        return "redirect:/admin/product";
+        return "redirect:/admin/admin-product";
     }
 
+    @PostMapping("admin-product/action")
+    public String processAction(
+        @RequestParam Integer id,
+        @RequestParam String action,
+        @RequestParam(required = false) String keyword
+    ) {
+        switch (action) {
+            case "increment":
+                adminService.incrementCount(id);
+                break;
+            case "decrement":
+                adminService.decrementCount(id);
+                break;
+            case "delete":
+                adminService.delete(id);
+                return "redirect:/admin/admin-product";
+            default:
+                break;
+        }
+
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            return "redirect:/admin/admin-product?keyword=" + URLEncoder.encode(keyword, StandardCharsets.UTF_8);
+        }
+        return "redirect:/admin/admin-product";
+    }
 }

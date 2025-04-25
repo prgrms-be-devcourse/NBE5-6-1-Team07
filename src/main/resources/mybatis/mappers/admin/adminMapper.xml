@@ -14,15 +14,16 @@
     select * from product where deleted_at is null;
   </select>
 
-  <select id="selectImg" parameterType="int" resultType="ProductImgDto">
-  select * from product_img where product_id = #{product_id} AND activated = 1;
+  <select id="selectById" parameterType="int" resultMap="adminProductMap">
+    select * from product where product_id = #{product_id} and deleted_at is null;
   </select>
 
-  <select id="selectById" parameterType="int" resultMap="adminProductMap">
-    select * from product where product_id = #{product_id};
+  <select id="selectImg" parameterType="int" resultType="ProductImgDto">
+    select * from product_img where product_id = #{product_id} AND activated = 1;
   </select>
+
 
   <select id="searchByKeyword" parameterType="string" resultMap="adminProductMap">
-    select * from product where name like concat('%', #{keyword}, '%')
+    select * from product where name like concat('%', #{keyword}, '%') and deleted_at is null;
   </select>
 </mapper>
