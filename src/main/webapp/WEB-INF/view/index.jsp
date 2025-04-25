@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/WEB-INF/view/include/page.jsp" %>
-<jsp:forward page="/WEB-INF/view/adminOrderCheck.jsp" />
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -27,15 +26,36 @@
         width: 90%;
         box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         border-radius: 1rem;
-        border: transparent
+        border: transparent;
+        padding: 2rem 2rem 2rem 2rem;
       }
 
       .row {
-        margin: 0
+        display: flex;
+        justify-content: center;
+      }
+
+      .product-link{
+        display: flex;
+        justify-content: right;
+        color: black;
+        text-decoration: none;
+      }
+
+      .image{
+        width: 150px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 0.5rem;
       }
 
       .title b {
         font-size: 1.5rem
+      }
+
+      .col{
+        margin: 1rem 0.5rem 0 0.5rem;
+
       }
 
       img {
@@ -48,30 +68,24 @@
 
     </style>
     <title>Hello, world!</title>
-<%@include file="/WEB-INF/view/include/static.jsp" %>
+    <%@include file="/WEB-INF/view/include/static.jsp" %>
 </head>
 <body>
 <%@include file="/WEB-INF/view/include/header.jsp" %>
 <div class="container text-center">
     <h1 class="my-4">Grids & Circle</h1>
-    <div class="card mx-auto p-4">
+    <div class="card">
         <h5><b>인기 상품</b></h5>
-        <div class="row justify-content-center g-4 mt-3">
-            <div class="col-auto">
-                <img src="#" alt="커피 이미지">
-                <p>고급 커피 이름1</p>
-                <p>커피 가격1</p>
-            </div>
-            <div class="col-auto">
-                <img src="#" alt="커피 이미지">
-                <p>고급 커피 이름2</p>
-                <p>커피 가격2</p>
-            </div>
-            <div class="col-auto">
-                <img src="#" alt="커피 이미지">
-                <p>고급 커피 이름3</p>
-                <p>커피 가격3</p>
-            </div>
+        <a class="product-link" href="/product"><b>상품 더보기</b></a>
+        <div class="row g-1">
+            <c:forEach var="product" items="${products}">
+                <div class="col">
+                    <img class="image" src="${product.image}" alt="커피 이미지">
+                    <p><c:out value="${product.name}"/></p>
+                    <p><c:out value="${product.price}"/></p>
+                    <p><c:out value="${product.brand}"/></p>
+                </div>
+            </c:forEach>
         </div>
     </div>
 </div>

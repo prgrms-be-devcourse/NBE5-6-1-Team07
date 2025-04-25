@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.grepp.team07.app.model.delivery.DeliveryRepository">
+
+    <resultMap id="deliveryMap" type="DeliveryDto">
+        <id property="deliveryId" column="delivery_id"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="deliveryMap">
+        select * from delivery
+    </select>
+
+    <select id="findByOrderId" resultMap="deliveryMap">
+        select * from delivery where order_id = #{orderId}
+    </select>
+
+    <update id="updateStatus" parameterType="DeliveryDto">
+        update delivery set status = #{status}
+        where delivery_id = #{deliveryId}
+    </update>
+
+    <update id="updateDeliveredAt" parameterType="DeliveryDto">
+        update delivery set delivered_at = #{deliveredAt}
+        where delivery_id = #{deliveryId}
+    </update>
+</mapper>

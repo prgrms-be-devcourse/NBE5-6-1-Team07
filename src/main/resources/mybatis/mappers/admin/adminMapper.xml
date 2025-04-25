@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.grepp.team07.app.model.admin.AdminRepository">
+
+  <resultMap id="adminProductMap" type="ProductDto">
+    <id property="productId" column="product_id"/>
+    <collection property="images" column="product_id" ofType="ProductImgDto" select="selectImg"/>
+  </resultMap>
+
+  <select id="selectAll" resultMap="adminProductMap">
+    select * from product where deleted_at is null;
+  </select>
+
+  <select id="selectById" parameterType="int" resultMap="adminProductMap">
+    select * from product where product_id = #{product_id} and deleted_at is null;
+  </select>
+
+  <select id="selectImg" parameterType="int" resultType="ProductImgDto">
+    select * from product_img where product_id = #{product_id} AND activated = 1;
+  </select>
+
+
+  <select id="searchByKeyword" parameterType="string" resultMap="adminProductMap">
+    select * from product where name like concat('%', #{keyword}, '%') and deleted_at is null;
+  </select>
+</mapper>

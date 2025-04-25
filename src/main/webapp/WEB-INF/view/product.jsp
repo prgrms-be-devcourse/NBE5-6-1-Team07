@@ -68,18 +68,36 @@
     .products .action {
       line-height: 38px;
     }
+    .search-btn {
+      height: 38px;
+      width: 60px;
+      padding: 6px 12px;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
 
   </style>
   <title>Hello, world!</title>
+  <%@include file="/WEB-INF/view/include/static.jsp" %>
 </head>
-<body class="container-fluid">
+<body>
+<%@include file="/WEB-INF/view/include/header.jsp" %>
 <div class="row justify-content-center m-4">
   <h1 class="text-center">Grids & Circle</h1>
 </div>
-<div class="card">
+<div class="card mt-0 mb-4">
   <div class="row">
     <div class="col-md-8 mt-4 d-flex flex-column align-items-start p-3 pt-0">
-      <h5 class="flex-grow-0"><b>상품 목록</b></h5>
+      <div class="d-flex justify-content-between align-items-center w-100 mb-3">
+        <h5 class="mb-0"><b>상품 목록</b></h5>
+        <form action="${pageContext.request.contextPath}/product"
+              method="get"
+              class="d-flex align-items-center gap-2"
+              style="max-width: 400px;">
+          <input type="text" name="item" class="form-control" placeholder="상품명을 입력하세요" required>
+          <button type="submit" class="btn btn-dark search-btn">검색</button>
+        </form>
+      </div>
       <ul class="list-group products">
         <li class="list-group-item d-flex mt-3">
           <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/HKOFQYa.jpeg" alt=""></div>
