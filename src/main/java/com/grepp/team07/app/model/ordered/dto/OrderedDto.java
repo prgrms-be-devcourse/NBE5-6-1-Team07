@@ -20,6 +20,7 @@ public class OrderedDto {
     private String address;
     private List<OrderedProductDto> orderedProducts;
     private LocalDateTime orderedAt;
+    private Integer totalPrice;
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
