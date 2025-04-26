@@ -122,7 +122,10 @@
             </div>
             <div class="col text-center price">${product.price}원</div>
             <div class="col text-end action">
-              <a class="btn btn-small btn-outline-dark" href="javascript:addToCart(${product.productId})">추가</a>
+              <form action="${pageContext.request.contextPath}/cart/add" method="post" style="display:inline;">
+                <input type="hidden" name="productId" value="${product.productId}">
+                <button type="submit" class="btn btn-small btn-outline-dark">추가</button>
+              </form>
             </div>
           </li>
         </c:forEach>
@@ -159,15 +162,14 @@
         <h5 class="m-0 p-0"><b>Summary</b></h5>
       </div>
       <hr>
-      <div class="row">
-        <h6 class="p-0">Columbia Nariñó <span class="badge bg-dark text-">2개</span></h6>
-      </div>
-      <div class="row">
-        <h6 class="p-0">Brazil Serra Do Caparaó <span class="badge bg-dark">2개</span></h6>
-      </div>
-      <div class="row">
-        <h6 class="p-0">Columbia Nariñó <span class="badge bg-dark">2개</span></h6>
-      </div>
+      <c:forEach var="item" items="${cartItems}">
+        <div class="row">
+          <h6 class="p-0">
+              ${productNames[item.productId]}
+            <span class="badge bg-dark">${item.count}개</span>
+          </h6>
+        </div>
+      </c:forEach>
       <form>
         <div class="mb-3">
           <label for="email" class="form-label">이메일</label>

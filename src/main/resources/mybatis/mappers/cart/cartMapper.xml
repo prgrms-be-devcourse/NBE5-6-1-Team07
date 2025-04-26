@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.grepp.team07.app.model.cart.CartRepository">
+
+    <resultMap id="cartProductMap" type="CartProductDto">
+        <id property="cartProductId" column="cart_product_id"/>
+        <result property="cartId" column="cart_id"/>
+        <result property="productId" column="product_id"/>
+        <result property="count" column="count"/>
+    </resultMap>
+
+    <select id="findActiveCart" resultType="CartDto">
+        SELECT *
+        FROM cart
+        WHERE customer_id = (SELECT id FROM customer WHERE user_id = #{userId})
+        AND is_activated = TRUE
+    </select>
+
+    <insert id="createCart">
+        INSERT INTO cart (customer_id, is_activated)
+        VALUES ((SELECT id FROM customer WHERE user_id = #{userId}), TRUE)
+    </insert>
+
+    <update id="deactivateCart">
+        UPDATE cart
+        SET is_activated = FALSE
+        WHERE customer_id = (SELECT id FROM customer WHERE user_id = #{userId})
+        AND is_activated = TRUE
+    </update>
+
+    <select id="getProduct" resultType="CartProductDto">
+        SELECT *
+        FROM cart_product
+        WHERE cart_id = #{cartId}
+        AND product_id = #{productId}
+    </select>
+
+    <insert id="addProduct">
+        INSERT INTO cart_product (cart_id, product_id, count)
+        VALUES (#{cartId}, #{productId}, #{count})
+    </insert>
+
+    <update id="updateCount">
+        UPDATE cart_product
+        SET count = #{count}
+        WHERE cart_product_id = #{cartProductId}
+    </update>
+
+    <select id="getProducts" resultMap="cartProductMap">
+        SELECT cp.*
+        FROM cart_product cp
+        JOIN cart c ON cp.cart_id = c.cart_id
+        JOIN customer cu ON c.customer_id = cu.id
+        WHERE cu.user_id = #{userId}
+        AND c.is_activated = TRUE
+    </select>
+
+</mapper>

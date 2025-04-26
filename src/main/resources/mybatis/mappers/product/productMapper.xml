@@ -42,5 +42,8 @@
         limit 3;
     </select>
 
+    <select id="findById" parameterType="int" resultMap="productMap">
+        SELECT * FROM product WHERE product_id = #{productId}
+    </select>
 
 </mapper>

@@ -43,4 +43,8 @@ public class ProductService {
 
         return new PageImpl<>(result, pageable, total);
     }
+
+    public ProductDto findById(int productId) {
+        return productRepository.findById(productId);
+    }
 }

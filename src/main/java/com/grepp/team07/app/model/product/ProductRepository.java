@@ -17,4 +17,6 @@ public interface ProductRepository {
 
     List<ProductDto> findPaged(@Param("limit") int limit, @Param("offset") int offset);
     int countAll();
+
+    ProductDto findById(int productId);
 }
