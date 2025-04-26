@@ -11,6 +11,7 @@
         <result property="email" column="email"/>
         <result property="address" column="address"/>
         <result property="orderedAt" column="ordered_at"/>
+        <result property="totalPrice" column="total_price"/>
         <result property="status" column="status" javaType="com.grepp.team07.app.model.delivery.code.DeliveryState"/>
         <result property="deliveredAt" column="delivered_at"/>
         <collection property="orderedProducts" ofType="OrderedProductDto"
@@ -43,6 +44,34 @@
         from order_product op
         join product p on op.product_id = p.product_id
         where order_id = #{orderId}
+    </select>
+
+    <select id="searchByEmail" resultMap="orderedMap" parameterType="map">
+        select *
+        from ordered o
+        left join delivery d ON o.order_id = d.order_id
+        where o.email = #{email} and o.is_customer is false
+        order by o.ordered_at DESC
+        limit #{limit} offset #{offset}
+    </select>
+    <select id="countEmailOrders" resultType="int">
+        select count(*)
+        from ordered
+        where email = #{email} and is_customer is false
+    </select>
+
+    <select id="searchByMemberEmail" resultMap="orderedMap" parameterType="map">
+        select *
+        from ordered o
+        left join delivery d ON o.order_id = d.order_id
+        where o.email = #{email} and o.is_customer is true
+        order by o.ordered_at DESC
+        limit #{limit} offset #{offset}
+    </select>
+    <select id="countMemberEmailOrders" resultType="int">
+        select count(*)
+        from ordered
+        where email = #{email} and is_customer is true
     </select>
 
 </mapper>

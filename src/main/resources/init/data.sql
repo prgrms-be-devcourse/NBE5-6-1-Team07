@@ -10,13 +10,6 @@ INSERT INTO PRODUCT (name, price, info, brand, count, sales) VALUES
                                                                  ('에스프레소 블렌드', '15000', '진한 풍미의 커피', 'CoffeeBrand', 100, 20),
                                                                  ('드립백 세트', '18000', '간편한 드립백', 'DripMaster', 80, 15),
                                                                  ('콜드브루 원액', '20000', '진한 콜드브루', 'CoolBrew', 60, 10);
-
--- PRODUCT_IMG
-INSERT INTO PRODUCT_IMG (product_id, original_file_name, rename_file_name, save_path, created_at, activated) VALUES
-                                                                 (1, 'espresso.jpg', 'espresso_123.jpg', '/images/products', now(), true),
-                                                                 (2, 'drip.jpg', 'drip_456.jpg', '/images/products', now(), true),
-                                                                 (3, 'coldbrew.jpg', 'coldbrew_789.jpg', '/images/products', now(), true);
-
 -- CART
 INSERT INTO CART (customer_id, is_activated) VALUES
                                                                 (1, true),
