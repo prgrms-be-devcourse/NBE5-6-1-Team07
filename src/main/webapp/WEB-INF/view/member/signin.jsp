@@ -79,25 +79,28 @@
 
                 <div class="mx-auto mt-3 mb-4" style="max-width: 500px; width: 100%;">
                     <label for="password" class="form-label">비밀번호</label>
-                    <input type="password" class="form-control bg-light" id="password" name="password"
-                           placeholder="비밀번호를 입력하세요">
+                    <input type="password" class="form-control bg-light" id="password" name="password" placeholder="비밀번호를 입력하세요">
+                </div>
+
+                <div class="mx-auto mt-3 mb-4" style="max-width: 500px; width: 100%;">
+                    <div class="form-check mt-3" >
+                        <input class="form-check-input" type="checkbox" name="remember-me" id="remember-me">
+                        <label class="form-check-label" for="remember-me">로그인 유지</label>
+                    </div>
                 </div>
 
                 <div class="text-center mt-4">
-                    <div><a href="<c:url value='/member/signup' />" class="text-decoration-none">Grids
-                        & Circle 이 처음이라면?</a></div>
+                    <div><a href="<c:url value='/member/signup' />" class="text-decoration-none">Grids & Circle 이 처음이라면?</a></div>
                 </div>
                 <div class="text-center mt-2">
                     <div><a href="#" class="custom-link">비회원으로 계속하기</a></div>
                 </div>
 
                 <div class="d-flex justify-content-center gap-3 mt-5 pt-2 mb-2">
-                    <button type="button" class="btn btn-outline-secondary" style="width: 150px;">
-                        취소
-                    </button>
+                    <button type="button" class="btn btn-outline-secondary" style="width: 150px;">취소</button>
                     <button type="submit" class="btn btn-primary" style="width: 150px;">로그인</button>
                 </div>
-
+            </form>
         </div>
     </div>
 </div>
