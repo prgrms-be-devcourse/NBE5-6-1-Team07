@@ -29,4 +29,22 @@ public class OrderedService {
 
         return new PageImpl<>(result, pageable, total);
     }
+
+    public Page<OrderedDto> searchByEmail(Pageable pageable, String email) {
+        int offset = (int) pageable.getOffset();
+        int size = pageable.getPageSize();
+        List<OrderedDto> result = orderedRepository.searchByEmail(size, offset, email);
+        int total = orderedRepository.countEmailOrders(email);
+
+        return new PageImpl<>(result, pageable, total);
+    }
+
+    public Page<OrderedDto> searchByMemberEmail(Pageable pageable, String email) {
+        int offset = (int) pageable.getOffset();
+        int size = pageable.getPageSize();
+        List<OrderedDto> result =  orderedRepository.searchByMemberEmail(size, offset, email);
+        int total = orderedRepository.countMemberEmailOrders(email);
+
+        return new PageImpl<>(result, pageable, total);
+    }
 }
