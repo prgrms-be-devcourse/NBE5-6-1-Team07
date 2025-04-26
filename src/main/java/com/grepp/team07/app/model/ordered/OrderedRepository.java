@@ -14,4 +14,10 @@ public interface OrderedRepository {
     int countAllOrders();
 
     List<OrderedDto> findPaged(@Param("limit") int limit, @Param("offset") int offset);
+
+    List<OrderedDto> searchByEmail(@Param("limit") int limit, @Param("offset") int offset, String email);
+    int countEmailOrders(String email);
+
+    List<OrderedDto> searchByMemberEmail(@Param("limit") int limit, @Param("offset") int offset, String email);
+    int countMemberEmailOrders(String email);
 }
