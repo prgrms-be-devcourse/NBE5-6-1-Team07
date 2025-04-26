@@ -77,7 +77,7 @@ public class ProductController {
         PageResponse<ProductDto> response = new PageResponse<>("/product", page, 3);
         model.addAttribute("page", response);
 
-        return "product";
+        return "product/product";
     }
 
     private String getLoginUserId() {

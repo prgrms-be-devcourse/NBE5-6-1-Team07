@@ -132,6 +132,7 @@
             <div class="col text-end action">
               <form action="${pageContext.request.contextPath}/cart/add" method="post" style="display:inline;">
                 <input type="hidden" name="productId" value="${product.productId}">
+                <input type="hidden" name="page" value="${page.currentNumber()}">
                 <button type="submit" class="btn btn-small btn-outline-dark">추가</button>
               </form>
             </div>

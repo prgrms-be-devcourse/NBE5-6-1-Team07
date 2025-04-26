@@ -22,10 +22,11 @@ public class CartController {
 
     @PostMapping("/add")
     public String addCart(@RequestParam("productId") int productId,
+                          @RequestParam(value = "page", required = false, defaultValue = "1") int page,
                           HttpSession session) {
         String userId = getLoginUserId();
         cartService.addProduct(productId, 1, session, userId);
-        return "redirect:/product";
+        return "redirect:/product?page=" + page;
     }
 
     @PostMapping("/clear")
