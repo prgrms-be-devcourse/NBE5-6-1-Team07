@@ -80,7 +80,7 @@
             <div class="d-flex mb-2 w-100"><div class="info-label">주소</div><div><c:out value="${info.address}"/></div></div>
             <div class="d-flex mb-2 w-100"><div class="info-label">우편번호</div><div><c:out value="${info.postCode}"/></div></div>
 
-            <a href="/orders" class="btn mb-2 mt-4">주문 목록 더보기</a>
+            <a href="/order/list" class="btn mb-2 mt-4">주문 목록 더보기</a>
         </div>
 
         <div class="col-md-4 summary p-4">

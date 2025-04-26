@@ -7,7 +7,7 @@
         <ul class="navbar-nav mb-2 mb-lg-0">
           <sec:authorize access="isAnonymous()">
             <li class="nav-item">
-              <a class="nav-link text-secondary" href="/">비회원 주문 조회</a>
+              <a class="nav-link text-secondary" href="/order/list">비회원 주문 조회</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-secondary" href="<c:url value='/member/signin' />">로그인</a>
