@@ -13,6 +13,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
@@ -61,10 +62,15 @@ public class ProductController {
         }
         model.addAttribute("productNames", productNames);
 
-        Pageable pageable = PageRequest.of(param.getPage() - 1, param.getSize());
-        Page<ProductDto> page = productService.findPaged(pageable);
+        Page<ProductDto> page;
+        if (item == null || item.isBlank()) {
+            Pageable pageable = PageRequest.of(param.getPage() - 1, param.getSize());
+            page = productService.findPaged(pageable);
+        } else {
+            page = new PageImpl<>(products);
+        }
 
-        if(param.getPage() != 1 && page.getContent().isEmpty()){
+        if (param.getPage() != 1 && page.getContent().isEmpty()){
             throw new CommonException();
         }
 
