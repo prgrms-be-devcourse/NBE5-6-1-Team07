@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Data
 public class CustomerEditForm {
@@ -14,8 +15,10 @@ public class CustomerEditForm {
     @NotBlank
     @Email
     private String email;
+
     @NotBlank
-    @Size(min = 4, max = 10)
+    private String checkpassword;
+
     private String password;
     @NotBlank
     private String address;
@@ -31,4 +34,5 @@ public class CustomerEditForm {
         customer.setPostCode(postCode);
         return customer;
     }
+
 }
