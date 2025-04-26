@@ -76,10 +76,10 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(
                 (requests) -> requests
+                    .requestMatchers("/admin/**").hasRole("ADMIN")
                     .requestMatchers(GET, "/", "/assets/**", "/download/**").permitAll()
-                    .requestMatchers(GET, "/member/signup").permitAll()
-                    .requestMatchers(GET, "/member/signin").permitAll()
-                    .requestMatchers(POST, "/member/signin", "/member/signup").permitAll()
+                    .requestMatchers(GET, "/member/signup", "/member/signin").permitAll()
+                    .requestMatchers(POST, "/member/signup", "/member/signin").permitAll()
                     .requestMatchers(GET, "/api/member/exists/*").permitAll()
                     .requestMatchers("/**").permitAll()
                     .anyRequest().authenticated()
