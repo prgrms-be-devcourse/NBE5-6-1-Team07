@@ -72,13 +72,13 @@
             <h5 class="mb-3"><b>마이페이지</b></h5>
             <div class="d-flex justify-content-between align-items-center w-100 mb-3">
                 <div class="fw-bold">회원 정보</div>
-                <button class="edit-button">수정</button>
+                <a href="mypage/edit"><div class="edit-button">수정</div></a>
             </div>
 
-            <div class="d-flex mb-2 w-100"><div class="info-label">id</div><div>test</div></div>
-            <div class="d-flex mb-2 w-100"><div class="info-label">email</div><div>test@test.com</div></div>
-            <div class="d-flex mb-2 w-100"><div class="info-label">주소</div><div>서울특별시 ~</div></div>
-            <div class="d-flex mb-2 w-100"><div class="info-label">우편번호</div><div>12345</div></div>
+            <div class="d-flex mb-2 w-100"><div class="info-label">id</div><div><c:out value="${info.userId}"/></div></div>
+            <div class="d-flex mb-2 w-100"><div class="info-label">email</div><div><c:out value="${info.email}"/></div></div>
+            <div class="d-flex mb-2 w-100"><div class="info-label">주소</div><div><c:out value="${info.address}"/></div></div>
+            <div class="d-flex mb-2 w-100"><div class="info-label">우편번호</div><div><c:out value="${info.postCode}"/></div></div>
 
             <a href="/orders" class="btn mb-2 mt-4">주문 목록 더보기</a>
         </div>
