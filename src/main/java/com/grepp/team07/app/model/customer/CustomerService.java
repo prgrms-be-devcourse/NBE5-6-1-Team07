@@ -4,6 +4,7 @@ import com.grepp.team07.app.model.customer.dto.CustomerDto;
 import com.grepp.team07.infra.exceptions.CommonException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public CustomerDto findById(String userId) {
         return customerRepository.findById(userId);
@@ -22,5 +24,13 @@ public class CustomerService {
     public void edit(CustomerDto dto) {
         customerRepository.update(dto.getUserId(), dto);
 
+    }
+
+    public boolean checkPassword(String userId, String rawPassword) {
+        String encodedPassword = customerRepository.findEncodedPasswordByUserId(userId);
+        if (encodedPassword == null) {
+            return false;
+        }
+        return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 }

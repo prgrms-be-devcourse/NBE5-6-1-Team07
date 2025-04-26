@@ -60,8 +60,11 @@
         }
     </style>
     <title>마이페이지</title>
+    <%@include file="/WEB-INF/view/include/static.jsp" %>
 </head>
-<body class="container-fluid">
+<body>
+<%@include file="/WEB-INF/view/include/header.jsp" %>
+
 <div class="row justify-content-center m-4">
     <h1 class="text-center">Grids & Circle</h1>
 </div>
