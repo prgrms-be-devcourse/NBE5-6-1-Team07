@@ -44,4 +44,31 @@ public class CartController {
         Principal principal = (Principal) auth.getPrincipal();
         return principal.getUsername();
     }
+
+    @PostMapping("/increase")
+    public String increaseCount(@RequestParam("productId") int productId,
+                                @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                HttpSession session) {
+        String userId = getLoginUserId();
+        cartService.increaseCount(productId, session, userId);
+        return "redirect:/product?page=" + page;
+    }
+
+    @PostMapping("/decrease")
+    public String decreaseCount(@RequestParam("productId") int productId,
+                                @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                HttpSession session) {
+        String userId = getLoginUserId();
+        cartService.decreaseCount(productId, session, userId);
+        return "redirect:/product?page=" + page;
+    }
+
+    @PostMapping("/remove")
+    public String removeProduct(@RequestParam("productId") int productId,
+                                @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                HttpSession session) {
+        String userId = getLoginUserId();
+        cartService.removeProduct(productId, session, userId);
+        return "redirect:/product?page=" + page;
+    }
 }

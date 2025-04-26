@@ -168,15 +168,34 @@
     </div>
     <div class="col-md-4 summary p-4">
       <div>
-        <h5 class="m-0 p-0"><b>Summary</b></h5>
+        <h5 class="m-0 p-0"><b>Cart</b></h5>
       </div>
       <hr>
       <c:forEach var="item" items="${cartItems}">
-        <div class="row">
-          <h6 class="p-0">
-              ${productNames[item.productId]}
+        <div class="row align-items-center mb-2">
+          <div class="col-8">
+            <h6 class="p-0 m-0">
+                ${productNames[item.productId]}
+            </h6>
+          </div>
+          <div class="col-4 d-flex align-items-center justify-content-end gap-1">
+            <form action="${pageContext.request.contextPath}/cart/decrease" method="post" style="display:inline;">
+              <input type="hidden" name="productId" value="${item.productId}" />
+              <button type="submit" class="btn btn-sm btn-outline-dark" style="border-color: #ccc; margin-top: 4px;">-</button>
+            </form>
             <span class="badge bg-dark">${item.count}개</span>
-          </h6>
+            <form action="${pageContext.request.contextPath}/cart/increase" method="post" style="display:inline;">
+              <input type="hidden" name="productId" value="${item.productId}" />
+              <button type="submit" class="btn btn-sm btn-outline-dark" style="border-color: #ccc; margin-top: 4px;">+</button>
+            </form>
+            <form action="${pageContext.request.contextPath}/cart/remove" method="post" style="display:inline;">
+              <input type="hidden" name="productId" value="${item.productId}" />
+              <button type="submit" class="btn btn-sm btn-outline-dark px-2"
+                      style="min-width: 30px; white-space: nowrap; border-color: red; color: red; margin-top: 4px;">
+                <i class="bi bi-trash3"></i>
+              </button>
+            </form>
+          </div>
         </div>
       </c:forEach>
       <form>

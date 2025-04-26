@@ -58,4 +58,9 @@
         AND c.is_activated = TRUE
     </select>
 
+    <delete id="deleteProduct">
+        DELETE FROM cart_product
+        WHERE cart_product_id = #{cartProductId}
+    </delete>
+
 </mapper>

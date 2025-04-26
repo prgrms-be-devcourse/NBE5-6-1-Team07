@@ -37,14 +37,12 @@ class CartServiceTest {
     @Test
     public void getCartItems() {
         HttpSession session = new MockHttpSession();
-        // 비회원 장바구니 상품 추가
         cartService.addProduct(1, 2, session, null);
+        cartService.increaseCount(1, session, null);
 
-        // 비회원
         List<CartProductDto> guestItems = cartService.getCartItems(session, null);
         guestItems.forEach(item -> log.info("비회원 장바구니: {}", item));
 
-        // 회원
         List<CartProductDto> memberItems = cartService.getCartItems(session, "user01");
         memberItems.forEach(item -> log.info("회원 장바구니: {}", item));
     }
@@ -52,17 +50,63 @@ class CartServiceTest {
     @Test
     public void clearCart() {
         HttpSession session = new MockHttpSession();
-        // 비회원 장바구니 상품 추가
         cartService.addProduct(1, 2, session, null);
+        cartService.increaseCount(1, session, null);
 
-        // 비회원
         cartService.clearCart(session, null);
         List<CartProductDto> guestItems = cartService.getCartItems(session, null);
         log.info("비운 후 비회원 장바구니: {}", guestItems);
 
-        // 회원
         cartService.clearCart(session, "user01");
         List<CartProductDto> memberItems = cartService.getCartItems(session, "user01");
         log.info("비운 후 회원 장바구니: {}", memberItems);
+    }
+
+    @Test
+    public void increaseCount() {
+        HttpSession session = new MockHttpSession();
+        cartService.addProduct(1, 1, session, null);
+        cartService.increaseCount(1, session, null);
+
+        List<CartProductDto> guestItems = cartService.getCartItems(session, null);
+        guestItems.forEach(item -> log.info("비회원 수량 증가: {}", item));
+
+        cartService.addProduct(2, 1, session, "user01");
+        cartService.increaseCount(2, session, "user01");
+
+        List<CartProductDto> memberItems = cartService.getCartItems(session, "user01");
+        memberItems.forEach(item -> log.info("회원 수량 증가: {}", item));
+    }
+
+    @Test
+    public void decreaseCount() {
+        HttpSession session = new MockHttpSession();
+        cartService.addProduct(1, 2, session, null);
+        cartService.decreaseCount(1, session, null);
+
+        List<CartProductDto> guestItems = cartService.getCartItems(session, null);
+        guestItems.forEach(item -> log.info("비회원 수량 감소: {}", item));
+
+        cartService.addProduct(2, 2, session, "user01");
+        cartService.decreaseCount(2, session, "user01");
+
+        List<CartProductDto> memberItems = cartService.getCartItems(session, "user01");
+        memberItems.forEach(item -> log.info("회원 수량 감소: {}", item));
+    }
+
+    @Test
+    public void removeProduct() {
+        HttpSession session = new MockHttpSession();
+        cartService.addProduct(1, 1, session, null);
+        cartService.removeProduct(1, session, null);
+
+        List<CartProductDto> guestItems = cartService.getCartItems(session, null);
+        log.info("비회원 삭제 후 장바구니: {}", guestItems);
+
+        cartService.addProduct(2, 1, session, "user01");
+        cartService.removeProduct(2, session, "user01");
+
+        List<CartProductDto> memberItems = cartService.getCartItems(session, "user01");
+        log.info("회원 삭제 후 장바구니: {}", memberItems);
     }
 }

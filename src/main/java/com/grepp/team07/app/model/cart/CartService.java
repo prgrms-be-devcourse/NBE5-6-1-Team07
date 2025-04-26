@@ -13,4 +13,10 @@ public interface CartService {
     List<CartProductDto> getCartItems(HttpSession session, String userId);
     // 장바구니 비우기
     void clearCart(HttpSession session, String userId);
+    // 수량 증가
+    void increaseCount(int productId, HttpSession session, String userId);
+    // 수량 감소
+    void decreaseCount(int productId, HttpSession session, String userId);
+    // 상품 삭제
+    void removeProduct(int productId, HttpSession session, String userId);
 }

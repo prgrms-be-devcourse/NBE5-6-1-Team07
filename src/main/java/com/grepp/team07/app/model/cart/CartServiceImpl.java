@@ -76,4 +76,73 @@ public class CartServiceImpl implements CartService {
             cartRepository.createCart(userId);
         }
     }
+
+    @Override
+    public void increaseCount(int productId, HttpSession session, String userId) {
+        if (userId == null) {
+            // 비회원
+            Map<Integer, Integer> guestCart = (Map<Integer, Integer>) session.getAttribute("guestCart");
+            if (guestCart != null && guestCart.containsKey(productId)) {
+                guestCart.put(productId, guestCart.get(productId) + 1);
+                session.setAttribute("guestCart", guestCart);
+            }
+        } else {
+            // 회원
+            CartDto cart = cartRepository.findActiveCart(userId)
+                .orElseThrow();
+            CartProductDto item = cartRepository.getProduct(cart.getCartId(), productId);
+            if (item != null) {
+                cartRepository.updateCount(item.getCartProductId(), item.getCount() + 1);
+            }
+        }
+    }
+
+    @Override
+    public void decreaseCount(int productId, HttpSession session, String userId) {
+        if (userId == null) {
+            // 비회원
+            Map<Integer, Integer> guestCart = (Map<Integer, Integer>) session.getAttribute("guestCart");
+            if (guestCart != null && guestCart.containsKey(productId)) {
+                int currentCount = guestCart.get(productId);
+                if (currentCount > 1) {
+                    guestCart.put(productId, currentCount - 1);
+                } else {
+                    guestCart.remove(productId);
+                }
+                session.setAttribute("guestCart", guestCart);
+            }
+        } else {
+            // 회원
+            CartDto cart = cartRepository.findActiveCart(userId)
+                .orElseThrow();
+            CartProductDto item = cartRepository.getProduct(cart.getCartId(), productId);
+            if (item != null) {
+                if (item.getCount() > 1) {
+                    cartRepository.updateCount(item.getCartProductId(), item.getCount() - 1);
+                } else {
+                    cartRepository.deleteProduct(item.getCartProductId());
+                }
+            }
+        }
+    }
+
+    @Override
+    public void removeProduct(int productId, HttpSession session, String userId) {
+        if (userId == null) {
+            // 비회원
+            Map<Integer, Integer> guestCart = (Map<Integer, Integer>) session.getAttribute("guestCart");
+            if (guestCart != null) {
+                guestCart.remove(productId);
+                session.setAttribute("guestCart", guestCart);
+            }
+        } else {
+            // 회원
+            CartDto cart = cartRepository.findActiveCart(userId)
+                .orElseThrow();
+            CartProductDto item = cartRepository.getProduct(cart.getCartId(), productId);
+            if (item != null) {
+                cartRepository.deleteProduct(item.getCartProductId());
+            }
+        }
+    }
 }

@@ -24,4 +24,6 @@ public interface CartRepository {
     void updateCount(@Param("cartProductId") int cartProductId, @Param("count") int count);
 
     List<CartProductDto> getProducts(@Param("userId") String userId);
+
+    void deleteProduct(@Param("cartProductId") int cartProductId);
 }
