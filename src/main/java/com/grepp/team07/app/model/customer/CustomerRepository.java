@@ -10,4 +10,6 @@ public interface CustomerRepository {
 
 
     void update(@Param("userId")String userId, @Param("dto")CustomerDto dto);
+
+    String findEncodedPasswordByUserId(String userId);
 }

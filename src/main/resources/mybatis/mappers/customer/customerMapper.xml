@@ -27,4 +27,7 @@
         update delivery set delivered_at = #{deliveredAt}
         where delivery_id = #{deliveryId}
     </update>
+    <select id="findEncodedPasswordByUserId" resultType="string">
+        SELECT password FROM customer WHERE user_id = #{userId}
+    </select>
 </mapper>
