@@ -33,10 +33,12 @@ public class AdminController {
     private final OrderedService orderedService;
 
     @GetMapping("orders")
-    public String list(@Valid
-    PageParam param,
+    public String list(
+        @Valid
+        PageParam param,
         BindingResult bindingResult,
-        Model model){
+        Model model
+    ){
 
         Pageable pageable = PageRequest.of(param.getPage() - 1, param.getSize());
         Page<OrderedDto> page = orderedService.findPaged(pageable);
