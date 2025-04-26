@@ -10,5 +10,5 @@ public class CustomerDto {
     private String email;
     private String password;
     private String address;
-    private Integer postCode;
+    private String postCode;
 }
