@@ -73,6 +73,11 @@
 <body>
 <%@include file="/WEB-INF/view/include/header.jsp" %>
 <div class="container text-center">
+    <c:if test="${param.logout == 'true'}">
+        <div class="alert alert-success text-center" role="alert">
+            로그아웃되었습니다.
+        </div>
+    </c:if>
     <h1 class="my-4">Grids & Circle</h1>
     <div class="card">
         <h5><b>인기 상품</b></h5>

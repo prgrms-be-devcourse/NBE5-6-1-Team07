@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import java.io.IOException;
@@ -49,7 +50,7 @@ public class SecurityConfig {
                         authority.getAuthority().equals("ROLE_ADMIN"));
 
                 if(isAdmin){
-                    response.sendRedirect("/admin");
+                    response.sendRedirect("/admin/orders");
                     return;
                 }
 
@@ -57,6 +58,13 @@ public class SecurityConfig {
             }
         };
 
+    }
+
+    @Bean
+    public AuthenticationFailureHandler failureHandler() {
+        return (request, response, exception) -> {
+            response.sendRedirect("/member/signin?error=true");
+        };
     }
 
     @Bean
@@ -82,10 +90,16 @@ public class SecurityConfig {
                 .loginProcessingUrl("/member/signin")
                 .defaultSuccessUrl("/")
                 .successHandler(successHandler())
+                .failureHandler(failureHandler())
                 .permitAll()
             )
             .rememberMe(rememberMe -> rememberMe.key(rememberMeKey))
-            .logout(LogoutConfigurer::permitAll);
+            .logout(logout -> logout
+                .logoutSuccessUrl("/member/signin")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID", "remember-me")
+                .permitAll()
+            );
 
         return http.build();
     }

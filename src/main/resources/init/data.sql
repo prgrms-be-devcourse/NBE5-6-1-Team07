@@ -1,9 +1,9 @@
 -- CUSTOMER
 INSERT INTO CUSTOMER (user_id, email, password, address, post_code, role) VALUES
-                                                                 ('user01', 'user01@example.com', 'pass01', '서울 강남구 테헤란로 123', '12345', 'USER'),
-                                                                 ('user02', 'user02@example.com', 'pass02', '부산 해운대구 A로 456', '67890', 'USER'),
-                                                                 ('user03', 'user03@example.com', 'pass03', '대구 달서구 B길 789', '11223', 'USER'),
-                                                                 ('super', 'super@example.com', 'superpassword', '대구 달서구 B길 789', '11223', 'ADMIN');
+                                                                 ('user01', 'user01@example.com', '{noop}pass01', '서울 강남구 테헤란로 123', '12345', 'ROLE_USER'),
+                                                                 ('user02', 'user02@example.com', '{noop}pass02', '부산 해운대구 A로 456', '67890', 'ROLE_USER'),
+                                                                 ('user03', 'user03@example.com', '{noop}pass03', '대구 달서구 B길 789', '11223', 'ROLE_USER'),
+                                                                 ('super', 'super@example.com', '{noop}superpassword', '대구 달서구 B길 789', '11223', 'ROLE_ADMIN');
 
 -- PRODUCT
 INSERT INTO PRODUCT (name, price, info, brand, count, sales) VALUES
