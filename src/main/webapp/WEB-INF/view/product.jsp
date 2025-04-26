@@ -73,12 +73,16 @@
       line-height: 1.2;
       white-space: nowrap;
     }
-
     .pagination-container {
       display: flex;
       justify-content: center;
       margin-top: 20px;
       margin-bottom: 10px;
+    }
+    .product-name, .product-brand {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
   </style>
@@ -117,8 +121,12 @@
               </c:if>
             </div>
             <div class="col">
-              <div class="row text-muted">${product.brand}</div>
-              <div class="row">${product.name}</div>
+              <div class="row text-muted product-brand">
+                  ${product.brand}
+              </div>
+              <div class="row product-name">
+                  ${product.name}
+              </div>
             </div>
             <div class="col text-center price">${product.price}원</div>
             <div class="col text-end action">
