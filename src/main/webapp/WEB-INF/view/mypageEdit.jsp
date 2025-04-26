@@ -6,6 +6,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="_csrf" content="${_csrf.token}"/>
+  <meta name="_csrf_header" content="${_csrf.headerName}"/>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
@@ -52,7 +54,7 @@
       <form:form method="post" action="/mypage/edit" enctype="multipart/form-data" modelAttribute="customerEditForm">
         <div class="mx-auto mb-1" style="max-width: 500px; width: 100%;">
           <label class="form-label">아이디</label>
-          <form:input class="form-control bg-light" path="userId"></form:input>
+          <form:input path="userId" cssClass="form-control bg-light" readonly="true"/>
         </div>
 
         <div class="mx-auto mt-1 mb-1" style="max-width: 500px; width: 100%;">
@@ -61,8 +63,16 @@
         </div>
 
         <div class="mx-auto mt-1 mb-1" style="max-width: 500px; width: 100%;">
-          <label for="password" class="form-label">비밀번호</label>
-          <form:input path="password" cssClass="form-control bg-light" placeholder="비밀번호를 입력하세요"/>
+          <label for="checkpassword" class="form-label">현재 비밀번호</label>
+          <div class="input-group">
+            <form:input path="checkpassword" type="password" cssClass="form-control bg-light" placeholder="현재 비밀번호를 입력하세요" autocomplete="current-password"/>
+            <button type="button" class="btn btn-outline-secondary" id="checkPasswordBtn">비밀번호 확인</button>
+          </div>
+          <div id="passwordCheckResult" class="mt-2"></div>
+        </div>
+        <div class="mx-auto mt-1 mb-1" style="max-width: 500px; width: 100%;">
+          <label for="password" class="form-label">새 비밀번호</label>
+          <form:input path="password" type="password" cssClass="form-control bg-light" placeholder="새 비밀번호를 입력하세요" autocomplete="new-password"/>
         </div>
 
         <div class="mx-auto mt-1 mb-1" style="max-width: 500px; width: 100%;">
@@ -84,4 +94,44 @@
   </div>
 </div>
 </body>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const submitBtn = document.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+
+    document.getElementById('checkPasswordBtn').addEventListener('click', function() {
+      const password = document.getElementsByName('checkpassword')[0].value;
+      const userId = document.getElementsByName('userId')[0].value;
+      if (!userId || !password) {
+        document.getElementById('passwordCheckResult').innerText = '아이디와 비밀번호를 입력하세요.';
+        submitBtn.disabled = true;
+        return;
+      }
+      const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+      const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+      fetch('/mypage/check-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          [csrfHeader]: csrfToken
+        },
+        body: JSON.stringify({ userId, password })
+      })
+              .then(res => res.json())
+              .then(data => {
+                if (data.valid) {
+                  document.getElementById('passwordCheckResult').innerText = '비밀번호가 일치합니다.';
+                  submitBtn.disabled = false; // 활성화
+                } else {
+                  document.getElementById('passwordCheckResult').innerText = '비밀번호가 일치하지 않습니다.';
+                  submitBtn.disabled = true; // 비활성화 유지
+                }
+              })
+              .catch(() => {
+                document.getElementById('passwordCheckResult').innerText = '오류가 발생했습니다.';
+                submitBtn.disabled = true;
+              });
+    });
+  });
+</script>
 </html>

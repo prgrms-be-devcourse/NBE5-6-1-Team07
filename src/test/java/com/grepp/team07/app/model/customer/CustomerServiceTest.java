@@ -30,7 +30,7 @@ class CustomerServiceTest {
         dto.setUserId("user01");
         dto.setPassword("afsd");
         dto.setEmail("asf@asdf.com");
-        dto.setPostCode(12332);
+        dto.setPostCode("12332");
         dto.setAddress("afklsakskaf");
         customerService.edit(dto);
     }
