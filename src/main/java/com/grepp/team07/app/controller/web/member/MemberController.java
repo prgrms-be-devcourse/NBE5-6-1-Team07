@@ -4,8 +4,13 @@ import com.grepp.team07.app.controller.web.member.form.MemberEditForm;
 import com.grepp.team07.app.controller.web.member.form.SigninForm;
 import com.grepp.team07.app.controller.web.member.form.SignupForm;
 import com.grepp.team07.app.model.auth.code.Role;
+import com.grepp.team07.app.model.cart.CartService;
+import com.grepp.team07.app.model.cart.dto.CartProductDto;
 import com.grepp.team07.app.model.member.dto.Member;
 import com.grepp.team07.app.model.member.service.MemberService;
+import com.grepp.team07.app.model.product.ProductService;
+import com.grepp.team07.app.model.product.dto.ProductDto;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,9 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -28,6 +31,8 @@ public class MemberController {
 
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
+    private final ProductService productService;
+    private final CartService cartService;
 
     @GetMapping("/signin")
     public String signin(SigninForm form){
@@ -55,11 +60,31 @@ public class MemberController {
 
 
     @GetMapping("mypage")
-    public String mypage(Authentication authentication, Model model){
-        log.info("authentication : {}", authentication);
+    public String mypage(Authentication authentication, HttpSession session, Model model){
         String userId = authentication.getName();
-        Optional<Member> info =  memberService.findByUserId(userId);
+        Member info = memberService.findByUserId(userId)
+            .orElseThrow(() -> new RuntimeException("회원 정보를 찾을 수 없습니다: " + userId));
+
         model.addAttribute("info", info);
+
+        List<CartProductDto> cartItems = cartService.getCartItems(session, userId);
+        model.addAttribute("cartItems", cartItems);
+
+        Map<Integer, String> productNames = new HashMap<>();
+        Map<Integer, Integer> productPrices = new HashMap<>();
+
+        for (CartProductDto item : cartItems) {
+            ProductDto dto = productService.findById(item.getProductId());
+            productNames.put(item.getProductId(), dto.getName());
+            productPrices.put(item.getProductId(), Integer.parseInt(dto.getPrice()));
+        }
+        model.addAttribute("productNames", productNames);
+        model.addAttribute("productPrices", productPrices);
+
+        model.addAttribute("loginEmail", info.getEmail());
+        model.addAttribute("loginAddress", info.getAddress());
+        model.addAttribute("loginPostCode", info.getPostCode());
+
         return "member/mypage";
     }
 

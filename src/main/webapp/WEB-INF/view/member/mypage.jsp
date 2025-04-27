@@ -78,49 +78,16 @@
                 <a href="edit"><div class="edit-button">수정</div></a>
             </div>
 
-            <div class="d-flex mb-2 w-100"><div class="info-label">id</div><div><c:out value="${info.get().userId}"/></div></div>
-            <div class="d-flex mb-2 w-100"><div class="info-label">email</div><div><c:out value="${info.get().email}"/></div></div>
-            <div class="d-flex mb-2 w-100"><div class="info-label">주소</div><div><c:out value="${info.get().address}"/></div></div>
-            <div class="d-flex mb-2 w-100"><div class="info-label">우편번호</div><div><c:out value="${info.get().postCode}"/></div></div>
+            <div class="d-flex mb-2 w-100"><div class="info-label">id</div><div><c:out value="${info.userId}"/></div></div>
+            <div class="d-flex mb-2 w-100"><div class="info-label">email</div><div><c:out value="${info.email}"/></div></div>
+            <div class="d-flex mb-2 w-100"><div class="info-label">주소</div><div><c:out value="${info.address}"/></div></div>
+            <div class="d-flex mb-2 w-100"><div class="info-label">우편번호</div><div><c:out value="${info.postCode}"/></div></div>
 
             <a href="/order/list" class="btn mb-2 mt-4">주문 목록 더보기</a>
         </div>
 
-        <div class="col-md-4 summary p-4">
-            <div>
-                <h5 class="m-0 p-0"><b>Summary</b></h5>
-            </div>
-            <hr>
-            <div class="row">
-                <h6 class="p-0">Columbia Nariñó <span class="badge bg-dark">2개</span></h6>
-            </div>
-            <div class="row">
-                <h6 class="p-0">Brazil Serra Do Caparaó <span class="badge bg-dark">2개</span></h6>
-            </div>
-            <div class="row">
-                <h6 class="p-0">Columbia Nariñó <span class="badge bg-dark">2개</span></h6>
-            </div>
-            <form>
-                <div class="mb-3">
-                    <label for="email" class="form-label">이메일</label>
-                    <input type="email" class="form-control mb-1" id="email">
-                </div>
-                <div class="mb-3">
-                    <label for="address" class="form-label">주소</label>
-                    <input type="text" class="form-control mb-1" id="address">
-                </div>
-                <div class="mb-3">
-                    <label for="postcode" class="form-label">우편번호</label>
-                    <input type="text" class="form-control" id="postcode">
-                </div>
-                <div>당일 오후 2시 이후의 주문은 다음날 배송을 시작합니다.</div>
-            </form>
-            <div class="row pt-2 pb-2 border-top">
-                <h5 class="col">총금액</h5>
-                <h5 class="col text-end">15000원</h5>
-            </div>
-            <button class="btn btn-dark col-12">결제하기</button>
-        </div>
+        <%@ include file="/WEB-INF/view/include/cart.jsp" %>
+
     </div>
 </div>
 </body>
