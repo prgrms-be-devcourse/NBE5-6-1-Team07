@@ -59,11 +59,15 @@ public class ProductController {
         model.addAttribute("cartItems", cartItems);
 
         Map<Integer, String> productNames = new HashMap<>();
+        Map<Integer, Integer> productPrices = new HashMap<>();
+
         for (CartProductDto i : cartItems) {
             ProductDto dto = productService.findById(i.getProductId());
             productNames.put(i.getProductId(), dto.getName());
+            productPrices.put(i.getProductId(), Integer.parseInt(dto.getPrice()));
         }
         model.addAttribute("productNames", productNames);
+        model.addAttribute("productPrices", productPrices);
 
         Page<ProductDto> page;
         if (item == null || item.isBlank()) {
