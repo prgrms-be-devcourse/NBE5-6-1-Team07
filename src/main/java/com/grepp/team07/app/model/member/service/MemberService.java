@@ -11,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -35,4 +37,20 @@ public class MemberService {
         return memberRepository.existsMember(id);
     }
 
+    @Transactional
+    public void edit(Member dto) {
+        memberRepository.update(dto.getUserId(), dto);
+    }
+
+    public boolean checkPassword(String userId, String rawPassword) {
+        String encodedPassword = memberRepository.findEncodedPasswordByUserId(userId);
+        if (encodedPassword == null) {
+            return false;
+        }
+        return passwordEncoder.matches(rawPassword, encodedPassword);
+    }
+
+    public Optional<Member> findByUserId(String userId) {
+        return memberRepository.selectByUserId(userId);
+    }
 }
