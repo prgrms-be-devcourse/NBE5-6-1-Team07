@@ -74,4 +74,67 @@
         where email = #{email} and is_customer is true
     </select>
 
+    <insert id="insertMemberOrder">
+        insert into ordered (cart_id, email, is_customer, address, post_code, total_price)
+        values (
+        (select c.cart_id
+        from cart c
+        join customer cu on c.customer_id = cu.id
+        where cu.user_id = #{userId}
+        and c.is_activated = true),
+        #{email},
+        true,
+        #{address},
+        #{postCode},
+        (select sum(p.price * cp.count)
+        from cart_product cp
+        join cart c on cp.cart_id = c.cart_id
+        join product p on cp.product_id = p.product_id
+        join customer cu on c.customer_id = cu.id
+        where cu.user_id = #{userId}
+        and c.is_activated = true)
+        )
+    </insert>
+
+    <insert id="insertGuestOrder">
+        insert into ordered (email, is_customer, address, post_code, total_price)
+        values (#{email}, false, #{address}, #{postCode}, 0)
+    </insert>
+
+    <select id="findLastOrderId" resultType="int">
+        select last_insert_id()
+    </select>
+
+    <select id="findProductPrice" parameterType="int" resultType="int">
+        select price
+        from product
+        where product_id = #{productId}
+    </select>
+
+    <insert id="insertOrderProducts">
+        insert into order_product (order_id, product_id, count)
+        values (#{orderId}, #{productId}, #{count})
+    </insert>
+
+    <update id="updateOrderTotalPrice">
+        update ordered
+        set total_price = #{totalPrice}
+        where order_id = #{orderId}
+    </update>
+
+    <select id="findCartProductByUserId" resultType="map">
+        select cp.product_id, cp.count
+        from cart_product cp
+        join cart c on cp.cart_id = c.cart_id
+        join customer cu on c.customer_id = cu.id
+        where cu.user_id = #{userId}
+        and c.is_activated = true
+    </select>
+
+    <select id="findCustomerIdByUserId" resultType="int">
+        select id
+        from customer
+        where user_id = #{userId}
+    </select>
+
 </mapper>

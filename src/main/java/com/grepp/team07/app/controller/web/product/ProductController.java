@@ -3,6 +3,8 @@ package com.grepp.team07.app.controller.web.product;
 import com.grepp.team07.app.model.auth.domain.Principal;
 import com.grepp.team07.app.model.cart.CartService;
 import com.grepp.team07.app.model.cart.dto.CartProductDto;
+import com.grepp.team07.app.model.member.dto.Member;
+import com.grepp.team07.app.model.member.repository.MemberRepository;
 import com.grepp.team07.app.model.product.ProductService;
 import com.grepp.team07.app.model.product.dto.ProductDto;
 import com.grepp.team07.infra.exceptions.CommonException;
@@ -37,6 +39,7 @@ public class ProductController {
 
     private final ProductService productService;
     private final CartService cartService;
+    private final MemberRepository memberRepository;
 
     @GetMapping("")
     public String productList(@Valid PageParam param,
@@ -56,11 +59,15 @@ public class ProductController {
         model.addAttribute("cartItems", cartItems);
 
         Map<Integer, String> productNames = new HashMap<>();
+        Map<Integer, Integer> productPrices = new HashMap<>();
+
         for (CartProductDto i : cartItems) {
             ProductDto dto = productService.findById(i.getProductId());
             productNames.put(i.getProductId(), dto.getName());
+            productPrices.put(i.getProductId(), Integer.parseInt(dto.getPrice()));
         }
         model.addAttribute("productNames", productNames);
+        model.addAttribute("productPrices", productPrices);
 
         Page<ProductDto> page;
         if (item == null || item.isBlank()) {
@@ -76,6 +83,15 @@ public class ProductController {
 
         PageResponse<ProductDto> response = new PageResponse<>("/product", page, 3);
         model.addAttribute("page", response);
+
+        if (userId != null) {
+            Member member = memberRepository.selectByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("존재하지 않는 회원입니다: " + userId));
+
+            model.addAttribute("loginEmail", member.getEmail());
+            model.addAttribute("loginAddress", member.getAddress());
+            model.addAttribute("loginPostCode", member.getPostCode());
+        }
 
         return "product/product-list";
     }

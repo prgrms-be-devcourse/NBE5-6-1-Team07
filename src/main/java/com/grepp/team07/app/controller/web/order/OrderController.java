@@ -6,8 +6,8 @@ import com.grepp.team07.app.model.ordered.OrderedService;
 import com.grepp.team07.app.model.ordered.dto.OrderedDto;
 import com.grepp.team07.infra.payload.PageParam;
 import com.grepp.team07.infra.response.PageResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -56,5 +57,23 @@ public class OrderController {
         model.addAttribute("page", response);
 
         return "order/order-list";
+    }
+
+    @PostMapping("/create")
+    public String create(
+        @RequestParam String email,
+        @RequestParam String address,
+        @RequestParam String postCode,
+        HttpSession session,
+        Authentication authentication
+    ) {
+        String userId = authentication != null
+            && authentication.isAuthenticated()
+            && !"anonymousUser".equals(authentication.getPrincipal())
+            ? authentication.getName() : null;
+
+        orderedService.create(session, email, address, postCode, userId);
+
+        return "redirect:/";
     }
 }

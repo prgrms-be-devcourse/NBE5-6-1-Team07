@@ -26,4 +26,9 @@
         update delivery set delivered_at = #{deliveredAt}
         where delivery_id = #{deliveryId}
     </update>
+
+    <insert id="insertDelivery">
+        insert into delivery (order_id, customer_id, status)
+        values (#{orderId}, #{customerId}, #{status})
+    </insert>
 </mapper>
