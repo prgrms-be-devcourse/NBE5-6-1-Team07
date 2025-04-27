@@ -205,26 +205,41 @@
         </div>
       </c:forEach>
 
-      <form>
+      <form id="orderForm" action="${pageContext.request.contextPath}/order/create" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
         <div class="mb-3">
           <label for="email" class="form-label">이메일</label>
-          <input type="email" class="form-control mb-1" id="email">
+          <input type="email" class="form-control mb-1" id="email" name="email"
+                 value="${loginEmail}" ${not empty loginEmail ? 'readonly' : ''} required>
         </div>
         <div class="mb-3">
           <label for="address" class="form-label">주소</label>
-          <input type="text" class="form-control mb-1" id="address">
+          <input type="text" class="form-control mb-1" id="address" name="address"
+                 value="${loginAddress}" required>
         </div>
         <div class="mb-3">
           <label for="postcode" class="form-label">우편번호</label>
-          <input type="text" class="form-control" id="postcode">
+          <input type="text" class="form-control" id="postcode" name="postCode"
+                 value="${loginPostCode}" required>
         </div>
         <div>당일 오후 2시 이후의 주문은 다음날 배송을 시작합니다.</div>
+
+        <div class="row pt-2 pb-2 border-top">
+          <h5 class="col">총금액</h5>
+          <h5 class="col text-end">
+            <c:set var="totalPrice" value="0" />
+            <c:forEach var="item" items="${cartItems}">
+              <c:set var="itemPrice" value="${productPrices[item.productId]}" />
+              <c:set var="subtotal" value="${item.count * itemPrice}" />
+              <c:set var="totalPrice" value="${totalPrice + subtotal}" />
+            </c:forEach>
+            <fmt:formatNumber value="${totalPrice}" pattern="#,###"/>원
+          </h5>
+        </div>
+
+        <button type="submit" class="btn btn-dark col-12 mt-2">결제하기</button>
       </form>
-      <div class="row pt-2 pb-2 border-top">
-        <h5 class="col">총금액</h5>
-        <h5 class="col text-end">15000원</h5>
-      </div>
-      <button class="btn btn-dark col-12">결제하기</button>
     </div>
   </div>
 </div>
