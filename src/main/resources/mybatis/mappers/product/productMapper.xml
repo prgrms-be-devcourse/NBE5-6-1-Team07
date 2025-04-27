@@ -11,18 +11,23 @@
     </resultMap>
 
     <select id="selectAll" resultMap="productMap">
-        select * from product
+        select *
+        from product
+        where deleted_at is null
     </select>
 
     <select id="findPaged" resultMap="productMap">
         SELECT *
         FROM product
+        where deleted_at is null
         ORDER BY product_id DESC
         LIMIT #{limit} OFFSET #{offset}
     </select>
 
     <select id="countAll" resultType="int">
-        SELECT COUNT(*) FROM product
+        SELECT COUNT(*)
+        FROM product
+        where deleted_at is null
     </select>
 
     <select id="selectImg" parameterType="int" resultType="ProductImgDto">
@@ -32,6 +37,7 @@
     <select id="findByKeyword" resultMap="productMap">
         select * from product
         where name like concat('%', #{keyword}, '%')
+            and deleted_at is null;
     </select>
 
     <select id="bestProduct" resultMap="productMap">
@@ -42,5 +48,11 @@
         limit 3;
     </select>
 
+    <select id="findById" parameterType="int" resultMap="productMap">
+        SELECT *
+        FROM product
+        WHERE product_id = #{productId}
+            and deleted_at is null;
+    </select>
 
 </mapper>
