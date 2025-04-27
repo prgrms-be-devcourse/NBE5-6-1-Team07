@@ -18,4 +18,6 @@ public interface DeliveryRepository {
     void updateDeliveredAt(@Param("deliveryId")Integer deliveryId, @Param("deliveredAt")LocalDateTime deliveredAt);
 
     void updateStatus(@Param("deliveryId")Integer deliveryId, @Param("status")DeliveryState status);
+
+    void insertDelivery(@Param("orderId") Integer orderId, @Param("customerId") Integer customerId, @Param("status") DeliveryState status);
 }

@@ -1,6 +1,8 @@
 package com.grepp.team07.app.model.ordered;
 
 import com.grepp.team07.app.model.cart.CartRepository;
+import com.grepp.team07.app.model.delivery.DeliveryRepository;
+import com.grepp.team07.app.model.delivery.code.DeliveryState;
 import com.grepp.team07.app.model.ordered.dto.OrderedDto;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ public class OrderedService {
 
     private final OrderedRepository orderedRepository;
     private final CartRepository cartRepository;
+    private final DeliveryRepository deliveryRepository;
 
     public List<OrderedDto> findAll() {
         return orderedRepository.selectAll();
@@ -61,6 +64,10 @@ public class OrderedService {
             // 회원
             orderedRepository.insertMemberOrder(email, address, postCode, userId);
             Integer orderId = orderedRepository.findLastOrderId();
+
+            Integer customerId = orderedRepository.findCustomerIdByUserId(userId);
+            deliveryRepository.insertDelivery(orderId, customerId, DeliveryState.READY);
+
             List<Map<String, Object>> cartProducts = orderedRepository.findCartProductByUserId(userId);
 
             for (Map<String, Object> item : cartProducts) {
@@ -80,6 +87,8 @@ public class OrderedService {
             orderedRepository.insertGuestOrder(email, address, postCode);
 
             Integer orderId = orderedRepository.findLastOrderId();
+
+            deliveryRepository.insertDelivery(orderId, null, DeliveryState.READY);
 
             int totalPrice = 0;
             for (Map.Entry<Integer, Integer> entry : guestCart.entrySet()) {

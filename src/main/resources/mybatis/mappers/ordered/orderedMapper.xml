@@ -131,4 +131,10 @@
         and c.is_activated = true
     </select>
 
+    <select id="findCustomerIdByUserId" resultType="int">
+        select id
+        from customer
+        where user_id = #{userId}
+    </select>
+
 </mapper>

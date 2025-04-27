@@ -49,4 +49,6 @@ public interface OrderedRepository {
                                @Param("totalPrice") Integer totalPrice);
 
     List<Map<String, Object>> findCartProductByUserId(@Param("userId") String userId);
+
+    Integer findCustomerIdByUserId(@Param("userId") String userId);
 }
