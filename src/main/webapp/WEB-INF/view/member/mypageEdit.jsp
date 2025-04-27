@@ -51,7 +51,7 @@
       <div class="text-center mb-1">
         <h2><b>회원 정보 수정</b></h2>
       </div>
-      <form:form method="post" action="/mypage/edit" enctype="multipart/form-data" modelAttribute="customerEditForm">
+      <form:form method="post" action="/member/edit" enctype="multipart/form-data" modelAttribute="customerEditForm">
         <div class="mx-auto mb-1" style="max-width: 500px; width: 100%;">
           <label class="form-label">아이디</label>
           <form:input path="userId" cssClass="form-control bg-light" readonly="true"/>
@@ -109,7 +109,7 @@
       }
       const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
       const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
-      fetch('/mypage/check-password', {
+      fetch('/member/check-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

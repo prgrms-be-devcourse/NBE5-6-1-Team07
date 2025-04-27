@@ -25,4 +25,21 @@
     VALUES (#{userId}, #{password}, #{email}, #{address}, #{postCode})
   </insert>
 
+  <update id="update">
+    update customer
+    set
+      email = #{dto.email},
+      password = #{dto.password},
+      address = #{dto.address},
+      post_code = #{dto.postCode}
+    where user_id = #{userId}
+  </update>
+  <update id="updateDeliveredAt" parameterType="DeliveryDto">
+    update delivery set delivered_at = #{deliveredAt}
+    where delivery_id = #{deliveryId}
+  </update>
+  <select id="findEncodedPasswordByUserId" resultType="string">
+    SELECT password FROM customer WHERE user_id = #{userId}
+  </select>
+
 </mapper>

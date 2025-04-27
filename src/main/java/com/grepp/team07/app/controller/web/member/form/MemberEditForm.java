@@ -1,15 +1,12 @@
-package com.grepp.team07.app.controller.web.customer.form;
+package com.grepp.team07.app.controller.web.member.form;
 
-import com.grepp.team07.app.model.customer.dto.CustomerDto;
+import com.grepp.team07.app.model.member.dto.Member;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Data
-public class CustomerEditForm {
+public class MemberEditForm {
     @NotBlank
     private String userId;
     @NotBlank
@@ -25,8 +22,8 @@ public class CustomerEditForm {
     @NotBlank
     private String postCode;
 
-    public CustomerDto toDto() {
-        CustomerDto customer = new CustomerDto();
+    public Member toDto() {
+        Member customer = new Member();
         customer.setUserId(userId);
         customer.setPassword(password);
         customer.setEmail(email);

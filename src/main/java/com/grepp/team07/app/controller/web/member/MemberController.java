@@ -1,16 +1,24 @@
 package com.grepp.team07.app.controller.web.member;
 
+import com.grepp.team07.app.controller.web.member.form.MemberEditForm;
 import com.grepp.team07.app.controller.web.member.form.SigninForm;
 import com.grepp.team07.app.controller.web.member.form.SignupForm;
 import com.grepp.team07.app.model.auth.code.Role;
+import com.grepp.team07.app.model.member.dto.Member;
 import com.grepp.team07.app.model.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
 
     private final MemberService memberService;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/signin")
     public String signin(SigninForm form){
@@ -42,5 +51,55 @@ public class MemberController {
 
         memberService.signup(form.toDto(), Role.ROLE_USER);
         return "redirect:/";
+    }
+
+
+    @GetMapping("mypage")
+    public String mypage(Authentication authentication, Model model){
+        log.info("authentication : {}", authentication);
+        String userId = authentication.getName();
+        Optional<Member> info =  memberService.findByUserId(userId);
+        model.addAttribute("info", info);
+        return "member/mypage";
+    }
+
+    @GetMapping("edit")
+    public String editMypage(MemberEditForm form, Authentication authentication, Model model){
+        String userId = authentication.getName();
+        Optional<Member> info =  memberService.findByUserId(userId);
+        form.setUserId(info.get().getUserId());
+        form.setEmail(info.get().getEmail());
+        form.setPassword(null);
+        form.setAddress(info.get().getAddress());
+        form.setPostCode(info.get().getPostCode());
+
+        model.addAttribute("customerEditForm", form);
+        model.addAttribute("info", info);
+        return "/member/mypageEdit";
+    }
+
+    @PostMapping("edit")
+    public String editMypage(@Valid MemberEditForm form, BindingResult bindingResult, Model model){
+        if (bindingResult.hasErrors()) {
+            return "redirect:/member/edit";
+        }
+
+        if (form.getPassword() != null && !form.getPassword().isEmpty()) {
+            form.setPassword(passwordEncoder.encode(form.getPassword()));
+        } else {
+            form.setPassword(passwordEncoder.encode(form.getCheckpassword()));
+        }
+
+        memberService.edit(form.toDto());
+        return "redirect:/member/mypage";
+    }
+
+    @PostMapping("check-password")
+    @ResponseBody
+    public Map<String, Boolean> checkPassword(@RequestBody Map<String, String> payload) {
+        String userId = payload.get("userId");
+        String password = payload.get("password");
+        boolean valid = memberService.checkPassword(userId, password);
+        return Collections.singletonMap("valid", valid);
     }
 }

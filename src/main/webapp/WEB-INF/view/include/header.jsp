@@ -17,7 +17,7 @@
 
           <sec:authorize access="isAuthenticated()">
             <li class="nav-item">
-              <a class="nav-link text-secondary" href="/mypage">
+              <a class="nav-link text-secondary" href="/member/mypage">
                 <sec:authentication property="name" />님
               </a>
             </li>
