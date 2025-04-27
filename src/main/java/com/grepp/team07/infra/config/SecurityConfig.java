@@ -74,7 +74,6 @@ public class SecurityConfig {
         // ** : 모든 depth 의 모든 경로
         // Security Config 에는 인증과 관련된 설정만 지정 (PermitAll or Authenticated)
         http
-            .csrf(csrf -> csrf.disable()) // csrf 비활성화
             .authorizeHttpRequests(
                 (requests) -> requests
                     .requestMatchers("/admin/**").hasRole("ADMIN")

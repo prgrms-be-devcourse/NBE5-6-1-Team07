@@ -5,6 +5,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="_csrf" content="${_csrf.token}"/>
+  <meta name="_csrf_header" content="${_csrf.headerName}"/>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
@@ -133,6 +135,7 @@
               <form action="${pageContext.request.contextPath}/cart/add" method="post" style="display:inline;">
                 <input type="hidden" name="productId" value="${product.productId}">
                 <input type="hidden" name="page" value="${page.currentNumber()}">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 <button type="submit" class="btn btn-small btn-outline-dark">추가</button>
               </form>
             </div>
@@ -181,15 +184,18 @@
           <div class="col-4 d-flex align-items-center justify-content-end gap-1">
             <form action="${pageContext.request.contextPath}/cart/decrease" method="post" style="display:inline;">
               <input type="hidden" name="productId" value="${item.productId}" />
+              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
               <button type="submit" class="btn btn-sm btn-outline-dark" style="border-color: #ccc; margin-top: 4px;">-</button>
             </form>
             <span class="badge bg-dark">${item.count}개</span>
             <form action="${pageContext.request.contextPath}/cart/increase" method="post" style="display:inline;">
               <input type="hidden" name="productId" value="${item.productId}" />
+              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
               <button type="submit" class="btn btn-sm btn-outline-dark" style="border-color: #ccc; margin-top: 4px;">+</button>
             </form>
             <form action="${pageContext.request.contextPath}/cart/remove" method="post" style="display:inline;">
               <input type="hidden" name="productId" value="${item.productId}" />
+              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
               <button type="submit" class="btn btn-sm btn-outline-dark px-2"
                       style="min-width: 30px; white-space: nowrap; border-color: red; color: red; margin-top: 4px;">
                 <i class="bi bi-trash3"></i>
@@ -198,6 +204,7 @@
           </div>
         </div>
       </c:forEach>
+
       <form>
         <div class="mb-3">
           <label for="email" class="form-label">이메일</label>
