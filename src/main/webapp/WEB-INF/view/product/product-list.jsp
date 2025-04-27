@@ -88,7 +88,7 @@
     }
 
   </style>
-  <title>Hello, world!</title>
+  <title>상품페이지</title>
   <%@include file="/WEB-INF/view/include/static.jsp" %>
 </head>
 <body>
