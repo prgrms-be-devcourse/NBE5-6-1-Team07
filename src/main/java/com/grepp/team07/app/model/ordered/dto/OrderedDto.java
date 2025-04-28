@@ -29,6 +29,6 @@ public class OrderedDto {
     }
 
     public String getDeliveredDate() {
-        return deliveredAt != null ? deliveredAt.format(DATE_FORMATTER) : null;
+        return deliveredAt != null ? deliveredAt.plusDays(1).format(DATE_FORMATTER) : null;
     }
 }

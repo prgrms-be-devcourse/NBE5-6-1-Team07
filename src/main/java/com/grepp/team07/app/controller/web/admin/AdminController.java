@@ -43,10 +43,6 @@ public class AdminController {
         Pageable pageable = PageRequest.of(param.getPage() - 1, param.getSize());
         Page<OrderedDto> page = orderedService.findPaged(pageable);
 
-//        if(param.getPage() != 1 && page.getContent().isEmpty()){
-//            throw new CommonException();
-//        }
-
         PageResponse<OrderedDto> response = new PageResponse<>("/admin/orders", page, 3);
         model.addAttribute("page", response);
         return "admin/admin-order-check";
