@@ -18,7 +18,6 @@
             margin: auto;
             max-width: 950px;
             width: 90%;
-            height: 68vh;
             display: flex;
             box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             border-radius: 1rem;
@@ -31,6 +30,11 @@
             border-bottom-right-radius: 1rem;
             padding: 4vh;
             color: rgb(65, 65, 65)
+        }
+
+        a{
+          color: black;
+          text-decoration: none;
         }
 
         @media (max-width: 767px) {
