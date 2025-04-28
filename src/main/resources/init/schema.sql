@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `DELIVERY`
     `order_id`     INT                                    NOT NULL COMMENT '주문번호',
     `customer_id`  INT                                    NULL COMMENT '회원번호',
     `status`       ENUM ('READY', 'SHIPPED', 'DELIVERED') NOT NULL COMMENT '주문상태',
-    `delivered_at` TIMESTAMP                              NULL DEFAULT now() COMMENT '배송일시',
+    `delivered_at` TIMESTAMP                              NULL DEFAULT NULL COMMENT '배송일시',
     FOREIGN KEY (`order_id`) REFERENCES ORDERED (`order_id`),
     FOREIGN KEY (`customer_id`) REFERENCES CUSTOMER(`id`)
 );
