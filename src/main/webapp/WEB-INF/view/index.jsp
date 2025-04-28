@@ -35,9 +35,13 @@
         justify-content: center;
       }
 
-      .product-link{
+      .product-link-container{
         display: flex;
         justify-content: right;
+      }
+
+      .product-link{
+
         color: black;
         text-decoration: none;
       }
@@ -80,7 +84,9 @@
     <h1 class="my-4 mb-5">오늘의 인기 상품</h1>
     <div class="card">
         <h5><b>인기 3종 세트</b></h5>
+        <div class="product-link-container">
         <a class="product-link" href="/product"><b>상품 더보기</b></a>
+        </div>
         <div class="row g-1">
             <c:forEach var="product" items="${products}">
                 <div class="col">
@@ -92,7 +98,7 @@
                             <img src="${image.url}" alt="thumbnail" class="circle">
                         </c:forEach>
                     </c:if>
-                    <p><c:out value="${product.name}"/></p>
+                    <p style="margin-top: 4px"><c:out value="${product.name}"/></p>
                     <p><c:out value="${product.price}"/></p>
                     <p><c:out value="${product.brand}"/></p>
                 </div>

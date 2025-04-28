@@ -81,12 +81,26 @@
       margin-top: 20px;
       margin-bottom: 10px;
     }
+    .bi{
+      color: black;
+    }
     .product-name, .product-brand {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    .page-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+      height: 38px;
+    }
 
+    .page-link i {
+      font-size: 1rem;
+      vertical-align: middle;
+    }
   </style>
   <title>상품페이지</title>
   <%@include file="/WEB-INF/view/include/static.jsp" %>
