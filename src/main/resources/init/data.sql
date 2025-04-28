@@ -27,8 +27,8 @@ INSERT INTO CART_PRODUCT (cart_id, product_id, count) VALUES
 INSERT INTO ORDERED (cart_id, email, is_customer, address, post_code, ordered_at, total_price) VALUES
                                                                 (1, 'user01@example.com', true, '서울 강남구 테헤란로 123', 12345, '2025-04-20 10:00:00', 48000),
                                                                 (2, 'user02@example.com', true, '부산 해운대구 A로 456', 67890, '2025-04-21 11:00:00', 20000),
-                                                                (3, 'user03@example.com', true, '대구 달서구 B길 789', 11223, '2025-04-22 12:00:00', 54000),
-                                                                (1, 'user01@example.com', true, '서울 강남구 테헤란로 123', 12345, '2025-04-23 09:00:00', 18000),
+                                                                (3, 'user03@example.com', true, '대구 달서구 B길 789', 11223, '2025-04-28 12:00:00', 54000),
+                                                                (1, 'user01@example.com', true, '서울 강남구 테헤란로 123', 12345, '2025-04-28 09:00:00', 18000),
                                                                 (2, 'user02@example.com', true, '부산 해운대구 A로 456', 67890, '2025-04-23 15:30:00', 15000);
 
 -- ORDER_PRODUCT

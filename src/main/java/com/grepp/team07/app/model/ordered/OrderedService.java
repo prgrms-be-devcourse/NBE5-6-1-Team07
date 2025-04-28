@@ -14,7 +14,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -33,10 +35,22 @@ public class OrderedService {
         return orderedRepository.selectAll();
     }
 
+    @Transactional
     public Page<OrderedDto> findPaged(Pageable pageable) {
         int offset = (int) pageable.getOffset();
         int size = pageable.getPageSize();
         List<OrderedDto> result =  orderedRepository.findPaged(size, offset);
+
+        result.forEach(orderedDto -> {
+            if(orderedDto.getDeliveredAt() != null) {
+                if (orderedDto.getDeliveredAt().plusDays(1).isBefore(LocalDateTime.now()) && orderedDto.getStatus().equals(DeliveryState.SHIPPED)) {
+                    orderedDto.setStatus(DeliveryState.DELIVERED);
+                    log.info("status : {}",orderedDto.getStatus());
+                    deliveryRepository.updateStatus(orderedDto.getOrderId(), orderedDto.getStatus());
+                }
+            }
+        });
+
         int total = orderedRepository.countAllOrders();
 
         return new PageImpl<>(result, pageable, total);
