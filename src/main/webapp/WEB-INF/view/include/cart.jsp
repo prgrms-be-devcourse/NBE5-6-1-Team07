@@ -68,7 +68,7 @@
             </h5>
         </div>
 
-        <button type="submit" class="btn btn-dark col-12 mt-2">결제하기</button>
+        <button type="submit" class="btn btn-dark col-12 mt-2" <c:if test="${totalPrice == 0}">disabled</c:if>>결제하기</button>
     </form>
 
     <c:if test="${not empty errorMessage}">
