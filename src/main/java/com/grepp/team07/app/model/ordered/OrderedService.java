@@ -4,6 +4,9 @@ import com.grepp.team07.app.model.cart.CartRepository;
 import com.grepp.team07.app.model.delivery.DeliveryRepository;
 import com.grepp.team07.app.model.delivery.code.DeliveryState;
 import com.grepp.team07.app.model.ordered.dto.OrderedDto;
+import com.grepp.team07.app.model.product.ProductRepository;
+import com.grepp.team07.app.model.product.ProductService;
+import com.grepp.team07.app.model.product.dto.ProductDto;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +26,8 @@ public class OrderedService {
     private final OrderedRepository orderedRepository;
     private final CartRepository cartRepository;
     private final DeliveryRepository deliveryRepository;
+    private final ProductService productService;
+    private final ProductRepository productRepository;
 
     public List<OrderedDto> findAll() {
         return orderedRepository.selectAll();
@@ -73,7 +78,14 @@ public class OrderedService {
             for (Map<String, Object> item : cartProducts) {
                 Integer productId = (Integer) item.get("product_id");
                 Integer count = (Integer) item.get("count");
+
+                ProductDto product = productService.findById(productId);
+                if (count > product.getCount()) {
+                    throw new IllegalArgumentException("재고가 부족하여 주문할 수 없습니다.");
+                }
+
                 orderedRepository.insertOrderProducts(orderId, productId, count);
+                productRepository.updateStock(productId, product.getCount() - count);
             }
 
             cartRepository.deactivateCart(userId);
@@ -94,9 +106,16 @@ public class OrderedService {
             for (Map.Entry<Integer, Integer> entry : guestCart.entrySet()) {
                 Integer productId = entry.getKey();
                 Integer count = entry.getValue();
+
+                ProductDto product = productService.findById(productId);
+                if (count > product.getCount()) {
+                    throw new IllegalArgumentException("재고가 부족하여 주문할 수 없습니다.");
+                }
+
                 Integer price = orderedRepository.findProductPrice(productId);
                 totalPrice += price * count;
                 orderedRepository.insertOrderProducts(orderId, productId, count);
+                productRepository.updateStock(productId, product.getCount() - count);
             }
 
             orderedRepository.updateOrderTotalPrice(orderId, totalPrice);

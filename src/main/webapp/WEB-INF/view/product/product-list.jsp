@@ -132,12 +132,19 @@
             </div>
             <div class="col text-center price">${product.price}원</div>
             <div class="col text-end action">
-              <form action="${pageContext.request.contextPath}/cart/add" method="post" style="display:inline;">
-                <input type="hidden" name="productId" value="${product.productId}">
-                <input type="hidden" name="page" value="${page.currentNumber()}">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                <button type="submit" class="btn btn-small btn-outline-dark">추가</button>
-              </form>
+              <c:choose>
+                <c:when test="${product.count > 0}">
+                  <form action="${pageContext.request.contextPath}/cart/add" method="post" style="display:inline;">
+                    <input type="hidden" name="productId" value="${product.productId}">
+                    <input type="hidden" name="page" value="${page.currentNumber()}">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <button type="submit" class="btn btn-small btn-outline-dark">추가</button>
+                  </form>
+                </c:when>
+                <c:otherwise>
+                  <button type="button" class="btn btn-small btn-secondary" disabled>품절</button>
+                </c:otherwise>
+              </c:choose>
             </div>
           </li>
         </c:forEach>

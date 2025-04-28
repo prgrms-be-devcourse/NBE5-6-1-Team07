@@ -70,4 +70,10 @@
 
         <button type="submit" class="btn btn-dark col-12 mt-2">결제하기</button>
     </form>
+
+    <c:if test="${not empty errorMessage}">
+        <script>
+            alert("${errorMessage}");
+        </script>
+    </c:if>
 </div>

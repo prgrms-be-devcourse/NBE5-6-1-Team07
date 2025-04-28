@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -65,14 +66,20 @@ public class OrderController {
         @RequestParam String address,
         @RequestParam String postCode,
         HttpSession session,
-        Authentication authentication
+        Authentication authentication,
+        RedirectAttributes redirectAttributes
     ) {
         String userId = authentication != null
             && authentication.isAuthenticated()
             && !"anonymousUser".equals(authentication.getPrincipal())
             ? authentication.getName() : null;
 
-        orderedService.create(session, email, address, postCode, userId);
+        try {
+            orderedService.create(session, email, address, postCode, userId);
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/product";
+        }
 
         return "redirect:/";
     }
