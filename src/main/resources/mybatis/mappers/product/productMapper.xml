@@ -55,4 +55,10 @@
             and deleted_at is null;
     </select>
 
+    <update id="updateStock">
+        UPDATE product
+        SET count = #{count}
+        WHERE product_id = #{productId}
+    </update>
+
 </mapper>

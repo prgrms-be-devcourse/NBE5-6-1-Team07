@@ -2,6 +2,8 @@ package com.grepp.team07.app.model.cart;
 
 import com.grepp.team07.app.model.cart.dto.CartDto;
 import com.grepp.team07.app.model.cart.dto.CartProductDto;
+import com.grepp.team07.app.model.product.ProductService;
+import com.grepp.team07.app.model.product.dto.ProductDto;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,16 +18,24 @@ import java.util.Map;
 public class CartServiceImpl implements CartService {
 
     private final CartRepository cartRepository;
+    private final ProductService productService;
 
     @Override
     public void addProduct(int productId, int count, HttpSession session, String userId) {
+        ProductDto productDto = productService.findById(productId);
+        int stock = productDto.getCount();
+
         if (userId == null) {
             // 비회원
             Map<Integer, Integer> guestCart = (Map<Integer, Integer>) session.getAttribute("guestCart");
             if (guestCart == null) {
                 guestCart = new HashMap<>();
             }
-            guestCart.put(productId, guestCart.getOrDefault(productId, 0) + count);
+            int currentCount = guestCart.getOrDefault(productId, 0);
+            if (currentCount + count > stock) {
+                throw new IllegalArgumentException("재고보다 많이 담을 수 없습니다.");
+            }
+            guestCart.put(productId, currentCount + count);
             session.setAttribute("guestCart", guestCart);
         } else {
             // 회원
@@ -36,6 +46,12 @@ public class CartServiceImpl implements CartService {
                 });
 
             CartProductDto existing = cartRepository.getProduct(cart.getCartId(), productId);
+            int currentCount = (existing != null) ? existing.getCount() : 0;
+
+            if (currentCount + count > stock) {
+                throw new IllegalArgumentException("재고보다 많이 담을 수 없습니다.");
+            }
+
             if (existing != null) {
                 cartRepository.updateCount(existing.getCartProductId(), existing.getCount() + count);
             } else {
@@ -79,10 +95,17 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void increaseCount(int productId, HttpSession session, String userId) {
+        ProductDto product = productService.findById(productId);
+        int stock = product.getCount();
+
         if (userId == null) {
             // 비회원
             Map<Integer, Integer> guestCart = (Map<Integer, Integer>) session.getAttribute("guestCart");
             if (guestCart != null && guestCart.containsKey(productId)) {
+                int currentCount = guestCart.get(productId);
+                if (currentCount + 1 > stock) {
+                    throw new IllegalArgumentException("재고보다 많이 담을 수 없습니다.");
+                }
                 guestCart.put(productId, guestCart.get(productId) + 1);
                 session.setAttribute("guestCart", guestCart);
             }
@@ -92,6 +115,9 @@ public class CartServiceImpl implements CartService {
                 .orElseThrow();
             CartProductDto item = cartRepository.getProduct(cart.getCartId(), productId);
             if (item != null) {
+                if (item.getCount() + 1 > stock) {
+                    throw new IllegalArgumentException("재고보다 많이 담을 수 없습니다.");
+                }
                 cartRepository.updateCount(item.getCartProductId(), item.getCount() + 1);
             }
         }

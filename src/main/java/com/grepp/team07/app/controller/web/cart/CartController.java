@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Slf4j
@@ -23,9 +24,15 @@ public class CartController {
     @PostMapping("/add")
     public String addCart(@RequestParam("productId") int productId,
                           @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                          HttpSession session) {
+                          HttpSession session,
+                          RedirectAttributes redirectAttributes) {
         String userId = getLoginUserId();
-        cartService.addProduct(productId, 1, session, userId);
+        try {
+            cartService.addProduct(productId, 1, session, userId);
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/product?page=" + page;
+        }
         return "redirect:/product?page=" + page;
     }
 
@@ -48,9 +55,15 @@ public class CartController {
     @PostMapping("/increase")
     public String increaseCount(@RequestParam("productId") int productId,
                                 @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                HttpSession session) {
+                                HttpSession session,
+                                RedirectAttributes redirectAttributes) {
         String userId = getLoginUserId();
-        cartService.increaseCount(productId, session, userId);
+        try {
+            cartService.increaseCount(productId, session, userId);
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/product?page=" + page;
+        }
         return "redirect:/product?page=" + page;
     }
 

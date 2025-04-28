@@ -19,4 +19,6 @@ public interface ProductRepository {
     int countAll();
 
     ProductDto findById(int productId);
+
+    void updateStock(@Param("productId") int productId, @Param("count") int count);
 }
