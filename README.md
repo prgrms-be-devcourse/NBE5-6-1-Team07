@@ -25,11 +25,6 @@
 
 <br>
 
-<!-- Top Button -->
-<p style='background: black; width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-left: auto;'><a href="#top" style='color: white; '>▲</a></p>
-
-<br>
-
 ## <span id="2">🛠️ 2. 기술스택 소개</span>
 
 
@@ -55,11 +50,6 @@
 
 <br>
 
-<!-- Top Button -->
-<p style='background: black; width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-left: auto;'><a href="#top" style='color: white; '>▲</a></p>
-
-<br>
-
 ## <span id="4">🤝 4. 커밋 컨벤션</span>
 
 커밋 메시지 형식: `[타입] - 하려는 내용`
@@ -77,6 +67,3 @@
 | docs     | 문서 수정                                         | [docs] - API 문서 업데이트                            |
 
 <br>
-
-<!-- Top Button -->
-<p style='background: black; width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-left: auto;'><a href="#top" style='color: white; '>▲</a></p>
