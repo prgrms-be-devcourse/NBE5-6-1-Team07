@@ -93,7 +93,7 @@
                     <div><a href="<c:url value='/member/signup' />" class="text-decoration-none">Grids & Circle 이 처음이라면?</a></div>
                 </div>
                 <div class="text-center mt-2">
-                    <div><a href="#" class="custom-link">비회원으로 계속하기</a></div>
+                    <div><a href="<c:url value='/' />" class="custom-link">비회원으로 계속하기</a></div>
                 </div>
 
                 <div class="d-flex justify-content-center gap-3 mt-5 pt-2 mb-2">
