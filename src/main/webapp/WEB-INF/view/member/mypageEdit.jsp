@@ -86,7 +86,7 @@
         </div>
 
         <div class="d-flex justify-content-center gap-3 mt-2 pt-2">
-          <a href="/mypage"><button type="button" class="btn btn-outline-secondary" style="width: 150px;">취소</button></a>
+          <a href="/member/mypage"><button type="button" class="btn btn-outline-secondary" style="width: 150px;">취소</button></a>
           <button type="submit" class="btn btn-primary" style="width: 150px;">저장</button>
         </div>
       </form:form>

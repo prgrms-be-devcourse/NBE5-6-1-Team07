@@ -120,6 +120,7 @@
                                 </div>
                                 <div class="col d-flex justify-content-center align-items-center gap-2">
                                     <form method="post" action="/admin/admin-product/action" style="display:inline;">
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                         <input type="hidden" name="id" value="${product.productId}" />
                                         <input type="hidden" name="action" value="increment" />
                                         <c:if test="${not empty param.keyword}">
@@ -133,6 +134,7 @@
                                     </span>
 
                                     <form method="post" action="/admin/admin-product/action" style="display:inline;">
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                         <input type="hidden" name="id" value="${product.productId}" />
                                         <input type="hidden" name="action" value="decrement" />
                                         <c:if test="${not empty param.keyword}">
@@ -152,6 +154,7 @@
                                         </button>
                                     </form>
                                     <form method="post" action="/admin/admin-product/action" style="display: inline;">
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                         <input type="hidden" name="id" value="${product.productId}" />
                                         <input type="hidden" name="action" value="delete" />
                                         <c:if test="${not empty param.keyword}">
