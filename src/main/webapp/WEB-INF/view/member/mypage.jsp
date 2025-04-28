@@ -18,6 +18,8 @@
             margin: auto;
             max-width: 950px;
             width: 90%;
+            height: 68vh;
+            display: flex;
             box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             border-radius: 1rem;
             border: transparent
@@ -66,29 +68,32 @@
 <%@include file="/WEB-INF/view/include/header.jsp" %>
 
 <div class="row justify-content-center m-4">
-    <h1 class="text-center">Grids & Circle</h1>
+    <h1 class="text-center">마이페이지</h1>
 </div>
 
+<div class="container-fluid">
 <div class="card">
     <div class="row">
         <div class="col-md-8 mt-4 d-flex flex-column align-items-start p-4 pt-0">
-            <h5 class="mb-3"><b>마이페이지</b></h5>
-            <div class="d-flex justify-content-between align-items-center w-100 mb-3">
+            <h5 class="mb-4"><a href="edit" class="fw-bold">기본 정보 수정 > </a></h5>
+            <div class="d-flex justify-content-between align-items-center w-100 mb-3 mt-2">
                 <div class="fw-bold">회원 정보</div>
-                <a href="edit"><div class="edit-button">수정</div></a>
             </div>
 
-            <div class="d-flex mb-2 w-100"><div class="info-label">id</div><div><c:out value="${info.userId}"/></div></div>
-            <div class="d-flex mb-2 w-100"><div class="info-label">email</div><div><c:out value="${info.email}"/></div></div>
-            <div class="d-flex mb-2 w-100"><div class="info-label">주소</div><div><c:out value="${info.address}"/></div></div>
-            <div class="d-flex mb-2 w-100"><div class="info-label">우편번호</div><div><c:out value="${info.postCode}"/></div></div>
+            <div class="d-flex mt-1 mb-4 w-100"><div class="info-label">id</div><div><c:out value="${info.userId}"/></div></div>
+            <div class="d-flex mb-4 w-100"><div class="info-label">email</div><div><c:out value="${info.email}"/></div></div>
+            <div class="d-flex mb-4 w-100"><div class="info-label">주소</div><div><c:out value="${info.address}"/></div></div>
+            <div class="d-flex mb-4 w-100"><div class="info-label">우편번호</div><div><c:out value="${info.postCode}"/></div></div>
 
-            <a href="/order/list" class="btn mb-2 mt-4">주문 목록 더보기</a>
+            <h5 class="mt-5"><a href="/order/list" class="fw-bold">주문 목록 더보기 > </a></h5>
         </div>
 
-        <%@ include file="/WEB-INF/view/include/cart.jsp" %>
+        <sec:authorize access="hasRole('ROLE_USER')">
+            <%@ include file="/WEB-INF/view/include/cart.jsp" %>
+        </sec:authorize>
 
     </div>
+</div>
 </div>
 </body>
 </html>

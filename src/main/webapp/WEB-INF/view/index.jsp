@@ -67,7 +67,7 @@
       }
 
     </style>
-    <title>Hello, world!</title>
+    <title>Grids & Circle</title>
     <%@include file="/WEB-INF/view/include/static.jsp" %>
 </head>
 <body>
@@ -78,9 +78,9 @@
             로그아웃되었습니다.
         </div>
     </c:if>
-    <h1 class="my-4">Grids & Circle</h1>
+    <h1 class="my-4 mb-5">오늘의 인기 상품</h1>
     <div class="card">
-        <h5><b>인기 상품</b></h5>
+        <h5><b>인기 3종 세트</b></h5>
         <a class="product-link" href="/product"><b>상품 더보기</b></a>
         <div class="row g-1">
             <c:forEach var="product" items="${products}">

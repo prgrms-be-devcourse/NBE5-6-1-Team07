@@ -86,6 +86,8 @@ public class AdminController {
         Model model
     ) {
         if (bindingResult.hasErrors()) {
+            List<ProductDto> adminProducts = adminService.findAll();
+            model.addAttribute("adminProducts", adminProducts);
             return "admin/admin-product";
         }
 
