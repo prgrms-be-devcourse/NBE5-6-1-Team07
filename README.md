@@ -16,6 +16,8 @@
 2.  [기술스택 소개](#2)
 3.  [브랜치 및 디렉토리 구조](#3)
 4.  [커밋 컨벤션](#4)
+5.  [ERD](#5)
+6.  [순서도](#6)
 
 <br >
 
@@ -49,11 +51,11 @@
 
 <br>
 
-② 본인 브랜치에 push 후 `develop` 브랜치에 PR 보낸 후 디스코드에 남겨주세요.
+② 본인 브랜치에 push 후 `main` 브랜치에 PR 보낸 후 디스코드에 남겨주세요.
 
 <br>
 
-③ 리뷰 확인 후 `develop` 브랜치에서 pull
+③ 리뷰 확인 후 `main` 브랜치에서 pull
 
 <br>
 
@@ -75,3 +77,11 @@
 | test     | 테스트 코드, 리팩토링 테스트 코드 추가            | [test] - 유저 로그인 기능 테스트 추가             |
 
 <br>
+
+## <span id="5">📀 5. ERD</span>
+![ERD  07팀_1차 팀프로젝트](https://github.com/user-attachments/assets/9f964699-b35b-4b11-863d-36f74e6656a6)
+
+<br>
+
+## <span id="6">➡️ 6. 순서도</span>
+![순서도  07팀_1차 팀프로젝트](https://github.com/user-attachments/assets/2183f05a-82c9-4161-bf71-1f6e2d3ad2ac)
